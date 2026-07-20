@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Bloom">
-<title>Bloom — Prendre soin de son budget</title>
+<title>Bloom V7 — Jardin financier vivant</title>
 <style>
 :root{
   --cream:#fbfcf8;--pink0:#f6faf5;--pink1:#e5f3e9;--pink2:#b8ddc2;--pink3:#82bf95;--pink4:#4f8f68;
@@ -176,6 +176,52 @@ body[data-theme] .envelope,
 body[data-theme] .transaction,
 body[data-theme] .dream-card{border-color:color-mix(in srgb,var(--accent-soft) 35%,white)}
  
+ 
+.onboarding{
+  position:fixed;inset:0;z-index:120;display:none;place-items:center;padding:18px;
+  background:linear-gradient(160deg,var(--cream),var(--accent-soft),var(--lav1));
+}
+.onboarding.open{display:grid}
+.onboarding-card{
+  width:min(100%,620px);max-height:92vh;overflow:auto;padding:28px 22px;border-radius:34px;
+  background:rgba(255,255,255,.92);box-shadow:0 30px 80px rgba(75,60,70,.20);text-align:center
+}
+.onboarding-visual{font-size:72px;animation:onboardFloat 2.7s ease-in-out infinite}
+@keyframes onboardFloat{50%{transform:translateY(-8px) rotate(2deg)}}
+.onboarding-card h2{font-size:32px;margin:10px 0 6px}.onboarding-card p{color:var(--muted);line-height:1.6}
+.steps{display:flex;justify-content:center;gap:7px;margin:16px 0}.step-dot{width:9px;height:9px;border-radius:50%;background:rgba(90,70,80,.16)}.step-dot.active{background:var(--accent);transform:scale(1.25)}
+.onboarding-step{display:none}.onboarding-step.active{display:block;animation:viewIn .28s ease}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.onboarding-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.onboarding-actions .primary,.onboarding-actions .secondary{margin:0}
+.onboarding-actions .primary:only-child{grid-column:1/-1}
+.welcome-field{text-align:left;margin-top:14px}.welcome-field label{display:block;font-size:13px;font-weight:900;margin-bottom:7px}
+.welcome-field input,.welcome-field select{width:100%;padding:14px;border:1px solid #ead9e2;border-radius:15px;background:#fff;color:var(--ink)}
+.weather-card{
+  margin-top:14px;padding:15px 16px;border-radius:20px;background:rgba(255,255,255,.74);
+  display:flex;align-items:center;gap:12px
+}
+.weather-icon{font-size:32px}.weather-card b{display:block}.weather-card span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.quote-card{
+  margin-top:14px;padding:17px;border-radius:20px;background:linear-gradient(145deg,var(--accent-soft),rgba(255,255,255,.7));
+  font-size:14px;line-height:1.55;font-weight:850;font-style:italic
+}
+.journal-list{display:grid;gap:12px}
+.journal-card{padding:18px;border-radius:24px;background:rgba(255,255,255,.92);box-shadow:var(--shadow2)}
+.journal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.journal-head b{font-size:17px}.journal-head span{font-size:28px}
+.journal-card p{margin:9px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
+.reward-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.reward-card{border:2px solid transparent;border-radius:20px;padding:13px 8px;background:rgba(255,255,255,.9);color:var(--ink);box-shadow:var(--shadow2)}
+.reward-card .reward-emoji{display:block;font-size:30px}.reward-card small{display:block;margin-top:5px;color:var(--muted);font-size:10px;font-weight:850}
+.reward-card.active{border-color:var(--accent);background:var(--accent-soft)}
+.reward-card.locked{opacity:.45;filter:grayscale(.7)}
+.petal{position:fixed;top:-30px;z-index:110;pointer-events:none;font-size:20px;animation:petalFall 1.9s linear forwards}
+@keyframes petalFall{to{transform:translate(var(--drift),110vh) rotate(620deg);opacity:.1}}
+.ripple{animation:ripple .45s ease}@keyframes ripple{50%{transform:scale(1.018)}}
+.nav button[data-section="journal"]{display:block}
+@media(max-width:460px){.reward-grid{grid-template-columns:repeat(2,1fr)}.onboarding-card{padding:23px 16px}}
+ 
 @media(max-width:560px){.hero-grid{grid-template-columns:1fr}.plant-wrap{margin-top:6px}.daily{font-size:56px}}
 @media(max-width:390px){.app{padding-inline:10px}.hero{padding:18px}.soft-grid{grid-template-columns:1fr}.envelope{grid-template-columns:auto 1fr}.env-remain{grid-column:2}.fab{right:14px}}
 </style>
@@ -183,7 +229,7 @@ body[data-theme] .dream-card{border-color:color-mix(in srgb,var(--accent-soft) 3
 <body>
 <div class="app">
 <header class="topbar">
-  <div class="brand"><div class="logo"><span>🌱</span></div><div><h1>Bloom</h1><p>Ton compagnon de bien-être financier</p></div></div>
+  <div class="brand"><div class="logo"><span>🌱</span></div><div><h1>Bloom</h1><p>Ton jardin financier vivant</p></div></div>
   <button id="settingsBtn" class="icon-btn" aria-label="Paramètres">⚙︎</button>
 </header>
  
@@ -213,6 +259,8 @@ body[data-theme] .dream-card{border-color:color-mix(in srgb,var(--accent-soft) 3
         <button id="dailyVisitBtn" class="soft-action">☀️ Dire bonjour</button>
         <button id="encourageBtn" class="soft-action">💚 Encourager</button>
       </div>
+      <div class="weather-card"><div id="budgetWeatherIcon" class="weather-icon">☀️</div><div><b id="budgetWeatherTitle">Météo du jardin</b><span id="budgetWeatherText">Ta saison est douce.</span></div></div>
+      <div id="dailyQuote" class="quote-card">« Les grandes forêts poussent une feuille à la fois. »</div>
     </div>
  
     <div class="plant-wrap">
@@ -264,6 +312,16 @@ body[data-theme] .dream-card{border-color:color-mix(in srgb,var(--accent-soft) 3
 </section>
  
 <section class="section">
+  <div class="section-head"><div><div class="section-kicker">Personnaliser mon univers</div><div class="section-title">Décorations</div></div></div>
+  <div id="rewardGrid" class="reward-grid"></div>
+</section>
+ 
+<section class="section" id="journalSection">
+  <div class="section-head"><div><div class="section-kicker">Mon histoire</div><div class="section-title">Livre du Jardin</div></div></div>
+  <div id="journalList" class="journal-list"></div>
+</section>
+ 
+<section class="section">
   <div class="section-head"><div><div class="section-kicker">Mon activité récente</div><div class="section-title">Derniers mouvements</div></div></div>
   <div id="transactions" class="transactions"></div>
 </section>
@@ -275,7 +333,7 @@ body[data-theme] .dream-card{border-color:color-mix(in srgb,var(--accent-soft) 3
   <button class="active" data-scroll="top"><span>⌂</span>ACCUEIL</button>
   <button data-scroll="envelopes"><span>👜</span>ENVELOPPES</button>
   <button data-scroll="goalName"><span>🌸</span>RÊVE</button>
-  <button data-scroll="transactions"><span>♡</span>HISTORIQUE</button>
+  <button data-scroll="journalSection" data-section="journal"><span>📖</span>JOURNAL</button>
 </div></nav>
  
 <div id="txModal" class="modal"><div class="sheet">
@@ -344,6 +402,43 @@ body[data-theme] .dream-card{border-color:color-mix(in srgb,var(--accent-soft) 3
   <button id="saveGoal" class="primary">Enregistrer cet objectif</button><button class="secondary closeModal">Annuler</button>
 </div></div>
  
+ 
+<div id="onboarding" class="onboarding">
+  <div class="onboarding-card">
+    <div class="steps">
+      <span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
+    </div>
+    <div class="onboarding-step active" data-step="0">
+      <div class="onboarding-visual">🌱</div>
+      <h2>Bienvenue dans Bloom</h2>
+      <p>Ici, il n'y a pas de mauvais mois. Seulement des saisons, des habitudes et un jardin qui grandit avec toi.</p>
+    </div>
+    <div class="onboarding-step" data-step="1">
+      <div class="onboarding-visual">💚</div>
+      <h2>Choisis ton compagnon</h2>
+      <p>Il ne meurt jamais, ne te juge jamais et célèbre les petites victoires.</p>
+      <div class="welcome-field"><label>Son prénom</label><input id="welcomeName" maxlength="20" value="Mochi"></div>
+      <div class="welcome-field"><label>Ton univers</label><select id="welcomeTheme"><option value="jardin">🌿 Jardin</option><option value="sakura">🌸 Sakura</option><option value="lavande">💜 Lavande</option><option value="ocean">🌊 Océan</option></select></div>
+    </div>
+    <div class="onboarding-step" data-step="2">
+      <div class="onboarding-visual">🌷</div>
+      <h2>Prépare ta saison</h2>
+      <div class="welcome-field"><label>Jour de salaire</label><input id="welcomePayday" type="number" min="1" max="31" value="28"></div>
+      <div class="welcome-field"><label>Salaire</label><input id="welcomeIncome" type="number" min="0" step="0.01" value="0"></div>
+      <div class="welcome-field"><label>Charges à protéger</label><input id="welcomeFixed" type="number" min="0" step="0.01" value="0"></div>
+      <div class="welcome-field"><label>Épargne à protéger</label><input id="welcomeSaving" type="number" min="0" step="0.01" value="0"></div>
+    </div>
+    <div class="onboarding-step" data-step="3">
+      <div class="onboarding-visual">🌸</div>
+      <h2>Ton jardin est prêt</h2>
+      <p>Bloom transformera tes habitudes en feuilles, graines, badges et souvenirs. Tu pourras tout modifier plus tard.</p>
+    </div>
+    <div class="onboarding-actions">
+      <button id="onboardingBack" class="secondary" style="display:none">Retour</button>
+      <button id="onboardingNext" class="primary">Continuer</button>
+    </div>
+  </div>
+</div>
 <div id="toast" class="toast"></div>
  
 <script>
@@ -358,7 +453,7 @@ const DEFAULT_STATE={
   ],
   transactions:[],
   goal:{name:"Mon joli projet",target:3000,saved:0},
-  streak:0,lastGoodDay:"",seeds:0,lastVisitDay:"",garden:[],badges:[]
+  streak:0,lastGoodDay:"",seeds:0,lastVisitDay:"",garden:[],badges:[],onboardingDone:false,activeReward:"none",journal:[]
 };
 let state=loadState();
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -369,7 +464,7 @@ const dateShort=new Intl.DateTimeFormat("fr-FR",{day:"2-digit",month:"short"});
 function loadState(){
   try{
     let raw=localStorage.getItem(STORAGE_KEY);if(!raw){for(const key of LEGACY_KEYS){raw=localStorage.getItem(key);if(raw)break}}const s=JSON.parse(raw||"null");
-    return s?{...structuredClone(DEFAULT_STATE),...s,settings:{...DEFAULT_STATE.settings,...s.settings},goal:{...DEFAULT_STATE.goal,...s.goal},garden:Array.isArray(s.garden)?s.garden:[],badges:Array.isArray(s.badges)?s.badges:[]}:structuredClone(DEFAULT_STATE)
+    return s?{...structuredClone(DEFAULT_STATE),...s,settings:{...DEFAULT_STATE.settings,...s.settings},goal:{...DEFAULT_STATE.goal,...s.goal},garden:Array.isArray(s.garden)?s.garden:[],badges:Array.isArray(s.badges)?s.badges:[],journal:Array.isArray(s.journal)?s.journal:[]}:structuredClone(DEFAULT_STATE)
   }catch{return structuredClone(DEFAULT_STATE)}
 }
 function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
@@ -482,6 +577,7 @@ function maybeArchiveSeason(){
       const score=Number(state.lastCycleScore||0);
       const flowers=["🌱","🌿","🌷","🌼","🌸","🌺"];
       state.garden.push({key:stored,flower:flowers[stage(score)],score});
+      createJournalEntry(stored,score);
       if(state.garden.length>24)state.garden=state.garden.slice(-24);
     }
     state.transactions=[];
@@ -504,6 +600,90 @@ function renderBadges(){
   const unlocked=new Set(state.badges||[]);
   $("#badgeList").innerHTML=defs.map(([id,label])=>`<span class="badge-chip ${unlocked.has(id)?"":"locked"}">${unlocked.has(id)?label:"🔒 "+label}</span>`).join("");
 }
+function budgetWeather(){
+  const value=daily();
+  if(remaining()<0)return["⛈️","Saison orageuse","Ta marge est dépassée. On ralentit sans culpabiliser."];
+  if(value<10)return["🌧️","Jardin sous la pluie","Une journée très légère protégera la suite de ta saison."];
+  if(value<25)return["⛅","Quelques nuages","Ton budget demande un peu d'attention aujourd'hui."];
+  if(value<50)return["🌤️","Éclaircies douces","Ta saison avance dans un rythme équilibré."];
+  return["☀️","Grand soleil","Tu disposes d'une belle marge, tout en gardant tes priorités protégées."];
+}
+function quoteOfDay(){
+  const quotes=[
+    "Les grandes forêts poussent une feuille à la fois.",
+    "Chaque euro conscient est une petite graine.",
+    "La régularité vaut plus que la perfection.",
+    "Un jour difficile n'efface jamais le jardin déjà construit.",
+    "Prendre soin de son budget, c'est aussi prendre soin de soi.",
+    "Les petites habitudes finissent par créer de grands paysages.",
+    "Tu avances davantage que tu ne le crois."
+  ];
+  const d=localToday();return quotes[(d.getFullYear()*372+d.getMonth()*31+d.getDate())%quotes.length];
+}
+function showerPetals(){
+  const petals=["🌸","🍃","✦","🌷"];
+  for(let i=0;i<18;i++){
+    const p=document.createElement("span");p.className="petal";p.textContent=petals[i%petals.length];
+    p.style.left=Math.random()*100+"vw";p.style.animationDelay=Math.random()*.45+"s";
+    p.style.setProperty("--drift",(Math.random()*180-90)+"px");document.body.appendChild(p);
+    setTimeout(()=>p.remove(),2600)
+  }
+}
+function rewardDefinitions(){
+  return[
+    {id:"none",emoji:"🪴",name:"Pot naturel",cost:0},
+    {id:"butterfly",emoji:"🦋",name:"Papillon",cost:12},
+    {id:"bee",emoji:"🐝",name:"Abeille",cost:25},
+    {id:"mushroom",emoji:"🍄",name:"Champignon",cost:40},
+    {id:"rainbow",emoji:"🌈",name:"Arc-en-ciel",cost:60},
+    {id:"moon",emoji:"🌙",name:"Lune douce",cost:90}
+  ]
+}
+function renderRewards(){
+  const seeds=Number(state.seeds||0);
+  $("#rewardGrid").innerHTML=rewardDefinitions().map(r=>{
+    const unlocked=seeds>=r.cost,active=state.activeReward===r.id;
+    return`<button class="reward-card ${active?"active":""} ${unlocked?"":"locked"}" data-reward="${r.id}" ${unlocked?"":"disabled"}><span class="reward-emoji">${r.emoji}</span>${r.name}<small>${r.cost===0?"Inclus":r.cost+" graines"}</small></button>`
+  }).join("");
+  $$("[data-reward]").forEach(b=>b.onclick=()=>{state.activeReward=b.dataset.reward;render();toast("Décoration installée dans ton jardin ✨")})
+}
+function applyActiveReward(){
+  const map={butterfly:"🦋",bee:"🐝",mushroom:"🍄",rainbow:"🌈",moon:"🌙"};
+  let existing=$("#activeDecoration");
+  if(!existing){existing=document.createElement("div");existing.id="activeDecoration";existing.style.cssText="position:absolute;right:15px;top:70px;font-size:30px;animation:float 3s ease-in-out infinite";$("#mascot").appendChild(existing)}
+  existing.textContent=map[state.activeReward]||"";
+}
+function renderJournal(){
+  const list=[...(state.journal||[])];
+  if(!list.length){
+    $("#journalList").innerHTML=`<div class="empty">📖 Ton Livre du Jardin commencera à la fin de ta première saison.<br>Chaque page racontera une petite partie de ton parcours.</div>`;return
+  }
+  $("#journalList").innerHTML=list.slice().reverse().map(x=>`<article class="journal-card"><div class="journal-head"><b>${escapeHtml(x.title)}</b><span>${x.flower}</span></div><p>${escapeHtml(x.text)}</p></article>`).join("")
+}
+function createJournalEntry(key,score){
+  const flower=["🌱","🌿","🌷","🌼","🌸","🌺"][stage(score)];
+  const title=`Saison commencée le ${key}`;
+  const text=`Ton jardin a atteint ${score} % de croissance. Tu as récolté ${Number(state.seeds||0)} graines et conservé chaque progrès, même les jours imparfaits.`;
+  state.journal.push({key,title,text,flower});
+  if(state.journal.length>24)state.journal=state.journal.slice(-24)
+}
+function initOnboarding(){
+  if(state.onboardingDone)return;
+  let step=0;const overlay=$("#onboarding");overlay.classList.add("open");
+  const update=()=>{$$(".onboarding-step").forEach((e,i)=>e.classList.toggle("active",i===step));$$(".step-dot").forEach((e,i)=>e.classList.toggle("active",i===step));$("#onboardingBack").style.display=step?"block":"none";$("#onboardingNext").textContent=step===3?"Entrer dans mon jardin":"Continuer"};
+  $("#onboardingBack").onclick=()=>{step=Math.max(0,step-1);update()};
+  $("#onboardingNext").onclick=()=>{
+    if(step<3){step++;update();return}
+    state.settings.companionName=$("#welcomeName").value.trim()||"Mochi";
+    state.settings.theme=$("#welcomeTheme").value;
+    state.settings.payday=Math.max(1,Math.min(31,Number($("#welcomePayday").value||28)));
+    state.settings.income=Number($("#welcomeIncome").value||0);
+    state.settings.fixed=Number($("#welcomeFixed").value||0);
+    state.settings.savingGoal=Number($("#welcomeSaving").value||0);
+    state.settings.useBridge=false;state.onboardingDone=true;overlay.classList.remove("open");render();showerPetals();toast("Bienvenue dans ton jardin 🌱")
+  };update()
+}
+ 
  
 function escapeHtml(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
 function applyTheme(theme){
@@ -515,7 +695,7 @@ function applyTheme(theme){
 $("#dailyVisitBtn").onclick=()=>{
   const today=iso(localToday());
   if(state.lastVisitDay===today){animateCompanion("happy");return toast(`${companionName()} est déjà heureux de t'avoir vu aujourd'hui 💚`)}
-  state.lastVisitDay=today;addSeeds(2);render();animateCompanion("happy");toast(`Bonjour ${companionName()} : +2 graines ☀️`)
+  state.lastVisitDay=today;addSeeds(2);render();animateCompanion("happy");toast(`Bonjour ${companionName()} : +2 graines ☀️`);showerPetals()
 };
 $("#encourageBtn").onclick=()=>{
   animateCompanion("happy");
@@ -548,6 +728,8 @@ function render(){
   $("#dailyMessage").textContent=remaining()<0?"Ton budget a besoin d'un petit câlin.":daily()<10?"Une journée légère fera du bien à Bloom.":daily()>50?"Tu as une jolie marge aujourd'hui.":"Tu avances dans le bon rythme.";
   $("#budgetMood").textContent=isBridgeActive()?"🌱 Première saison adaptée à ton solde réel":remaining()<0?"🌧️ On ajuste sans culpabiliser":daily()>50?"🌞 Belle marge aujourd'hui":"🌸 Ta saison reste en équilibre";
   $("#coachText").textContent=coach();
+  const weather=budgetWeather();$("#budgetWeatherIcon").textContent=weather[0];$("#budgetWeatherTitle").textContent=weather[1];$("#budgetWeatherText").textContent=weather[2];
+  $("#dailyQuote").textContent=`« ${quoteOfDay()} »`;
   $("#companionNameLabel").textContent=`${companionName()} grandit avec toi`;
   $("#companionMood").textContent=companionMoodText();
   $("#seedCount").textContent=`🌱 ${Number(state.seeds||0)} graine${Number(state.seeds||0)===1?"":"s"}`;
@@ -604,7 +786,7 @@ $("#saveTx").onclick=()=>{
   const amount=Number($("#txAmount").value),label=$("#txLabel").value.trim(),type=$("#txType").value;
   if(!amount||amount<=0||!label)return toast("Ajoute un nom et un montant 🌸");
   state.transactions.push({id:crypto.randomUUID(),type,amount,label,envelope:type==="expense"?$("#txEnvelope").value:"",date:$("#txDate").value||iso(localToday())});
-  updateStreak();addSeeds(type==="extraSaving"?3:1);$("#txAmount").value="";$("#txLabel").value="";closeModals();render();toast(type==="extraSaving"?"Épargne célébrée : +3 graines 🌱":"Mouvement ajouté : +1 graine 🌿")
+  updateStreak();addSeeds(type==="extraSaving"?3:1);$("#txAmount").value="";$("#txLabel").value="";closeModals();render();toast(type==="extraSaving"?"Épargne célébrée : +3 graines 🌱":"Mouvement ajouté : +1 graine 🌿");if(type==="extraSaving")showerPetals()
 };
 function fillSettings(){
   applyTheme(state.settings.theme||"jardin");
@@ -644,7 +826,7 @@ $("#goalBtn").onclick=()=>{fillGoal();openModal("goalModal")};$("#saveGoal").onc
 $("#dailyVisitBtn").onclick=()=>{
   const today=iso(localToday());
   if(state.lastVisitDay===today){animateCompanion("happy");return toast(`${companionName()} est déjà heureux de t'avoir vu aujourd'hui 💚`)}
-  state.lastVisitDay=today;addSeeds(2);render();animateCompanion("happy");toast(`Bonjour ${companionName()} : +2 graines ☀️`)
+  state.lastVisitDay=today;addSeeds(2);render();animateCompanion("happy");toast(`Bonjour ${companionName()} : +2 graines ☀️`);showerPetals()
 };
 $("#encourageBtn").onclick=()=>{
   animateCompanion("happy");
@@ -665,7 +847,7 @@ $$(".nav button").forEach(b=>b.onclick=()=>{
 $("#dailyVisitBtn").onclick=()=>{
   const today=iso(localToday());
   if(state.lastVisitDay===today){animateCompanion("happy");return toast(`${companionName()} est déjà heureux de t'avoir vu aujourd'hui 💚`)}
-  state.lastVisitDay=today;addSeeds(2);render();animateCompanion("happy");toast(`Bonjour ${companionName()} : +2 graines ☀️`)
+  state.lastVisitDay=today;addSeeds(2);render();animateCompanion("happy");toast(`Bonjour ${companionName()} : +2 graines ☀️`);showerPetals()
 };
 $("#encourageBtn").onclick=()=>{
   animateCompanion("happy");
@@ -683,6 +865,7 @@ $$(".theme-pick").forEach(button=>button.onclick=()=>{
 });
 $$(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");const id=b.dataset.scroll;if(id==="top")window.scrollTo({top:0,behavior:"smooth"});else document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"})});
 render();
+setTimeout(initOnboarding,180);
 </script>
 </body>
 </html>
