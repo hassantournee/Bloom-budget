@@ -3,230 +3,111 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#dcefe2">
+<meta name="theme-color" content="#dfeee4">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Bloom">
-<title>Bloom V7 — Jardin financier vivant</title>
+<title>Bloom — Ton jardin financier vivant</title>
 <style>
 :root{
-  --cream:#fbfcf8;--pink0:#f6faf5;--pink1:#e5f3e9;--pink2:#b8ddc2;--pink3:#82bf95;--pink4:#4f8f68;
-  --lav1:#eeebf7;--lav2:#bdb3dd;--mint1:#e8f8ef;--mint2:#91cfaa;--yellow:#fff2cf;
-  --accent:#4f8f68;--accent-soft:#e5f3e9;--accent-2:#bdb3dd;
-  --ink:#5d4352;--muted:#987f8e;--white:#fff;--danger:#e76f8b;--ok:#63b680;--warning:#d9a248;
-  --shadow:0 18px 40px rgba(165,95,130,.14);--shadow2:0 10px 24px rgba(165,95,130,.10)
+  --bg:#f8fbf7;--bg2:#eef6f0;--surface:rgba(255,255,255,.90);--surface2:#fff;
+  --ink:#4f3b49;--muted:#927d8a;--accent:#4e9670;--accent2:#b2a4d5;--accentSoft:#e2f1e7;
+  --warm:#fff0ca;--danger:#d96882;--ok:#56aa75;--warning:#cf9942;
+  --shadow:0 18px 44px rgba(94,71,83,.12);--shadow2:0 9px 24px rgba(94,71,83,.09);
+  --rXL:32px;--rLG:24px;--rMD:17px
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{background:var(--cream)}
+html{background:var(--bg)}
 body{
   margin:0;min-height:100vh;color:var(--ink);
   font-family:ui-rounded,"SF Pro Rounded","Nunito","Segoe UI",system-ui,-apple-system,sans-serif;
   background:
-    radial-gradient(circle at 10% -5%,rgba(170,216,183,.38),transparent 30%),
-    radial-gradient(circle at 95% 10%,rgba(189,179,221,.30),transparent 28%),
-    linear-gradient(180deg,var(--cream),var(--pink0));
-  padding-bottom:102px
+    radial-gradient(circle at 5% -5%,color-mix(in srgb,var(--accentSoft) 85%,transparent),transparent 29%),
+    radial-gradient(circle at 100% 8%,color-mix(in srgb,var(--accent2) 24%,transparent),transparent 28%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  padding-bottom:94px;transition:background .25s ease
 }
 button,input,select{font:inherit}button{cursor:pointer}
-.app{width:min(100%,760px);margin:auto;padding:18px 14px 36px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:54px;height:54px;border-radius:19px;display:grid;place-items:center;background:linear-gradient(145deg,var(--accent-soft),#e7e2f4);box-shadow:var(--shadow)}
-.logo span{font-size:28px}.brand h1{margin:0;font-size:34px;line-height:1;letter-spacing:-.04em}.brand p{margin:5px 0 0;color:var(--muted);font-size:13px;font-weight:700}
-.icon-btn{width:48px;height:48px;border:0;border-radius:17px;background:rgba(255,255,255,.9);color:var(--ink);box-shadow:var(--shadow2);font-size:21px}
-.hero{margin-top:18px;padding:22px;border-radius:34px;overflow:hidden;background:radial-gradient(circle at 15% 0%,rgba(255,255,255,.85),transparent 35%),linear-gradient(145deg,#e8f5eb,#f0edf8 65%,#f8f3e3);box-shadow:var(--shadow);position:relative}
-.sparkle{position:absolute;font-size:20px;opacity:.65;animation:float 3.2s ease-in-out infinite}.sparkle.s1{right:18px;top:16px}.sparkle.s2{left:18px;bottom:20px;animation-delay:1s}.sparkle.s3{right:38%;top:86px;animation-delay:1.7s}
-@keyframes float{50%{transform:translateY(-6px) rotate(5deg)}}
-.kicker{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:900}
-.daily{font-size:clamp(54px,15vw,82px);line-height:.95;color:var(--pink4);font-weight:1000;letter-spacing:-.065em;margin:10px 0}
-.daily-label{font-size:18px;font-weight:900;line-height:1.35}
-.pill{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.72);font-size:13px;font-weight:800}
-.cycle-label{margin-top:12px;color:var(--muted);font-size:13px;font-weight:850}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;align-items:center}
-.hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
-.stat{padding:13px;border-radius:18px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px)}
-.stat b,.stat span{display:block}.stat b{font-size:20px;letter-spacing:-.03em}.stat span{margin-top:3px;color:var(--muted);font-size:12px;font-weight:750}
-.coach{margin-top:14px;padding:14px;border-radius:19px;background:var(--yellow);display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;font-weight:750}
-.plant-wrap{text-align:center}
-.mascot{width:180px;height:205px;margin:auto;position:relative;filter:drop-shadow(0 14px 16px rgba(94,67,82,.12))}
-.pot{position:absolute;left:49px;bottom:7px;width:82px;height:66px;border-radius:16px 16px 34px 34px;background:linear-gradient(145deg,#e2aac2,#c985a7)}
-.pot:before{content:"";position:absolute;left:-5px;right:-5px;top:-7px;height:18px;border-radius:12px;background:#e7b5ca}
-.eye{position:absolute;top:27px;width:7px;height:10px;background:#624b5a;border-radius:50%}.eye.e1{left:24px}.eye.e2{right:24px}
-.cheek{position:absolute;top:39px;width:14px;height:7px;background:#f47fa8;border-radius:50%;opacity:.65}.cheek.c1{left:9px}.cheek.c2{right:9px}
-.smile{position:absolute;left:34px;top:37px;width:16px;height:8px;border-bottom:3px solid #624b5a;border-radius:50%}
-.stem{position:absolute;left:86px;bottom:72px;width:9px;height:82px;border-radius:10px;background:#66b77d}
-.leaf{position:absolute;width:55px;height:29px;background:#82cb94;opacity:0;transition:.35s ease}
-.leaf.l1{left:39px;bottom:108px;border-radius:100% 0 100% 0;transform:rotate(18deg) scale(.4)}
-.leaf.l2{right:35px;bottom:137px;border-radius:0 100% 0 100%;transform:rotate(-18deg) scale(.4)}
-.bud{position:absolute;left:68px;top:28px;width:44px;height:52px;border-radius:50% 50% 45% 45%;background:#f49abc;opacity:0;transform:scale(.4);transition:.35s ease}
-.flower{position:absolute;left:58px;top:5px;width:64px;height:64px;opacity:0;transform:scale(.3) rotate(-10deg);transition:.4s ease}
-.flower i{position:absolute;width:36px;height:36px;border-radius:50%;background:#f49abc}.flower .p1{left:14px;top:0}.flower .p2{left:0;top:14px}.flower .p3{right:0;top:14px}.flower .p4{left:14px;bottom:0}.flower .center{left:18px;top:18px;width:28px;height:28px;background:#ffd66b}
-.stage-0 .stem{height:14px}.stage-1 .stem{height:36px}.stage-2 .stem{height:56px}
-.stage-2 .leaf.l1,.stage-3 .leaf.l1,.stage-4 .leaf.l1,.stage-5 .leaf.l1{opacity:1;transform:rotate(18deg) scale(1)}
-.stage-3 .leaf.l2,.stage-4 .leaf.l2,.stage-5 .leaf.l2{opacity:1;transform:rotate(-18deg) scale(1)}
-.stage-4 .bud{opacity:1;transform:scale(1)}.stage-5 .flower{opacity:1;transform:scale(1) rotate(0)}.stage-5 .bud{opacity:0}
-.plant-title{font-weight:1000;font-size:19px;margin-top:-2px}.plant-sub{color:var(--muted);font-size:12px;margin-top:4px;font-weight:750}
-.growth{height:10px;background:rgba(100,71,88,.12);border-radius:999px;overflow:hidden;margin-top:12px}.growth>div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--mint2));border-radius:999px;transition:.35s ease}
-.section{margin-top:28px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:13px}.section-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:900}.section-title{font-size:27px;font-weight:1000;letter-spacing:-.04em}
-.link-btn{border:0;background:transparent;color:var(--pink4);font-weight:950;padding:7px}
-.soft-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.soft-card{padding:18px;border-radius:24px;background:rgba(255,255,255,.92);box-shadow:var(--shadow2);border:1px solid rgba(255,255,255,.9)}
-.soft-card .emoji{font-size:24px}.soft-card span{display:block;color:var(--muted);font-size:12px;font-weight:800;margin-top:10px}.soft-card b{display:block;font-size:29px;margin-top:3px;letter-spacing:-.045em}
-.envelopes,.transactions{display:grid;gap:12px}.envelope,.transaction,.dream-card{background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.95);box-shadow:var(--shadow2)}
-.envelope{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:15px;border-radius:22px}.env-icon{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:24px}
-.env-name{font-weight:1000}.env-sub{color:var(--muted);font-size:12px;margin-top:3px}.env-side{text-align:right}.env-remain{font-size:18px;font-weight:1000;white-space:nowrap}.env-edit{margin-top:7px;padding:6px 9px;border:0;border-radius:11px;background:var(--pink1);color:var(--pink4);font-size:11px;font-weight:950}
-.mini-progress{height:8px;background:#f0e5ea;border-radius:999px;overflow:hidden;margin-top:9px}.mini-progress>div{height:100%;background:linear-gradient(90deg,var(--mint2),var(--accent-2));border-radius:999px}
-.dream-card{padding:20px;border-radius:26px;background:linear-gradient(145deg,#fff,#fff6fa)}.dream-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.dream-name{font-weight:1000;font-size:18px}.dream-amount{font-size:30px;font-weight:1000;letter-spacing:-.04em;margin-top:6px}.dream-badge{padding:8px 10px;border-radius:13px;background:var(--pink1);color:var(--pink4);font-size:13px;font-weight:1000}.dream-message{color:var(--muted);font-size:13px;line-height:1.5;margin-top:12px}
-.transaction{display:flex;align-items:center;gap:12px;padding:14px;border-radius:20px}.tx-icon{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:var(--pink1);font-size:20px}.tx-icon.saving{background:var(--mint1)}
-.tx-main{flex:1;min-width:0}.tx-title{font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tx-sub{color:var(--muted);font-size:12px;margin-top:3px}.tx-amount{font-weight:1000;white-space:nowrap}.tx-amount.exp{color:var(--danger)}.tx-amount.inc{color:var(--ok)}
-.empty{padding:26px;text-align:center;color:var(--muted);border:1px dashed rgba(100,70,88,.22);border-radius:24px;line-height:1.55;background:rgba(255,255,255,.5)}
-.fab{position:fixed;right:max(18px,calc((100vw - 730px)/2 + 18px));bottom:91px;z-index:20;width:66px;height:66px;border:0;border-radius:23px;color:#fff;font-size:38px;line-height:1;background:linear-gradient(145deg,var(--accent),var(--accent-2));box-shadow:0 18px 34px rgba(190,105,147,.35)}
-.bottom{position:fixed;left:0;right:0;bottom:0;z-index:15;background:rgba(255,249,252,.91);backdrop-filter:blur(16px);border-top:1px solid rgba(161,99,130,.1);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
-.nav{width:min(100%,760px);margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}.nav button{border:0;background:transparent;color:var(--muted);padding:6px 2px;font-size:10px;font-weight:900}.nav button.active{color:var(--pink4)}.nav span{display:block;font-size:22px;margin-bottom:2px}
-.modal{position:fixed;inset:0;z-index:50;background:rgba(72,47,62,.34);display:none;align-items:flex-end}.modal.open{display:flex}.sheet{width:min(100%,760px);margin:auto;background:#fffafc;border-radius:30px 30px 0 0;padding:20px 16px calc(24px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto}
-.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.sheet h2{margin:0;font-size:28px}.close{width:40px;height:40px;border:0;border-radius:14px;background:var(--pink1);color:var(--ink);font-size:24px}
-.field{margin-top:14px}.field label{display:block;font-size:13px;font-weight:900;margin-bottom:7px}.field small{display:block;color:var(--muted);font-size:12px;line-height:1.45;margin-top:6px}.field input,.field select{width:100%;padding:14px;border:1px solid #ead9e2;border-radius:15px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field select:focus{border-color:var(--pink3);box-shadow:0 0 0 4px rgba(245,138,180,.13)}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.primary,.secondary{width:100%;border:0;border-radius:17px;padding:15px;font-weight:1000;margin-top:12px}.primary{background:linear-gradient(145deg,var(--accent),var(--accent-2));color:#fff}.secondary{background:var(--pink1);color:var(--ink)}
-.segmented{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:16px;background:var(--pink1);margin-top:14px}.segmented button{border:0;background:transparent;padding:10px;border-radius:12px;color:var(--muted);font-weight:950}.segmented button.active{background:#fff;color:var(--ink);box-shadow:var(--shadow2)}
-.info-box{margin-top:14px;padding:14px;border-radius:18px;background:var(--mint1);font-size:13px;line-height:1.5;font-weight:750}.warning-box{margin-top:14px;padding:14px;border-radius:18px;background:var(--yellow);font-size:13px;line-height:1.5;font-weight:750}
-.toast{position:fixed;left:50%;bottom:170px;z-index:80;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:#5d4352;color:#fff;padding:12px 16px;border-radius:999px;font-size:13px;font-weight:900;transition:.25s ease;max-width:calc(100% - 32px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
- 
-body[data-theme="jardin"]{
-  --cream:#fbfcf8;--pink0:#f6faf5;--pink1:#e5f3e9;--pink2:#b8ddc2;--pink3:#82bf95;--pink4:#4f8f68;
-  --lav1:#eeebf7;--lav2:#bdb3dd;--mint1:#e8f8ef;--mint2:#91cfaa;--yellow:#fff2cf;
-  --accent:#4f8f68;--accent-soft:#e5f3e9;--accent-2:#bdb3dd
+button:disabled{cursor:not-allowed}
+.app{width:min(100%,760px);margin:auto;padding:17px 14px 34px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{width:54px;height:54px;flex:0 0 auto;border-radius:19px;display:grid;place-items:center;background:linear-gradient(145deg,var(--accentSoft),color-mix(in srgb,var(--accent2) 35%,white));box-shadow:var(--shadow)}
+.logo span{font-size:28px}.brand h1{margin:0;font-size:34px;line-height:1;letter-spacing:-.04em}.brand p{margin:5px 0 0;color:var(--muted);font-size:13px;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icon-btn{width:48px;height:48px;border:0;border-radius:17px;background:var(--surface);color:var(--ink);box-shadow:var(--shadow2);font-size:21px}
+.view{display:none;animation:viewIn .22s ease}.view.active{display:block}
+@keyframes viewIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.hero{
+  margin-top:18px;padding:22px;border-radius:var(--rXL);position:relative;overflow:hidden;
+  background:radial-gradient(circle at 10% 0%,rgba(255,255,255,.88),transparent 36%),linear-gradient(145deg,var(--accentSoft),color-mix(in srgb,var(--accent2) 25%,white),#eef7ef);
+  box-shadow:var(--shadow)
 }
-body[data-theme="sakura"]{
-  --cream:#fffaf7;--pink0:#fff3f8;--pink1:#ffdceb;--pink2:#ffb9d3;--pink3:#f58ab4;--pink4:#d95e92;
-  --lav1:#eee7ff;--lav2:#cdbdf9;--mint1:#e8f8ef;--mint2:#9bd7ae;--yellow:#fff3c9;
-  --accent:#d95e92;--accent-soft:#ffdceb;--accent-2:#cdbdf9
+.hero:after{content:"✦";position:absolute;right:22px;top:22px;font-size:26px;color:color-mix(in srgb,var(--accent) 55%,var(--muted));animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-6px) rotate(7deg)}}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:950}
+.daily{font-size:clamp(55px,15vw,84px);line-height:.95;color:var(--accent);font-weight:1000;letter-spacing:-.067em;margin:10px 0}
+.daily-label{font-size:19px;font-weight:1000;line-height:1.34}.cycle{margin-top:12px;color:var(--muted);font-size:13px;font-weight:850}
+.mood-pill{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.76);font-size:13px;font-weight:900}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}.stat{padding:14px;border-radius:19px;background:rgba(255,255,255,.72)}.stat b,.stat span{display:block}.stat b{font-size:21px;letter-spacing:-.035em}.stat span{margin-top:3px;color:var(--muted);font-size:11px;font-weight:800}
+.garden-preview{
+  margin-top:16px;min-height:280px;border-radius:27px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accentSoft) 55%,white),color-mix(in srgb,var(--accent2) 16%,white));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.65)
 }
-body[data-theme="lavande"]{
-  --cream:#fcfaff;--pink0:#f7f3ff;--pink1:#ece5fa;--pink2:#cfbfec;--pink3:#a58bd4;--pink4:#7157a6;
-  --lav1:#ece5fa;--lav2:#a58bd4;--mint1:#edf7f1;--mint2:#9ecbb2;--yellow:#fff1d8;
-  --accent:#7157a6;--accent-soft:#ece5fa;--accent-2:#9ecbb2
-}
-body[data-theme="ocean"]{
-  --cream:#f8fcfc;--pink0:#f2f8f8;--pink1:#dff0ef;--pink2:#a8d6d1;--pink3:#69aaa4;--pink4:#397975;
-  --lav1:#e8eef6;--lav2:#9eb4d2;--mint1:#e4f4ee;--mint2:#8ec9b2;--yellow:#fff0cf;
-  --accent:#397975;--accent-soft:#dff0ef;--accent-2:#9eb4d2
-}
-.theme-picks{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:9px}
-.theme-pick{border:2px solid transparent;border-radius:16px;padding:10px 5px;background:#fff;color:var(--ink);font-size:12px;font-weight:900}
-.theme-pick span{display:block;font-size:22px;margin-bottom:4px}
-.theme-pick.active{border-color:var(--accent);background:var(--accent-soft)}
- 
- 
-.companion-card{
-  margin-top:14px;padding:14px 16px;border-radius:20px;
-  background:rgba(255,255,255,.72);display:flex;align-items:center;justify-content:space-between;gap:12px
-}
-.companion-copy{min-width:0}.companion-copy b{display:block;font-size:15px}.companion-copy span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
-.seed-pill{flex:0 0 auto;padding:9px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:1000;font-size:13px}
-.action-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.soft-action{border:0;border-radius:17px;padding:13px 10px;background:rgba(255,255,255,.82);color:var(--ink);font-weight:950;box-shadow:var(--shadow2)}
-.soft-action:active{transform:scale(.98)}
-.mascot.happy{animation:happyBounce .55s ease}.mascot.sparkly:after{
-  content:"✦  ✧  ✦";position:absolute;inset:14px 0 auto;text-align:center;color:var(--accent);font-size:20px;animation:sparkPop .8s ease
-}
-@keyframes happyBounce{0%,100%{transform:translateY(0)}35%{transform:translateY(-12px) scale(1.03)}65%{transform:translateY(2px)}}
-@keyframes sparkPop{0%{opacity:0;transform:scale(.4)}45%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:translateY(-18px)}}
-.tx-actions{display:flex;align-items:center;gap:8px}.delete-tx{
-  width:34px;height:34px;border:0;border-radius:12px;background:var(--accent-soft);color:var(--muted);font-size:16px
-}
-.delete-tx:hover{color:var(--danger)}
-.garden-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.garden-flower{min-height:84px;border:0;border-radius:20px;background:rgba(255,255,255,.9);box-shadow:var(--shadow2);font-size:30px;padding:10px 5px;color:var(--ink)}
-.garden-flower small{display:block;font-size:10px;color:var(--muted);margin-top:5px;font-weight:850}
-.badges{display:flex;flex-wrap:wrap;gap:9px}.badge-chip{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.9);box-shadow:var(--shadow2);font-size:12px;font-weight:900}
-.badge-chip.locked{opacity:.45;filter:grayscale(.6)}
-.companion-dialog{padding:16px;border-radius:20px;background:var(--accent-soft);margin-top:14px;line-height:1.5;font-size:14px;font-weight:800}
-body[data-theme="jardin"]{
-  background:
-    radial-gradient(circle at 10% -5%,rgba(170,216,183,.42),transparent 30%),
-    radial-gradient(circle at 95% 10%,rgba(189,179,221,.28),transparent 28%),
-    linear-gradient(180deg,#fbfcf8,#f3f8f2)
-}
-body[data-theme="sakura"]{
-  background:
-    radial-gradient(circle at 10% -5%,rgba(255,185,211,.50),transparent 30%),
-    radial-gradient(circle at 95% 10%,rgba(205,189,249,.34),transparent 28%),
-    linear-gradient(180deg,#fffaf7,#fff0f6)
-}
-body[data-theme="lavande"]{
-  background:
-    radial-gradient(circle at 12% -5%,rgba(188,168,224,.40),transparent 31%),
-    radial-gradient(circle at 95% 12%,rgba(157,203,178,.24),transparent 28%),
-    linear-gradient(180deg,#fcfaff,#f4f0fb)
-}
-body[data-theme="ocean"]{
-  background:
-    radial-gradient(circle at 10% -5%,rgba(119,190,184,.36),transparent 30%),
-    radial-gradient(circle at 95% 10%,rgba(158,180,210,.28),transparent 28%),
-    linear-gradient(180deg,#f8fcfc,#eef7f6)
-}
-body[data-theme] .hero{
-  background:
-    radial-gradient(circle at 15% 0%,rgba(255,255,255,.86),transparent 35%),
-    linear-gradient(145deg,var(--accent-soft),var(--lav1) 65%,var(--mint1))
-}
-body[data-theme] .bottom{background:color-mix(in srgb,var(--cream) 90%,transparent)}
-body[data-theme] .sheet{background:color-mix(in srgb,var(--cream) 94%,white)}
-body[data-theme] .soft-card,
-body[data-theme] .envelope,
-body[data-theme] .transaction,
-body[data-theme] .dream-card{border-color:color-mix(in srgb,var(--accent-soft) 35%,white)}
- 
- 
-.onboarding{
-  position:fixed;inset:0;z-index:120;display:none;place-items:center;padding:18px;
-  background:linear-gradient(160deg,var(--cream),var(--accent-soft),var(--lav1));
-}
-.onboarding.open{display:grid}
-.onboarding-card{
-  width:min(100%,620px);max-height:92vh;overflow:auto;padding:28px 22px;border-radius:34px;
-  background:rgba(255,255,255,.92);box-shadow:0 30px 80px rgba(75,60,70,.20);text-align:center
-}
-.onboarding-visual{font-size:72px;animation:onboardFloat 2.7s ease-in-out infinite}
-@keyframes onboardFloat{50%{transform:translateY(-8px) rotate(2deg)}}
-.onboarding-card h2{font-size:32px;margin:10px 0 6px}.onboarding-card p{color:var(--muted);line-height:1.6}
-.steps{display:flex;justify-content:center;gap:7px;margin:16px 0}.step-dot{width:9px;height:9px;border-radius:50%;background:rgba(90,70,80,.16)}.step-dot.active{background:var(--accent);transform:scale(1.25)}
-.onboarding-step{display:none}.onboarding-step.active{display:block;animation:viewIn .28s ease}
-@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.onboarding-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.onboarding-actions .primary,.onboarding-actions .secondary{margin:0}
-.onboarding-actions .primary:only-child{grid-column:1/-1}
-.welcome-field{text-align:left;margin-top:14px}.welcome-field label{display:block;font-size:13px;font-weight:900;margin-bottom:7px}
-.welcome-field input,.welcome-field select{width:100%;padding:14px;border:1px solid #ead9e2;border-radius:15px;background:#fff;color:var(--ink)}
-.weather-card{
-  margin-top:14px;padding:15px 16px;border-radius:20px;background:rgba(255,255,255,.74);
-  display:flex;align-items:center;gap:12px
-}
-.weather-icon{font-size:32px}.weather-card b{display:block}.weather-card span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
-.quote-card{
-  margin-top:14px;padding:17px;border-radius:20px;background:linear-gradient(145deg,var(--accent-soft),rgba(255,255,255,.7));
-  font-size:14px;line-height:1.55;font-weight:850;font-style:italic
-}
-.journal-list{display:grid;gap:12px}
-.journal-card{padding:18px;border-radius:24px;background:rgba(255,255,255,.92);box-shadow:var(--shadow2)}
-.journal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.journal-head b{font-size:17px}.journal-head span{font-size:28px}
-.journal-card p{margin:9px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
-.reward-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.reward-card{border:2px solid transparent;border-radius:20px;padding:13px 8px;background:rgba(255,255,255,.9);color:var(--ink);box-shadow:var(--shadow2)}
-.reward-card .reward-emoji{display:block;font-size:30px}.reward-card small{display:block;margin-top:5px;color:var(--muted);font-size:10px;font-weight:850}
-.reward-card.active{border-color:var(--accent);background:var(--accent-soft)}
-.reward-card.locked{opacity:.45;filter:grayscale(.7)}
-.petal{position:fixed;top:-30px;z-index:110;pointer-events:none;font-size:20px;animation:petalFall 1.9s linear forwards}
-@keyframes petalFall{to{transform:translate(var(--drift),110vh) rotate(620deg);opacity:.1}}
-.ripple{animation:ripple .45s ease}@keyframes ripple{50%{transform:scale(1.018)}}
-.nav button[data-section="journal"]{display:block}
-@media(max-width:460px){.reward-grid{grid-template-columns:repeat(2,1fr)}.onboarding-card{padding:23px 16px}}
- 
-@media(max-width:560px){.hero-grid{grid-template-columns:1fr}.plant-wrap{margin-top:6px}.daily{font-size:56px}}
-@media(max-width:390px){.app{padding-inline:10px}.hero{padding:18px}.soft-grid{grid-template-columns:1fr}.envelope{grid-template-columns:auto 1fr}.env-remain{grid-column:2}.fab{right:14px}}
+.sky-sun{position:absolute;right:23px;top:22px;width:46px;height:46px;border-radius:50%;background:#ffd77c;box-shadow:0 0 28px rgba(255,211,124,.5);animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.cloud{position:absolute;top:39px;left:30px;font-size:42px;opacity:.73;animation:cloudMove 12s ease-in-out infinite alternate}
+@keyframes cloudMove{to{transform:translateX(70px)}}
+.ground{position:absolute;left:-5%;right:-5%;bottom:-22px;height:112px;border-radius:50% 50% 0 0;background:linear-gradient(180deg,#b7dbb4,#91c899)}
+.companion{position:absolute;left:50%;bottom:48px;width:160px;height:178px;transform:translateX(-50%);filter:drop-shadow(0 15px 15px rgba(68,68,68,.14))}
+.companion.happy{animation:bounce .55s ease}.companion.spark{animation:bounce .55s ease}
+@keyframes bounce{35%{transform:translateX(-50%) translateY(-12px) scale(1.04)}70%{transform:translateX(-50%) translateY(2px)}}
+.pot{position:absolute;left:39px;bottom:0;width:82px;height:65px;border-radius:16px 16px 34px 34px;background:linear-gradient(145deg,#dda5bc,#bd799c)}
+.pot:before{content:"";position:absolute;left:-5px;right:-5px;top:-7px;height:18px;border-radius:12px;background:#e8b7ca}
+.eye{position:absolute;top:28px;width:7px;height:10px;background:#604a58;border-radius:50%}.eye.e1{left:24px}.eye.e2{right:24px}.cheek{position:absolute;top:40px;width:14px;height:7px;border-radius:50%;background:#ef7ea7;opacity:.68}.cheek.c1{left:9px}.cheek.c2{right:9px}.smile{position:absolute;left:33px;top:37px;width:17px;height:9px;border-bottom:3px solid #604a58;border-radius:50%}
+.stem{position:absolute;left:76px;bottom:61px;width:9px;height:76px;border-radius:9px;background:#62b47a}.leaf{position:absolute;width:53px;height:27px;background:#7cca8f}.leaf.l1{left:29px;bottom:99px;border-radius:100% 0 100% 0;transform:rotate(18deg)}.leaf.l2{right:24px;bottom:126px;border-radius:0 100% 0 100%;transform:rotate(-18deg)}
+.flower{position:absolute;left:48px;top:2px;width:64px;height:64px;opacity:0;transform:scale(.5);transition:.3s}.flower i{position:absolute;width:36px;height:36px;border-radius:50%;background:#ef92b8}.flower .p1{left:14px}.flower .p2{left:0;top:14px}.flower .p3{right:0;top:14px}.flower .p4{left:14px;bottom:0}.flower .center{left:18px;top:18px;width:28px;height:28px;background:#ffd56b}
+.companion.stage-0 .stem{height:14px}.companion.stage-0 .leaf{display:none}.companion.stage-1 .stem{height:35px}.companion.stage-1 .leaf{display:none}.companion.stage-2 .stem{height:55px}.companion.stage-2 .l2{display:none}.companion.stage-4 .flower,.companion.stage-5 .flower{opacity:1;transform:scale(1)}
+.critter{position:absolute;font-size:28px;animation:critterFloat 4s ease-in-out infinite}.critter.butterfly{right:24px;bottom:103px}.critter.bee{left:28px;bottom:130px;animation-delay:1s}.critter.mushroom{left:21px;bottom:36px;animation:none}.critter.rainbow{right:15px;top:11px;font-size:42px;animation:none}.critter.moon{right:21px;top:18px;font-size:38px;animation:none}
+@keyframes critterFloat{50%{transform:translateY(-13px) rotate(7deg)}}
+.preview-caption{position:absolute;left:16px;right:16px;bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.78);backdrop-filter:blur(7px);border-radius:17px;padding:11px 13px}.preview-caption b{font-size:14px}.preview-caption span{font-size:12px;color:var(--muted)}
+.seed-pill{padding:8px 11px;border-radius:999px;background:var(--accentSoft);color:var(--accent);font-size:12px;font-weight:1000;white-space:nowrap}
+.quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.soft-btn{border:0;border-radius:17px;padding:13px;background:var(--surface);color:var(--ink);box-shadow:var(--shadow2);font-weight:950}
+.weather{margin-top:12px;padding:14px 15px;border-radius:19px;background:var(--warm);display:flex;gap:11px;align-items:center}.weather .wi{font-size:28px}.weather b{display:block}.weather span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.section{margin-top:27px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:13px}.section-title{font-size:29px;font-weight:1000;letter-spacing:-.045em}.section-sub{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:950}.link-btn{border:0;background:transparent;color:var(--accent);font-weight:1000}
+.card{background:var(--surface);border:1px solid rgba(255,255,255,.8);box-shadow:var(--shadow2);border-radius:var(--rLG)}
+.envelope-list,.tx-list,.journal-list,.achievement-list{display:grid;gap:12px}
+.envelope{padding:16px}.env-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}.env-icon{width:53px;height:53px;border-radius:18px;display:grid;place-items:center;background:var(--accentSoft);font-size:24px}.env-main{min-width:0}.env-name{font-weight:1000}.env-sub{color:var(--muted);font-size:12px;margin-top:3px}.env-left{font-weight:1000;color:var(--ok);white-space:nowrap}.bar{height:9px;border-radius:999px;background:rgba(93,67,82,.10);overflow:hidden;margin-top:12px}.bar>div{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s}.env-actions{display:flex;justify-content:flex-end;margin-top:10px}.tiny-btn{border:0;border-radius:12px;padding:8px 11px;background:var(--accentSoft);color:var(--accent);font-weight:950;font-size:12px}
+.goal-card{padding:20px}.goal-head{display:flex;justify-content:space-between;gap:12px}.goal-name{font-size:18px;font-weight:1000}.goal-amount{font-size:30px;font-weight:1000;letter-spacing:-.045em;margin-top:5px}.goal-pct{padding:8px 10px;border-radius:13px;background:var(--accentSoft);color:var(--accent);font-weight:1000}.goal-msg{color:var(--muted);font-size:13px;line-height:1.5;margin-top:12px}
+.garden-world{min-height:470px;position:relative;overflow:hidden;border-radius:30px;background:linear-gradient(180deg,#dff1f2 0 42%,#dcefdc 42%);box-shadow:var(--shadow)}
+.garden-world .sky-sun{top:26px;right:28px}.garden-world .cloud{top:50px}.garden-world .ground{height:175px;bottom:-25px}.garden-world .companion{bottom:102px;transform:translateX(-50%) scale(1.2)}
+.world-message{position:absolute;top:20px;left:20px;right:90px;padding:13px 15px;border-radius:19px;background:rgba(255,255,255,.8);backdrop-filter:blur(7px);font-size:13px;line-height:1.45;font-weight:850}
+.flower-bed{position:absolute;left:14px;right:14px;bottom:22px;display:flex;justify-content:center;gap:12px;font-size:31px;flex-wrap:wrap}
+.store-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.store-item{padding:15px;text-align:center}.store-emoji{font-size:35px}.store-item b{display:block;margin-top:7px}.store-item small{display:block;color:var(--muted);margin-top:3px}.store-item button{width:100%;margin-top:11px;border:0;border-radius:13px;padding:9px;background:var(--accentSoft);color:var(--accent);font-weight:1000}.store-item button.active{background:var(--accent);color:white}.store-item button:disabled{opacity:.46}
+.achievement{padding:16px;display:flex;align-items:center;gap:13px}.ach-icon{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:var(--accentSoft);font-size:24px}.ach-main{flex:1}.ach-main b{display:block}.ach-main span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.ach-status{font-size:11px;font-weight:1000;color:var(--accent)}.achievement.locked{opacity:.58}
+.tx{padding:14px;display:flex;align-items:center;gap:12px}.tx-icon{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:var(--accentSoft);font-size:21px}.tx-main{flex:1;min-width:0}.tx-main b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tx-main span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.tx-side{text-align:right}.tx-amount{font-weight:1000;color:var(--danger);white-space:nowrap}.tx-amount.plus{color:var(--ok)}.undo-btn{margin-top:5px;border:0;border-radius:10px;background:var(--accentSoft);color:var(--accent);font-size:11px;padding:6px 8px;font-weight:1000}
+.journal-card{padding:18px}.journal-head{display:flex;justify-content:space-between;gap:12px}.journal-head b{font-size:17px}.journal-head span{font-size:30px}.journal-card p{margin:9px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
+.empty{padding:27px 19px;text-align:center;color:var(--muted);border:1px dashed color-mix(in srgb,var(--muted) 30%,transparent);border-radius:22px;background:rgba(255,255,255,.48);line-height:1.55}
+.fab{position:fixed;right:max(16px,calc((100vw - 730px)/2 + 16px));bottom:89px;z-index:30;width:65px;height:65px;border:0;border-radius:22px;color:white;font-size:38px;line-height:1;background:linear-gradient(145deg,var(--accent),var(--accent2));box-shadow:0 18px 34px color-mix(in srgb,var(--accent) 38%,transparent)}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:25;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(17px);border-top:1px solid rgba(90,70,80,.09);padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
+.nav{width:min(100%,760px);margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}.nav button{border:0;background:transparent;color:var(--muted);padding:6px 2px;font-size:10px;font-weight:950}.nav button.active{color:var(--accent)}.nav span{display:block;font-size:22px;margin-bottom:2px}
+.modal{position:fixed;inset:0;z-index:70;background:rgba(65,44,56,.36);display:none;align-items:flex-end}.modal.open{display:flex}.sheet{width:min(100%,760px);margin:auto;max-height:92vh;overflow:auto;background:var(--bg);border-radius:30px 30px 0 0;padding:20px 16px calc(24px + env(safe-area-inset-bottom))}
+.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.sheet h2{margin:0;font-size:28px}.close{width:40px;height:40px;border:0;border-radius:14px;background:var(--accentSoft);color:var(--ink);font-size:24px}
+.field{margin-top:14px}.field label{display:block;font-size:13px;font-weight:950;margin-bottom:7px}.field small{display:block;color:var(--muted);font-size:11px;line-height:1.45;margin-top:5px}.field input,.field select{width:100%;padding:14px;border:1px solid rgba(100,75,90,.16);border-radius:15px;background:white;color:var(--ink);outline:none}.field input:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 13%,transparent)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.primary,.secondary,.danger-btn{width:100%;border:0;border-radius:17px;padding:15px;font-weight:1000;margin-top:12px}.primary{background:linear-gradient(145deg,var(--accent),var(--accent2));color:white}.secondary{background:var(--accentSoft);color:var(--ink)}.danger-btn{background:#f7dde4;color:var(--danger)}
+.segmented{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:16px;background:var(--accentSoft);margin-top:14px}.segmented button{border:0;background:transparent;padding:10px;border-radius:12px;color:var(--muted);font-weight:950}.segmented button.active{background:white;color:var(--ink);box-shadow:var(--shadow2)}
+.theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.theme-btn{border:2px solid transparent;border-radius:15px;padding:9px 4px;background:white;color:var(--ink);font-size:11px;font-weight:950}.theme-btn span{display:block;font-size:21px}.theme-btn.active{border-color:var(--accent);background:var(--accentSoft)}
+.onboarding{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:17px;background:linear-gradient(150deg,var(--bg),var(--accentSoft),color-mix(in srgb,var(--accent2) 30%,white))}.onboarding.open{display:grid}.on-card{width:min(100%,610px);max-height:92vh;overflow:auto;border-radius:33px;background:rgba(255,255,255,.93);padding:27px 20px;text-align:center;box-shadow:0 30px 80px rgba(65,45,56,.2)}.on-emoji{font-size:70px;animation:float 3s ease-in-out infinite}.on-card h2{font-size:31px;margin:10px 0 6px}.on-card p{color:var(--muted);line-height:1.6}.on-step{display:none}.on-step.active{display:block}.dots{display:flex;justify-content:center;gap:7px;margin:15px 0}.dot{width:9px;height:9px;border-radius:50%;background:rgba(80,60,72,.16)}.dot.active{background:var(--accent);transform:scale(1.25)}.on-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.on-actions button{margin:0}.on-actions .primary:only-child{grid-column:1/-1}
+.toast{position:fixed;left:50%;bottom:165px;z-index:120;transform:translateX(-50%) translateY(18px);opacity:0;pointer-events:none;background:var(--ink);color:white;padding:12px 16px;border-radius:999px;font-size:13px;font-weight:950;transition:.24s;max-width:calc(100% - 28px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%)}
+.petal{position:fixed;top:-30px;z-index:110;pointer-events:none;font-size:19px;animation:fall 1.9s linear forwards}@keyframes fall{to{transform:translate(var(--drift),110vh) rotate(600deg);opacity:.1}}
+body[data-theme="jardin"]{--bg:#f8fbf7;--bg2:#edf5ef;--accent:#4e9670;--accent2:#afa2d0;--accentSoft:#e2f1e7;--warm:#fff0ca}
+body[data-theme="sakura"]{--bg:#fff8fb;--bg2:#fff0f5;--accent:#d85d91;--accent2:#b7a4df;--accentSoft:#ffe0eb;--warm:#fff0ca}
+body[data-theme="lavande"]{--bg:#fcfaff;--bg2:#f3effb;--accent:#7359a5;--accent2:#8fc3a9;--accentSoft:#ece5fa;--warm:#fff0d5}
+body[data-theme="ocean"]{--bg:#f7fcfc;--bg2:#eaf6f5;--accent:#367f7a;--accent2:#94acd0;--accentSoft:#dff1ef;--warm:#fff1d4}
+@media(max-width:420px){.app{padding-inline:10px}.hero{padding:18px}.daily{font-size:56px}.store-grid{grid-template-columns:1fr 1fr}.theme-grid{grid-template-columns:repeat(2,1fr)}.env-top{grid-template-columns:auto 1fr}.env-left{grid-column:2}.fab{right:13px}}
 </style>
 </head>
-<body>
+<body data-theme="jardin">
 <div class="app">
 <header class="topbar">
   <div class="brand"><div class="logo"><span>🌱</span></div><div><h1>Bloom</h1><p>Ton jardin financier vivant</p></div></div>
@@ -234,638 +115,328 @@ body[data-theme] .dream-card{border-color:color-mix(in srgb,var(--accent-soft) 3
 </header>
  
 <main>
-<section class="hero">
-  <span class="sparkle s1">✦</span><span class="sparkle s2">♡</span><span class="sparkle s3">✧</span>
-  <div class="hero-grid">
-    <div>
-      <div class="kicker">Aujourd'hui, tu peux dépenser</div>
-      <div id="dailyBudget" class="daily">0,00 €</div>
-      <div id="dailyMessage" class="daily-label">Configure Bloom pour commencer.</div>
-      <div id="budgetMood" class="pill">🌸 Bloom est prête à t'encourager</div>
-      <div id="cycleLabel" class="cycle-label"></div>
- 
-      <div class="hero-stats">
-        <div class="stat"><b id="remainingBudget">0 €</b><span>Reste pour la saison</span></div>
-        <div class="stat"><b id="daysLeft">0</b><span>Jours avant la prochaine saison</span></div>
-        <div class="stat"><b id="reservedSaving">0 €</b><span>Épargne réservée</span></div>
-        <div class="stat"><b id="streak">0 jour</b><span>Jours réguliers</span></div>
-      </div>
-      <div class="coach"><span>💌</span><div id="coachText">Bloom t’aide à avancer sans pression, une habitude après l’autre.</div></div>
-      <div class="companion-card">
-        <div class="companion-copy"><b id="companionNameLabel">Mochi grandit avec toi</b><span id="companionMood">Une présence douce, jamais punitive.</span></div>
-        <div id="seedCount" class="seed-pill">🌱 0 graines</div>
-      </div>
-      <div class="action-row">
-        <button id="dailyVisitBtn" class="soft-action">☀️ Dire bonjour</button>
-        <button id="encourageBtn" class="soft-action">💚 Encourager</button>
-      </div>
-      <div class="weather-card"><div id="budgetWeatherIcon" class="weather-icon">☀️</div><div><b id="budgetWeatherTitle">Météo du jardin</b><span id="budgetWeatherText">Ta saison est douce.</span></div></div>
-      <div id="dailyQuote" class="quote-card">« Les grandes forêts poussent une feuille à la fois. »</div>
+<section id="homeView" class="view active">
+  <article class="hero">
+    <div class="kicker">Aujourd'hui, tu peux dépenser</div>
+    <div id="dailyBudget" class="daily">0,00 €</div>
+    <div id="dailyMessage" class="daily-label">Bloom prépare ton jardin.</div>
+    <div id="moodPill" class="mood-pill">🌿 Ta saison commence doucement</div>
+    <div id="cycleLabel" class="cycle"></div>
+    <div class="stats">
+      <div class="stat"><b id="remainingBudget">0 €</b><span>Reste pour la saison</span></div>
+      <div class="stat"><b id="daysLeft">0</b><span>Jours avant la prochaine saison</span></div>
+      <div class="stat"><b id="savingReserved">0 €</b><span>Épargne protégée</span></div>
+      <div class="stat"><b id="streakValue">0</b><span>Jours réguliers</span></div>
     </div>
+    <div class="weather"><div id="weatherIcon" class="wi">🌤️</div><div><b id="weatherTitle">Météo du jardin</b><span id="weatherText">Ta saison prend forme.</span></div></div>
+  </article>
  
-    <div class="plant-wrap">
-      <div id="mascot" class="mascot stage-0">
+  <article class="garden-preview">
+    <div class="sky-sun"></div><div class="cloud">☁️</div><div class="ground"></div>
+    <div id="homeCompanion" class="companion stage-0">
+      <div class="flower"><i class="p1"></i><i class="p2"></i><i class="p3"></i><i class="p4"></i><i class="center"></i></div>
+      <div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div>
+      <div class="pot"><span class="eye e1"></span><span class="eye e2"></span><span class="cheek c1"></span><span class="cheek c2"></span><span class="smile"></span></div>
+    </div>
+    <div id="homeCritter"></div>
+    <div class="preview-caption"><div><b id="companionTitle">Mochi grandit avec toi</b><span id="companionMood">Aucun jour imparfait ne détruit ton jardin.</span></div><div id="seedCount" class="seed-pill">🌱 0</div></div>
+  </article>
+  <div class="quick-actions"><button id="helloBtn" class="soft-btn">☀️ Dire bonjour</button><button id="encourageBtn" class="soft-btn">💚 Encourager</button></div>
+</section>
+ 
+<section id="envelopesView" class="view">
+  <div class="section">
+    <div class="section-head"><div><div class="section-sub">Ta répartition</div><div class="section-title">Enveloppes</div></div><button id="addEnvelopeBtn" class="link-btn">+ Ajouter</button></div>
+    <div id="envelopeList" class="envelope-list"></div>
+  </div>
+</section>
+ 
+<section id="gardenView" class="view">
+  <div class="section">
+    <div class="section-head"><div><div class="section-sub">Un monde à faire grandir</div><div class="section-title">Mon Jardin</div></div><span id="gardenSeeds" class="seed-pill">🌱 0 graines</span></div>
+    <article class="garden-world">
+      <div class="sky-sun"></div><div class="cloud">☁️</div><div class="ground"></div>
+      <div id="worldMessage" class="world-message">Bienvenue dans ton jardin.</div>
+      <div id="worldCompanion" class="companion stage-0">
         <div class="flower"><i class="p1"></i><i class="p2"></i><i class="p3"></i><i class="p4"></i><i class="center"></i></div>
-        <div class="bud"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div>
+        <div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div>
         <div class="pot"><span class="eye e1"></span><span class="eye e2"></span><span class="cheek c1"></span><span class="cheek c2"></span><span class="smile"></span></div>
       </div>
-      <div id="plantTitle" class="plant-title">Une graine pleine de promesses</div>
-      <div id="plantSub" class="plant-sub">Tes habitudes la feront pousser.</div>
-      <div class="growth"><div id="growthBar"></div></div>
-    </div>
+      <div id="worldCritter"></div><div id="flowerBed" class="flower-bed"></div>
+    </article>
+  </div>
+ 
+  <div class="section">
+    <div class="section-head"><div><div class="section-sub">Ton rêve</div><div class="section-title">Projet personnel</div></div><button id="goalEditBtn" class="link-btn">Modifier</button></div>
+    <article class="card goal-card">
+      <div class="goal-head"><div><div id="goalName" class="goal-name">Mon projet</div><div id="goalAmount" class="goal-amount">0 € / 0 €</div></div><div id="goalPct" class="goal-pct">0 %</div></div>
+      <div class="bar"><div id="goalBar"></div></div><div id="goalMessage" class="goal-msg"></div>
+    </article>
+  </div>
+ 
+  <div class="section">
+    <div class="section-head"><div><div class="section-sub">À collectionner</div><div class="section-title">Habitants & décors</div></div></div>
+    <div id="storeGrid" class="store-grid"></div>
+  </div>
+ 
+  <div class="section">
+    <div class="section-head"><div><div class="section-sub">Tes petites victoires</div><div class="section-title">Rencontres</div></div></div>
+    <div id="achievementList" class="achievement-list"></div>
   </div>
 </section>
  
-<section class="section">
-  <div class="section-head"><div><div class="section-kicker">Tout doux</div><div class="section-title">Ma saison</div></div><button id="monthEditBtn" class="link-btn">Modifier</button></div>
-  <div class="soft-grid">
-    <article class="soft-card"><div class="emoji">🎀</div><span>Salaire récurrent</span><b id="incomeTotal">0 €</b></article>
-    <article class="soft-card"><div class="emoji">🏡</div><span>Charges réservées</span><b id="fixedTotal">0 €</b></article>
+<section id="journalView" class="view">
+  <div class="section">
+    <div class="section-head"><div><div class="section-sub">Corriger ou retrouver</div><div class="section-title">Mouvements</div></div></div>
+    <div id="transactionList" class="tx-list"></div>
   </div>
-</section>
- 
-<section class="section">
-  <div class="section-head"><div><div class="section-kicker">Mes enveloppes</div><div class="section-title">Enveloppes</div></div><button id="addEnvelopeBtn" class="link-btn">+ Ajouter</button></div>
-  <div id="envelopes" class="envelopes"></div>
-</section>
- 
-<section class="section">
-  <div class="section-head"><div><div class="section-kicker">Mon projet personnel</div><div class="section-title">Mon projet</div></div><button id="goalBtn" class="link-btn">Modifier</button></div>
-  <article class="dream-card">
-    <div class="dream-top">
-      <div><div id="goalName" class="dream-name">Mon joli projet</div><div id="goalProgressText" class="dream-amount">0 € / 0 €</div></div>
-      <div id="goalPercent" class="dream-badge">0 %</div>
-    </div>
-    <div class="growth"><div id="goalProgress"></div></div>
-    <div id="goalMotivation" class="dream-message"></div>
-  </article>
-</section>
- 
-<section class="section">
-  <div class="section-head"><div><div class="section-kicker">Mes souvenirs</div><div class="section-title">Mon jardin</div></div></div>
-  <div id="gardenGrid" class="garden-grid"></div>
-</section>
- 
-<section class="section">
-  <div class="section-head"><div><div class="section-kicker">Les petites victoires</div><div class="section-title">Badges</div></div></div>
-  <div id="badgeList" class="badges"></div>
-</section>
- 
-<section class="section">
-  <div class="section-head"><div><div class="section-kicker">Personnaliser mon univers</div><div class="section-title">Décorations</div></div></div>
-  <div id="rewardGrid" class="reward-grid"></div>
-</section>
- 
-<section class="section" id="journalSection">
-  <div class="section-head"><div><div class="section-kicker">Mon histoire</div><div class="section-title">Livre du Jardin</div></div></div>
-  <div id="journalList" class="journal-list"></div>
-</section>
- 
-<section class="section">
-  <div class="section-head"><div><div class="section-kicker">Mon activité récente</div><div class="section-title">Derniers mouvements</div></div></div>
-  <div id="transactions" class="transactions"></div>
+  <div class="section">
+    <div class="section-head"><div><div class="section-sub">Les saisons passées</div><div class="section-title">Livre du Jardin</div></div></div>
+    <div id="journalList" class="journal-list"></div>
+  </div>
 </section>
 </main>
 </div>
  
-<button id="addTxBtn" class="fab" aria-label="Ajouter un mouvement">+</button>
+<button id="fab" class="fab" aria-label="Ajouter un mouvement">+</button>
 <nav class="bottom"><div class="nav">
-  <button class="active" data-scroll="top"><span>⌂</span>ACCUEIL</button>
-  <button data-scroll="envelopes"><span>👜</span>ENVELOPPES</button>
-  <button data-scroll="goalName"><span>🌸</span>RÊVE</button>
-  <button data-scroll="journalSection" data-section="journal"><span>📖</span>JOURNAL</button>
+  <button class="active" data-view="homeView"><span>⌂</span>AUJOURD'HUI</button>
+  <button data-view="envelopesView"><span>👜</span>ENVELOPPES</button>
+  <button data-view="gardenView"><span>🌿</span>JARDIN</button>
+  <button data-view="journalView"><span>📖</span>JOURNAL</button>
 </div></nav>
  
-<div id="txModal" class="modal"><div class="sheet">
-  <div class="sheet-head"><div><div class="section-kicker">Un nouveau mouvement</div><h2>Ajouter un mouvement</h2></div><button class="close">×</button></div>
-  <div class="segmented"><button class="active" data-type="expense">Dépense</button><button data-type="extraSaving">Épargne en plus</button></div>
+<div id="transactionModal" class="modal"><div class="sheet">
+  <div class="sheet-head"><div><div class="kicker">Un nouveau mouvement</div><h2>Ajouter</h2></div><button class="close">×</button></div>
+  <div class="segmented"><button class="active" data-type="expense">Dépense</button><button data-type="saving">Épargne en plus</button></div>
   <input id="txType" type="hidden" value="expense">
   <div class="row"><div class="field"><label>Montant</label><input id="txAmount" type="number" min="0.01" step="0.01"></div><div class="field"><label>Date</label><input id="txDate" type="date"></div></div>
   <div class="field"><label>Libellé</label><input id="txLabel" placeholder="Ex. Courses du samedi"></div>
   <div id="txEnvelopeField" class="field"><label>Enveloppe</label><select id="txEnvelope"></select></div>
-  <button id="saveTx" class="primary">Ajouter le mouvement</button><button class="secondary closeModal">Annuler</button>
+  <button id="saveTransaction" class="primary">Enregistrer</button><button class="secondary closeModal">Annuler</button>
 </div></div>
  
 <div id="settingsModal" class="modal"><div class="sheet">
-  <div class="sheet-head"><div><div class="section-kicker">Ma saison</div><h2>Configurer Bloom</h2></div><button class="close">×</button></div>
-  <div class="field"><label>Prénom de ton compagnon</label>
-    <input id="setCompanionName" maxlength="20" placeholder="Mochi, Nori, Olive…">
-    <small>Ton compagnon ne meurt jamais et ne te juge jamais.</small>
-  </div>
-  <div class="field"><label>Univers visuel</label>
-    <div class="theme-picks">
-      <button type="button" class="theme-pick" data-theme-choice="jardin"><span>🌿</span>Jardin</button>
-      <button type="button" class="theme-pick" data-theme-choice="sakura"><span>🌸</span>Sakura</button>
-      <button type="button" class="theme-pick" data-theme-choice="lavande"><span>💜</span>Lavande</button>
-      <button type="button" class="theme-pick" data-theme-choice="ocean"><span>🌊</span>Océan</button>
-    </div>
-    <small>Le thème Jardin est doux et plus universel. Tu peux changer d'univers à tout moment.</small>
-  </div>
-  <div class="field"><label>Jour habituel du salaire</label><input id="setPayday" type="number" min="1" max="31"><small>Exemple : 28 si ton salaire arrive habituellement le 28.</small></div>
-  <div class="field"><label>Salaire reçu à chaque saison</label><input id="setIncome" type="number" min="0" step="0.01"></div>
-  <div class="field"><label>Charges à réserver dès le salaire</label><input id="setFixed" type="number" min="0" step="0.01"><small>Bloom met de côté toutes tes charges prévues dès le début de la saison, quelle que soit leur date de prélèvement.</small></div>
-  <div class="field"><label>Épargne à réserver dès le salaire</label><input id="setSaving" type="number" min="0" step="0.01"></div>
- 
-  <div class="warning-box">🌷 Pour ta toute première saison, Bloom ne doit pas utiliser un salaire futur. Indique simplement ce qu'il te reste réellement à dépenser jusqu'au prochain salaire.</div>
-  <div class="field"><label>Reste réellement disponible aujourd'hui</label><input id="setBridgeAvailable" type="number" min="0" step="0.01"><small>Après avoir mis de côté toutes les charges et l'épargne encore nécessaires avant ton prochain salaire.</small></div>
-  <div class="field"><label><input id="useBridge" type="checkbox" style="width:auto;margin-right:8px"> Utiliser ce montant jusqu'au prochain salaire</label></div>
- 
-  <div id="settingsPreview" class="info-box"></div>
-  <button id="saveSettings" class="primary">Enregistrer</button>
-  <button id="resetApp" class="secondary">Tout recommencer</button>
+  <div class="sheet-head"><div><div class="kicker">Ton univers</div><h2>Réglages</h2></div><button class="close">×</button></div>
+  <div class="field"><label>Prénom du compagnon</label><input id="setName" maxlength="20"></div>
+  <div class="field"><label>Thème</label><div class="theme-grid">
+    <button type="button" class="theme-btn" data-theme="jardin"><span>🌿</span>Jardin</button>
+    <button type="button" class="theme-btn" data-theme="sakura"><span>🌸</span>Sakura</button>
+    <button type="button" class="theme-btn" data-theme="lavande"><span>💜</span>Lavande</button>
+    <button type="button" class="theme-btn" data-theme="ocean"><span>🌊</span>Océan</button>
+  </div></div>
+  <div class="field"><label>Jour habituel du salaire</label><input id="setPayday" type="number" min="1" max="31"></div>
+  <div class="field"><label>Salaire par saison</label><input id="setIncome" type="number" min="0" step="0.01"></div>
+  <div class="field"><label>Charges protégées</label><input id="setFixed" type="number" min="0" step="0.01"><small>Bloom réserve ce montant quelle que soit la date réelle des prélèvements.</small></div>
+  <div class="field"><label>Épargne protégée</label><input id="setSaving" type="number" min="0" step="0.01"></div>
+  <div class="field"><label>Reste réellement disponible jusqu'au prochain salaire</label><input id="setBridge" type="number" min="0" step="0.01"></div>
+  <div class="field"><label><input id="setBridgeActive" type="checkbox" style="width:auto;margin-right:7px"> Utiliser ce montant uniquement pour la première saison</label></div>
+  <button id="saveSettings" class="primary">Enregistrer</button><button id="resetApp" class="danger-btn">Effacer toutes les données</button>
 </div></div>
  
 <div id="envelopeModal" class="modal"><div class="sheet">
-  <div class="sheet-head"><div><div class="section-kicker">Une nouvelle enveloppe</div><h2>Ajouter une enveloppe</h2></div><button class="close">×</button></div>
-  <div class="field"><label>Nom</label><input id="envName" placeholder="Ex. Sorties, loisirs, animaux…"></div>
-  <div class="field"><label>Budget par saison</label><input id="envBudget" type="number" min="0" step="0.01"></div>
-  <div class="field"><label>Icône</label><select id="envIcon"><option>🛒</option><option>⛽</option><option>🎀</option><option>🍓</option><option>🧁</option><option>🏡</option><option>💄</option><option>👗</option><option>🐰</option><option>🌸</option></select></div>
-  <button id="saveEnvelope" class="primary">Créer l'enveloppe</button><button class="secondary closeModal">Annuler</button>
-</div></div>
- 
-<div id="editEnvelopeModal" class="modal"><div class="sheet">
-  <div class="sheet-head"><div><div class="section-kicker">Mon enveloppe</div><h2>Modifier l'enveloppe</h2></div><button class="close">×</button></div>
-  <input id="editEnvId" type="hidden">
-  <div class="field"><label>Nom</label><input id="editEnvName"></div>
-  <div class="field"><label>Budget réservé par saison</label><input id="editEnvBudget" type="number" min="0.01" step="0.01"><small>Ce montant sert de repère. Une dépense enregistrée dans cette enveloppe réduit aussi le budget quotidien général.</small></div>
-  <div class="field"><label>Icône</label><select id="editEnvIcon"><option>🛒</option><option>⛽</option><option>🎀</option><option>🍓</option><option>🧁</option><option>🏡</option><option>💄</option><option>👗</option><option>🐰</option><option>🌸</option></select></div>
-  <button id="updateEnvelope" class="primary">Enregistrer les changements</button>
-  <button id="deleteEnvelope" class="secondary">Supprimer cette enveloppe</button>
-  <button class="secondary closeModal">Annuler</button>
+  <div class="sheet-head"><div><div class="kicker">Personnaliser</div><h2 id="envelopeModalTitle">Enveloppe</h2></div><button class="close">×</button></div>
+  <input id="editEnvelopeId" type="hidden">
+  <div class="field"><label>Nom</label><input id="envName"></div>
+  <div class="field"><label>Montant réservé</label><input id="envBudget" type="number" min="0" step="0.01"></div>
+  <div class="field"><label>Icône</label><select id="envIcon"><option>🛒</option><option>⛽</option><option>🍽️</option><option>🎀</option><option>🏠</option><option>🐾</option><option>👗</option><option>🎮</option><option>📚</option><option>🌸</option></select></div>
+  <button id="saveEnvelope" class="primary">Enregistrer</button><button id="deleteEnvelope" class="danger-btn">Supprimer l'enveloppe</button>
 </div></div>
  
 <div id="goalModal" class="modal"><div class="sheet">
-  <div class="sheet-head"><div><div class="section-kicker">Mon objectif</div><h2>Modifier mon projet</h2></div><button class="close">×</button></div>
-  <div class="field"><label>Nom du projet</label><input id="goalNameInput"></div>
+  <div class="sheet-head"><div><div class="kicker">Ton rêve</div><h2>Projet personnel</h2></div><button class="close">×</button></div>
+  <div class="field"><label>Nom</label><input id="goalNameInput"></div>
   <div class="field"><label>Montant cible</label><input id="goalTargetInput" type="number" min="0" step="0.01"></div>
   <div class="field"><label>Déjà épargné</label><input id="goalSavedInput" type="number" min="0" step="0.01"></div>
-  <button id="saveGoal" class="primary">Enregistrer cet objectif</button><button class="secondary closeModal">Annuler</button>
+  <button id="saveGoal" class="primary">Enregistrer</button>
 </div></div>
  
- 
-<div id="onboarding" class="onboarding">
-  <div class="onboarding-card">
-    <div class="steps">
-      <span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span>
-    </div>
-    <div class="onboarding-step active" data-step="0">
-      <div class="onboarding-visual">🌱</div>
-      <h2>Bienvenue dans Bloom</h2>
-      <p>Ici, il n'y a pas de mauvais mois. Seulement des saisons, des habitudes et un jardin qui grandit avec toi.</p>
-    </div>
-    <div class="onboarding-step" data-step="1">
-      <div class="onboarding-visual">💚</div>
-      <h2>Choisis ton compagnon</h2>
-      <p>Il ne meurt jamais, ne te juge jamais et célèbre les petites victoires.</p>
-      <div class="welcome-field"><label>Son prénom</label><input id="welcomeName" maxlength="20" value="Mochi"></div>
-      <div class="welcome-field"><label>Ton univers</label><select id="welcomeTheme"><option value="jardin">🌿 Jardin</option><option value="sakura">🌸 Sakura</option><option value="lavande">💜 Lavande</option><option value="ocean">🌊 Océan</option></select></div>
-    </div>
-    <div class="onboarding-step" data-step="2">
-      <div class="onboarding-visual">🌷</div>
-      <h2>Prépare ta saison</h2>
-      <div class="welcome-field"><label>Jour de salaire</label><input id="welcomePayday" type="number" min="1" max="31" value="28"></div>
-      <div class="welcome-field"><label>Salaire</label><input id="welcomeIncome" type="number" min="0" step="0.01" value="0"></div>
-      <div class="welcome-field"><label>Charges à protéger</label><input id="welcomeFixed" type="number" min="0" step="0.01" value="0"></div>
-      <div class="welcome-field"><label>Épargne à protéger</label><input id="welcomeSaving" type="number" min="0" step="0.01" value="0"></div>
-    </div>
-    <div class="onboarding-step" data-step="3">
-      <div class="onboarding-visual">🌸</div>
-      <h2>Ton jardin est prêt</h2>
-      <p>Bloom transformera tes habitudes en feuilles, graines, badges et souvenirs. Tu pourras tout modifier plus tard.</p>
-    </div>
-    <div class="onboarding-actions">
-      <button id="onboardingBack" class="secondary" style="display:none">Retour</button>
-      <button id="onboardingNext" class="primary">Continuer</button>
-    </div>
-  </div>
-</div>
+<div id="onboarding" class="onboarding"><div class="on-card">
+  <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+  <div class="on-step active" data-step="0"><div class="on-emoji">🌱</div><h2>Bienvenue dans Bloom</h2><p>En trois secondes, tu sais ce que tu peux dépenser. Au fil des saisons, tes habitudes font naître un jardin vivant.</p></div>
+  <div class="on-step" data-step="1"><div class="on-emoji">💚</div><h2>Rencontre ton compagnon</h2><p>Il ne meurt jamais, ne te juge jamais et célèbre chaque progrès.</p><div class="field" style="text-align:left"><label>Son prénom</label><input id="welcomeName" value="Mochi"></div></div>
+  <div class="on-step" data-step="2"><div class="on-emoji">🌷</div><h2>Prépare ta saison</h2><div class="field" style="text-align:left"><label>Jour de salaire</label><input id="welcomePayday" type="number" min="1" max="31" value="28"></div><div class="field" style="text-align:left"><label>Salaire</label><input id="welcomeIncome" type="number" min="0" step="0.01"></div><div class="field" style="text-align:left"><label>Charges à protéger</label><input id="welcomeFixed" type="number" min="0" step="0.01"></div><div class="field" style="text-align:left"><label>Épargne à protéger</label><input id="welcomeSaving" type="number" min="0" step="0.01"></div></div>
+  <div class="on-step" data-step="3"><div class="on-emoji">✨</div><h2>Ton jardin est prêt</h2><p>Les enveloppes t'aident à garder le cap. Les graines débloquent des habitants. Le journal conserve chaque saison.</p></div>
+  <div class="on-actions"><button id="onBack" class="secondary" style="display:none">Retour</button><button id="onNext" class="primary">Continuer</button></div>
+</div></div>
 <div id="toast" class="toast"></div>
  
 <script>
-const STORAGE_KEY="bloomCompanionV6";
-const LEGACY_KEYS=["bloomPayCycleV3","bloomKawaiiV1","bloomState"];
-const DEFAULT_STATE={
-  settings:{payday:28,income:6440,fixed:4567,savingGoal:800,bridgeAvailable:0,useBridge:true,theme:"jardin",companionName:"Mochi"},
-  envelopes:[
-    {id:"courses",name:"Courses",icon:"🛒",budget:500},
-    {id:"essence",name:"Essence",icon:"⛽",budget:250},
-    {id:"plaisirs",name:"Petits plaisirs",icon:"🎀",budget:150}
-  ],
-  transactions:[],
-  goal:{name:"Mon joli projet",target:3000,saved:0},
-  streak:0,lastGoodDay:"",seeds:0,lastVisitDay:"",garden:[],badges:[],onboardingDone:false,activeReward:"none",journal:[]
+const STORAGE_KEY="bloomFinalV8";
+const LEGACY_KEYS=["bloomCompanionV6","bloomPayCycleV3","bloomKawaiiV1","bloomState"];
+const DEFAULT={
+  settings:{name:"Mochi",theme:"jardin",payday:28,income:0,fixed:0,saving:0,bridge:0,bridgeActive:false},
+  envelopes:[{id:"courses",name:"Courses",icon:"🛒",budget:300},{id:"essence",name:"Essence",icon:"⛽",budget:150},{id:"plaisirs",name:"Loisirs",icon:"🎀",budget:100}],
+  transactions:[],goal:{name:"Mon projet",target:3000,saved:0},
+  seeds:0,streak:0,lastVisit:"",lastGoodDay:"",owned:["none"],equipped:"none",garden:[],journal:[],onboardingDone:false,currentCycleKey:""
 };
-let state=loadState();
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+let state=load();
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const euro=new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",minimumFractionDigits:2});
 const dateLong=new Intl.DateTimeFormat("fr-FR",{day:"numeric",month:"long"});
 const dateShort=new Intl.DateTimeFormat("fr-FR",{day:"2-digit",month:"short"});
- 
-function loadState(){
+function clone(v){return JSON.parse(JSON.stringify(v))}
+function load(){
   try{
-    let raw=localStorage.getItem(STORAGE_KEY);if(!raw){for(const key of LEGACY_KEYS){raw=localStorage.getItem(key);if(raw)break}}const s=JSON.parse(raw||"null");
-    return s?{...structuredClone(DEFAULT_STATE),...s,settings:{...DEFAULT_STATE.settings,...s.settings},goal:{...DEFAULT_STATE.goal,...s.goal},garden:Array.isArray(s.garden)?s.garden:[],badges:Array.isArray(s.badges)?s.badges:[],journal:Array.isArray(s.journal)?s.journal:[]}:structuredClone(DEFAULT_STATE)
-  }catch{return structuredClone(DEFAULT_STATE)}
+    let raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw){for(const k of LEGACY_KEYS){raw=localStorage.getItem(k);if(raw)break}}
+    const s=JSON.parse(raw||"null");if(!s)return clone(DEFAULT);
+    const oldSettings=s.settings||{};
+    return{
+      ...clone(DEFAULT),...s,
+      settings:{
+        ...DEFAULT.settings,...oldSettings,
+        name:oldSettings.name||oldSettings.companionName||"Mochi",
+        saving:Number(oldSettings.saving??oldSettings.savingGoal??0),
+        bridge:Number(oldSettings.bridge??oldSettings.bridgeAvailable??0),
+        bridgeActive:Boolean(oldSettings.bridgeActive??oldSettings.useBridge??false)
+      },
+      goal:{...DEFAULT.goal,...(s.goal||{})},
+      envelopes:Array.isArray(s.envelopes)?s.envelopes:clone(DEFAULT.envelopes),
+      transactions:Array.isArray(s.transactions)?s.transactions:[],
+      owned:Array.isArray(s.owned)?s.owned:["none"],
+      garden:Array.isArray(s.garden)?s.garden:[],
+      journal:Array.isArray(s.journal)?s.journal:[]
+    }
+  }catch{return clone(DEFAULT)}
 }
 function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
-function localToday(){const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
-function iso(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
-function daysInMonth(y,m){return new Date(y,m+1,0).getDate()}
-function payDate(y,m,day){return new Date(y,m,Math.min(Number(day)||1,daysInMonth(y,m)))}
-function cycleFor(date=localToday()){
-  const day=Number(state.settings.payday)||1;
-  const thisMonthPay=payDate(date.getFullYear(),date.getMonth(),day);
-  let start,next;
-  if(date>=thisMonthPay){
-    start=thisMonthPay;
-    next=payDate(date.getFullYear(),date.getMonth()+1,day);
-  }else{
-    start=payDate(date.getFullYear(),date.getMonth()-1,day);
-    next=thisMonthPay;
-  }
-  const end=new Date(next);end.setDate(end.getDate()-1);
-  return{start,end,next}
+function today(){const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function iso(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function monthDays(y,m){return new Date(y,m+1,0).getDate()}
+function safePay(y,m,day){return new Date(y,m,Math.min(Math.max(1,Number(day)||1),monthDays(y,m)))}
+function cycle(date=today()){
+  const p=Number(state.settings.payday)||1,monthPay=safePay(date.getFullYear(),date.getMonth(),p);
+  let start,next;if(date>=monthPay){start=monthPay;next=safePay(date.getFullYear(),date.getMonth()+1,p)}else{start=safePay(date.getFullYear(),date.getMonth()-1,p);next=monthPay}
+  const end=new Date(next);end.setDate(end.getDate()-1);return{start,next,end}
 }
-function isBridgeActive(){
-  const c=cycleFor();
-  return Boolean(state.settings.useBridge)&&localToday()<c.next;
+function cycleTx(){const c=cycle();return state.transactions.filter(x=>{const d=new Date(x.date+"T12:00:00");return d>=c.start&&d<c.next})}
+function expenses(){return cycleTx().filter(x=>x.type==="expense").reduce((s,x)=>s+Number(x.amount),0)}
+function extraSaving(){return cycleTx().filter(x=>x.type==="saving").reduce((s,x)=>s+Number(x.amount),0)}
+function bridgeActive(){return Boolean(state.settings.bridgeActive)&&today()<cycle().next}
+function baseAvailable(){return bridgeActive()?Number(state.settings.bridge):Math.max(0,Number(state.settings.income)-Number(state.settings.fixed)-Number(state.settings.saving))}
+function remaining(){return baseAvailable()-expenses()-extraSaving()}
+function daysLeft(){return Math.max(1,Math.ceil((cycle().next-today())/86400000))}
+function daily(){return Math.max(0,remaining()/daysLeft())}
+function spentEnvelope(id){return cycleTx().filter(x=>x.type==="expense"&&x.envelope===id).reduce((s,x)=>s+Number(x.amount),0)}
+function score(){
+  const env=state.envelopes.length?state.envelopes.reduce((s,e)=>s+(spentEnvelope(e.id)<=Number(e.budget)?1:0),0)/state.envelopes.length*35:0;
+  return Math.round(Math.max(0,Math.min(100,env+(remaining()>=0?25:0)+Math.min(20,cycleTx().length*2.5)+Math.min(20,Number(state.streak||0)*4))))
 }
-function activeCycleTx(){
-  const c=cycleFor();
-  return state.transactions.filter(x=>{
-    const d=new Date(x.date+"T12:00:00");
-    return d>=c.start&&d<c.next
-  })
-}
-function expenses(){return activeCycleTx().filter(x=>x.type==="expense").reduce((s,x)=>s+Number(x.amount),0)}
-function extraSavings(){return activeCycleTx().filter(x=>x.type==="extraSaving").reduce((s,x)=>s+Number(x.amount),0)}
-function standardBase(){return Math.max(0,Number(state.settings.income)-Number(state.settings.fixed)-Number(state.settings.savingGoal))}
-function seasonBase(){return isBridgeActive()?Number(state.settings.bridgeAvailable||0):standardBase()}
-function remaining(){return seasonBase()-expenses()-extraSavings()}
-function daysRemaining(){const c=cycleFor();return Math.max(1,Math.ceil((c.next-localToday())/86400000))}
-function daily(){return Math.max(0,remaining()/daysRemaining())}
-function envelopeSpent(id){return activeCycleTx().filter(x=>x.type==="expense"&&x.envelope===id).reduce((s,x)=>s+Number(x.amount),0)}
-function todaySpent(){const t=iso(localToday());return state.transactions.filter(x=>x.type==="expense"&&x.date===t).reduce((s,x)=>s+Number(x.amount),0)}
-function reservedSaving(){return isBridgeActive()?0:Number(state.settings.savingGoal)}
-function growthScore(){
-  const env=state.envelopes.length?state.envelopes.reduce((s,e)=>s+(envelopeSpent(e.id)<=Number(e.budget)?1:0),0)/state.envelopes.length*35:0;
-  const balance=remaining()>=0?25:0;
-  const habit=Math.min(20,activeCycleTx().length*2.5);
-  const streak=Math.min(20,Number(state.streak||0)*4);
-  return Math.round(Math.max(0,Math.min(100,env+balance+habit+streak)))
-}
-function stage(score){if(score>=90)return 5;if(score>=70)return 4;if(score>=50)return 3;if(score>=30)return 2;if(score>=10)return 1;return 0}
-function plantCopy(n){return[
-  ["Une graine pleine de promesses","Tes habitudes la feront pousser."],
-  ["La graine se réveille","Ton premier effort compte déjà."],
-  ["Une petite pousse apparaît","Continue tout doucement."],
-  ["Bloom devient bien feuillue","Ta régularité lui fait du bien."],
-  ["Un bouton floral se prépare","Encore un peu et elle fleurira."],
-  ["Bloom est en fleur","Tes efforts ont créé quelque chose de beau."]
-][n]}
-function updateStreak(){
-  const today=iso(localToday());
-  if(state.lastGoodDay===today||todaySpent()>daily()+todaySpent()/daysRemaining())return;
-  if(!state.lastGoodDay)state.streak=1;
-  else{
-    const diff=Math.round((new Date(today)-new Date(state.lastGoodDay))/86400000);
-    state.streak=diff===1?Number(state.streak||0)+1:1
-  }
-  state.lastGoodDay=today
-}
-function coach(){
-  if(isBridgeActive())return`Cette première saison utilise uniquement les ${euro.format(state.settings.bridgeAvailable)} réellement disponibles jusqu'au prochain salaire.`;
-  if(remaining()<0)return"Ta marge est un peu serrée. Tes priorités sont déjà protégées : ajuste seulement les dépenses libres, sans pression.";
-  const over=state.envelopes.find(e=>envelopeSpent(e.id)>Number(e.budget));
-  if(over)return`L'enveloppe « ${over.name} » dépasse légèrement son repère. Tu peux ralentir doucement, sans culpabiliser.`;
-  return`Tes charges et ton épargne sont déjà protégées. Le montant affiché correspond uniquement à ce que tu peux répartir librement.`
-}
+function stage(v){if(v>=90)return 5;if(v>=70)return 4;if(v>=50)return 3;if(v>=30)return 2;if(v>=10)return 1;return 0}
+function esc(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
-function companionName(){return (state.settings.companionName||"Mochi").trim()||"Mochi"}
-function animateCompanion(kind="happy"){
-  const m=$("#mascot");m.classList.remove("happy","sparkly");void m.offsetWidth;m.classList.add(kind);
-  setTimeout(()=>m.classList.remove(kind),900)
+function animate(kind="happy"){["#homeCompanion","#worldCompanion"].forEach(s=>{const e=$(s);e.classList.remove("happy","spark");void e.offsetWidth;e.classList.add(kind);setTimeout(()=>e.classList.remove(kind),800)})}
+function petals(){for(let i=0;i<16;i++){const p=document.createElement("span");p.className="petal";p.textContent=["🌸","🍃","✦"][i%3];p.style.left=Math.random()*100+"vw";p.style.animationDelay=Math.random()*.4+"s";p.style.setProperty("--drift",(Math.random()*160-80)+"px");document.body.appendChild(p);setTimeout(()=>p.remove(),2400)}}
+function theme(t){const a=["jardin","sakura","lavande","ocean"];state.settings.theme=a.includes(t)?t:"jardin";document.body.dataset.theme=state.settings.theme;$$(".theme-btn").forEach(b=>b.classList.toggle("active",b.dataset.theme===state.settings.theme))}
+function weather(){
+  if(remaining()<0)return["⛈️","Saison orageuse","Ta marge est dépassée. On ajuste sans jugement."];
+  if(daily()<10)return["🌧️","Pluie légère","Une journée très douce protégera la suite."];
+  if(daily()<25)return["⛅","Quelques nuages","Ton budget demande un peu d'attention aujourd'hui."];
+  if(daily()<50)return["🌤️","Belles éclaircies","Tu avances dans un rythme équilibré."];
+  return["☀️","Grand soleil","Tu disposes d'une belle marge, priorités protégées."]
 }
-function addSeeds(amount,message){
-  state.seeds=Math.max(0,Number(state.seeds||0)+amount);
-  animateCompanion("sparkly");
-  if(message)toast(message);
+function mood(){
+  if(remaining()<0)return"Ton jardin traverse une pluie passagère.";
+  if(score()>85)return"Ton jardin est presque en pleine floraison.";
+  if(state.streak>=3)return`${state.settings.name} adore votre belle régularité.`;
+  return"Une petite décision consciente suffit aujourd'hui."
 }
-function companionMoodText(){
-  if(remaining()<0)return`${companionName()} reste près de toi. Une saison difficile n'efface aucun progrès.`;
-  if(state.streak>=5)return`${companionName()} adore votre série de ${state.streak} jours réguliers.`;
-  if(growthScore()>=90)return`${companionName()} rayonne : votre jardin est en pleine floraison.`;
-  if(activeCycleTx().length===0)return`${companionName()} attend votre première petite trace de la saison.`;
-  return`${companionName()} grandit grâce à ta régularité, pas grâce à la perfection.`;
+function rewardDefs(){return[
+  {id:"none",e:"🪴",n:"Pot naturel",cost:0,desc:"Le décor de départ."},
+  {id:"butterfly",e:"🦋",n:"Papillon",cost:12,desc:"Il vole autour de ton compagnon."},
+  {id:"bee",e:"🐝",n:"Abeille",cost:25,desc:"Une visiteuse fidèle du jardin."},
+  {id:"mushroom",e:"🍄",n:"Champignon",cost:40,desc:"Une petite touche de forêt."},
+  {id:"rainbow",e:"🌈",n:"Arc-en-ciel",cost:60,desc:"Il apparaît dans le ciel du jardin."},
+  {id:"moon",e:"🌙",n:"Lune douce",cost:90,desc:"Une ambiance calme et nocturne."}
+]}
+function achievementDefs(){return[
+  {id:"first",e:"🌱",n:"Première trace",d:"Enregistre un premier mouvement.",ok:cycleTx().length>=1},
+  {id:"regular3",e:"🍃",n:"Trois jours réguliers",d:"Construis une série de trois jours.",ok:state.streak>=3},
+  {id:"regular7",e:"🦋",n:"Une semaine ensemble",d:"Construis une série de sept jours.",ok:state.streak>=7},
+  {id:"seeds25",e:"🐝",n:"Jardin accueillant",d:"Récolte 25 graines.",ok:state.seeds>=25},
+  {id:"flower",e:"🌸",n:"Première floraison",d:"Atteins 90 % de croissance.",ok:score()>=90}
+]}
+function equippedCritter(){
+  const d=rewardDefs().find(x=>x.id===state.equipped);return d&&d.id!=="none"?`<span class="critter ${d.id}">${d.e}</span>`:""
 }
-function unlockBadges(){
-  const unlocked=new Set(state.badges||[]);
-  if(activeCycleTx().length>=1)unlocked.add("first");
-  if(state.streak>=3)unlocked.add("streak3");
-  if(state.streak>=7)unlocked.add("streak7");
-  if(Number(state.seeds||0)>=25)unlocked.add("seeds25");
-  if(growthScore()>=90)unlocked.add("flower");
-  state.badges=[...unlocked];
+function archiveSeason(){
+  const key=iso(cycle().start);if(state.currentCycleKey&&state.currentCycleKey!==key){
+    const s=Number(state.lastScore||0),flower=["🌱","🌿","🌷","🌼","🌸","🌺"][stage(s)];
+    state.garden.push({key:state.currentCycleKey,flower,score:s});
+    state.journal.push({key:state.currentCycleKey,flower,title:`Saison du ${state.currentCycleKey}`,text:`Ton jardin a atteint ${s} % de croissance. Tu as récolté ${state.seeds} graines. Même les jours difficiles ont fait partie de l'histoire.`});
+    if(state.garden.length>24)state.garden=state.garden.slice(-24);if(state.journal.length>24)state.journal=state.journal.slice(-24);
+    state.transactions=[];state.streak=0;state.lastGoodDay="";state.settings.bridgeActive=false
+  }state.currentCycleKey=key
 }
-function maybeArchiveSeason(){
-  const c=cycleFor();
-  const currentKey=iso(c.start);
-  const stored=state.currentCycleKey;
-  if(stored&&stored!==currentKey){
-    const already=(state.garden||[]).some(x=>x.key===stored);
-    if(!already){
-      const score=Number(state.lastCycleScore||0);
-      const flowers=["🌱","🌿","🌷","🌼","🌸","🌺"];
-      state.garden.push({key:stored,flower:flowers[stage(score)],score});
-      createJournalEntry(stored,score);
-      if(state.garden.length>24)state.garden=state.garden.slice(-24);
-    }
-    state.transactions=[];
-    state.streak=0;
-    state.lastGoodDay="";
-    state.settings.useBridge=false;
-  }
-  state.currentCycleKey=currentKey;
+function updateStreak(){
+  const t=iso(today());if(state.lastGoodDay===t)return;
+  const spentToday=state.transactions.filter(x=>x.type==="expense"&&x.date===t).reduce((s,x)=>s+Number(x.amount),0);
+  if(spentToday>daily()+spentToday/daysLeft())return;
+  if(!state.lastGoodDay)state.streak=1;else{const dif=Math.round((new Date(t)-new Date(state.lastGoodDay))/86400000);state.streak=dif===1?Number(state.streak||0)+1:1}
+  state.lastGoodDay=t
 }
-function renderGarden(){
-  const current={key:iso(cycleFor().start),flower:["🌱","🌿","🌷","🌼","🌸","🌺"][stage(growthScore())],score:growthScore(),current:true};
-  const items=[...(state.garden||[]),current].slice(-12);
-  $("#gardenGrid").innerHTML=items.map(x=>`<button class="garden-flower" type="button">${x.flower}<small>${x.current?"Saison actuelle":x.key}<br>${x.score}%</small></button>`).join("");
-}
-function renderBadges(){
-  const defs=[
-    ["first","🌱 Première trace"],["streak3","🍃 3 jours réguliers"],["streak7","🦋 7 jours réguliers"],
-    ["seeds25","🐝 25 graines"],["flower","🌸 Première floraison"]
-  ];
-  const unlocked=new Set(state.badges||[]);
-  $("#badgeList").innerHTML=defs.map(([id,label])=>`<span class="badge-chip ${unlocked.has(id)?"":"locked"}">${unlocked.has(id)?label:"🔒 "+label}</span>`).join("");
-}
-function budgetWeather(){
-  const value=daily();
-  if(remaining()<0)return["⛈️","Saison orageuse","Ta marge est dépassée. On ralentit sans culpabiliser."];
-  if(value<10)return["🌧️","Jardin sous la pluie","Une journée très légère protégera la suite de ta saison."];
-  if(value<25)return["⛅","Quelques nuages","Ton budget demande un peu d'attention aujourd'hui."];
-  if(value<50)return["🌤️","Éclaircies douces","Ta saison avance dans un rythme équilibré."];
-  return["☀️","Grand soleil","Tu disposes d'une belle marge, tout en gardant tes priorités protégées."];
-}
-function quoteOfDay(){
-  const quotes=[
-    "Les grandes forêts poussent une feuille à la fois.",
-    "Chaque euro conscient est une petite graine.",
-    "La régularité vaut plus que la perfection.",
-    "Un jour difficile n'efface jamais le jardin déjà construit.",
-    "Prendre soin de son budget, c'est aussi prendre soin de soi.",
-    "Les petites habitudes finissent par créer de grands paysages.",
-    "Tu avances davantage que tu ne le crois."
-  ];
-  const d=localToday();return quotes[(d.getFullYear()*372+d.getMonth()*31+d.getDate())%quotes.length];
-}
-function showerPetals(){
-  const petals=["🌸","🍃","✦","🌷"];
-  for(let i=0;i<18;i++){
-    const p=document.createElement("span");p.className="petal";p.textContent=petals[i%petals.length];
-    p.style.left=Math.random()*100+"vw";p.style.animationDelay=Math.random()*.45+"s";
-    p.style.setProperty("--drift",(Math.random()*180-90)+"px");document.body.appendChild(p);
-    setTimeout(()=>p.remove(),2600)
-  }
-}
-function rewardDefinitions(){
-  return[
-    {id:"none",emoji:"🪴",name:"Pot naturel",cost:0},
-    {id:"butterfly",emoji:"🦋",name:"Papillon",cost:12},
-    {id:"bee",emoji:"🐝",name:"Abeille",cost:25},
-    {id:"mushroom",emoji:"🍄",name:"Champignon",cost:40},
-    {id:"rainbow",emoji:"🌈",name:"Arc-en-ciel",cost:60},
-    {id:"moon",emoji:"🌙",name:"Lune douce",cost:90}
-  ]
-}
-function renderRewards(){
-  const seeds=Number(state.seeds||0);
-  $("#rewardGrid").innerHTML=rewardDefinitions().map(r=>{
-    const unlocked=seeds>=r.cost,active=state.activeReward===r.id;
-    return`<button class="reward-card ${active?"active":""} ${unlocked?"":"locked"}" data-reward="${r.id}" ${unlocked?"":"disabled"}><span class="reward-emoji">${r.emoji}</span>${r.name}<small>${r.cost===0?"Inclus":r.cost+" graines"}</small></button>`
-  }).join("");
-  $$("[data-reward]").forEach(b=>b.onclick=()=>{state.activeReward=b.dataset.reward;render();toast("Décoration installée dans ton jardin ✨")})
-}
-function applyActiveReward(){
-  const map={butterfly:"🦋",bee:"🐝",mushroom:"🍄",rainbow:"🌈",moon:"🌙"};
-  let existing=$("#activeDecoration");
-  if(!existing){existing=document.createElement("div");existing.id="activeDecoration";existing.style.cssText="position:absolute;right:15px;top:70px;font-size:30px;animation:float 3s ease-in-out infinite";$("#mascot").appendChild(existing)}
-  existing.textContent=map[state.activeReward]||"";
-}
-function renderJournal(){
-  const list=[...(state.journal||[])];
-  if(!list.length){
-    $("#journalList").innerHTML=`<div class="empty">📖 Ton Livre du Jardin commencera à la fin de ta première saison.<br>Chaque page racontera une petite partie de ton parcours.</div>`;return
-  }
-  $("#journalList").innerHTML=list.slice().reverse().map(x=>`<article class="journal-card"><div class="journal-head"><b>${escapeHtml(x.title)}</b><span>${x.flower}</span></div><p>${escapeHtml(x.text)}</p></article>`).join("")
-}
-function createJournalEntry(key,score){
-  const flower=["🌱","🌿","🌷","🌼","🌸","🌺"][stage(score)];
-  const title=`Saison commencée le ${key}`;
-  const text=`Ton jardin a atteint ${score} % de croissance. Tu as récolté ${Number(state.seeds||0)} graines et conservé chaque progrès, même les jours imparfaits.`;
-  state.journal.push({key,title,text,flower});
-  if(state.journal.length>24)state.journal=state.journal.slice(-24)
-}
-function initOnboarding(){
-  if(state.onboardingDone)return;
-  let step=0;const overlay=$("#onboarding");overlay.classList.add("open");
-  const update=()=>{$$(".onboarding-step").forEach((e,i)=>e.classList.toggle("active",i===step));$$(".step-dot").forEach((e,i)=>e.classList.toggle("active",i===step));$("#onboardingBack").style.display=step?"block":"none";$("#onboardingNext").textContent=step===3?"Entrer dans mon jardin":"Continuer"};
-  $("#onboardingBack").onclick=()=>{step=Math.max(0,step-1);update()};
-  $("#onboardingNext").onclick=()=>{
-    if(step<3){step++;update();return}
-    state.settings.companionName=$("#welcomeName").value.trim()||"Mochi";
-    state.settings.theme=$("#welcomeTheme").value;
-    state.settings.payday=Math.max(1,Math.min(31,Number($("#welcomePayday").value||28)));
-    state.settings.income=Number($("#welcomeIncome").value||0);
-    state.settings.fixed=Number($("#welcomeFixed").value||0);
-    state.settings.savingGoal=Number($("#welcomeSaving").value||0);
-    state.settings.useBridge=false;state.onboardingDone=true;overlay.classList.remove("open");render();showerPetals();toast("Bienvenue dans ton jardin 🌱")
-  };update()
-}
- 
- 
-function escapeHtml(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
-function applyTheme(theme){
-  const allowed=["jardin","sakura","lavande","ocean"];
-  const chosen=allowed.includes(theme)?theme:"jardin";
-  document.body.dataset.theme=chosen;
-  state.settings.theme=chosen;
-  
-$("#dailyVisitBtn").onclick=()=>{
-  const today=iso(localToday());
-  if(state.lastVisitDay===today){animateCompanion("happy");return toast(`${companionName()} est déjà heureux de t'avoir vu aujourd'hui 💚`)}
-  state.lastVisitDay=today;addSeeds(2);render();animateCompanion("happy");toast(`Bonjour ${companionName()} : +2 graines ☀️`);showerPetals()
-};
-$("#encourageBtn").onclick=()=>{
-  animateCompanion("happy");
-  const messages=[
-    `${companionName()} te rappelle qu'un jour imparfait reste un jour vécu.`,
-    `${companionName()} est fier de chaque petite décision consciente.`,
-    `Votre jardin grandit lentement, et c'est très bien ainsi.`,
-    `Prendre soin de son budget, c'est aussi prendre soin de soi.`
-  ];
-  toast(messages[Math.floor(Math.random()*messages.length)])
-};
-$$(".theme-pick").forEach(b=>b.classList.toggle("active",b.dataset.themeChoice===chosen));
-  const colors={jardin:"#dcefe2",sakura:"#ffd9eb",lavande:"#ece5fa",ocean:"#dff0ef"};
-  document.querySelector('meta[name="theme-color"]').setAttribute("content",colors[chosen]);
-}
- 
- 
 function render(){
-  maybeArchiveSeason();
-  applyTheme(state.settings.theme||"jardin");
-  const c=cycleFor(),score=growthScore(),st=stage(score),copy=plantCopy(st);
-  $("#dailyBudget").textContent=euro.format(daily());
-  $("#remainingBudget").textContent=euro.format(remaining());
-  $("#daysLeft").textContent=daysRemaining();
-  $("#reservedSaving").textContent=euro.format(reservedSaving());
-  $("#streak").textContent=`${state.streak||0} jour${state.streak===1?"":"s"}`;
-  $("#incomeTotal").textContent=euro.format(state.settings.income);
-  $("#fixedTotal").textContent=euro.format(state.settings.fixed);
-  $("#cycleLabel").textContent=`🌷 Saison du ${dateLong.format(c.start)} au ${dateLong.format(c.end)}`;
-  $("#dailyMessage").textContent=remaining()<0?"Ton budget a besoin d'un petit câlin.":daily()<10?"Une journée légère fera du bien à Bloom.":daily()>50?"Tu as une jolie marge aujourd'hui.":"Tu avances dans le bon rythme.";
-  $("#budgetMood").textContent=isBridgeActive()?"🌱 Première saison adaptée à ton solde réel":remaining()<0?"🌧️ On ajuste sans culpabiliser":daily()>50?"🌞 Belle marge aujourd'hui":"🌸 Ta saison reste en équilibre";
-  $("#coachText").textContent=coach();
-  const weather=budgetWeather();$("#budgetWeatherIcon").textContent=weather[0];$("#budgetWeatherTitle").textContent=weather[1];$("#budgetWeatherText").textContent=weather[2];
-  $("#dailyQuote").textContent=`« ${quoteOfDay()} »`;
-  $("#companionNameLabel").textContent=`${companionName()} grandit avec toi`;
-  $("#companionMood").textContent=companionMoodText();
-  $("#seedCount").textContent=`🌱 ${Number(state.seeds||0)} graine${Number(state.seeds||0)===1?"":"s"}`;
-  $("#mascot").className=`mascot stage-${st}`;$("#plantTitle").textContent=copy[0];$("#plantSub").textContent=copy[1];$("#growthBar").style.width=score+"%";
-  renderEnvelopes();renderGoal();renderTransactions();populateEnvelope();bindEnvelopeEditButtons();persist()
+  archiveSeason();theme(state.settings.theme);
+  const c=cycle(),w=weather(),st=stage(score());
+  $("#dailyBudget").textContent=euro.format(daily());$("#remainingBudget").textContent=euro.format(remaining());$("#daysLeft").textContent=daysLeft();$("#savingReserved").textContent=euro.format(bridgeActive()?0:state.settings.saving);$("#streakValue").textContent=state.streak||0;
+  $("#dailyMessage").textContent=remaining()<0?"Ta marge a besoin d'un peu de douceur.":daily()<10?"Une journée légère protégera la suite.":daily()>50?"Tu as une belle liberté aujourd'hui.":"Tu avances dans le bon rythme.";
+  $("#moodPill").textContent=(bridgeActive()?"🌱 Première saison basée sur ton solde réel":"🌿 "+mood());
+  $("#cycleLabel").textContent=`Saison du ${dateLong.format(c.start)} au ${dateLong.format(c.end)}`;
+  $("#weatherIcon").textContent=w[0];$("#weatherTitle").textContent=w[1];$("#weatherText").textContent=w[2];
+  $("#companionTitle").textContent=`${state.settings.name} grandit avec toi`;$("#companionMood").textContent=mood();$("#seedCount").textContent=`🌱 ${state.seeds}`;$("#gardenSeeds").textContent=`🌱 ${state.seeds} graines`;
+  ["homeCompanion","worldCompanion"].forEach(id=>{$("#"+id).className=`companion stage-${st}`});
+  $("#homeCritter").innerHTML=equippedCritter();$("#worldCritter").innerHTML=equippedCritter();
+  $("#worldMessage").textContent=remaining()<0?`${state.settings.name} s'est abrité sous une feuille. Votre jardin reste là, prêt à repartir.`:`${state.settings.name} observe les nouvelles pousses. Chaque habitude consciente enrichit ce monde.`;
+  const currentFlower=["🌱","🌿","🌷","🌼","🌸","🌺"][st];$("#flowerBed").innerHTML=[...state.garden.slice(-8).map(x=>x.flower),currentFlower].map(x=>`<span>${x}</span>`).join("");
+  renderEnvelopes();renderGoal();renderStore();renderAchievements();renderTransactions();renderJournal();populateEnvelope();
+  state.lastScore=score();persist()
 }
 function renderEnvelopes(){
-  const colors=["#ffe0eb","#e9e1ff","#e4f5e9","#fff0d7","#ffe4dc"];
-  $("#envelopes").innerHTML=state.envelopes.length?state.envelopes.map((e,i)=>{
-    const spent=envelopeSpent(e.id),left=Number(e.budget)-spent,pct=e.budget?Math.min(100,spent/e.budget*100):0;
-    return`<article class="envelope"><div class="env-icon" style="background:${colors[i%colors.length]}">${escapeHtml(e.icon)}</div><div><div class="env-name">${escapeHtml(e.name)}</div><div class="env-sub">${euro.format(spent)} utilisés sur ${euro.format(e.budget)}</div><div class="mini-progress"><div style="width:${pct}%"></div></div></div><div class="env-side"><div class="env-remain" style="color:${left<0?"var(--danger)":left<e.budget*.2?"var(--warning)":"var(--ok)"}">${euro.format(left)}</div><button class="env-edit" data-edit-envelope="${e.id}">Modifier</button></div></article>`
-  }).join(""):`<div class="empty">👜 Aucun petit pot pour le moment.</div>`
+  $("#envelopeList").innerHTML=state.envelopes.length?state.envelopes.map(e=>{const used=spentEnvelope(e.id),left=Number(e.budget)-used,pct=e.budget?Math.min(100,used/e.budget*100):0;return`<article class="card envelope"><div class="env-top"><div class="env-icon">${esc(e.icon)}</div><div class="env-main"><div class="env-name">${esc(e.name)}</div><div class="env-sub">${euro.format(used)} utilisés sur ${euro.format(e.budget)}</div></div><div class="env-left" style="color:${left<0?"var(--danger)":left<e.budget*.2?"var(--warning)":"var(--ok)"}">${euro.format(left)}</div></div><div class="bar"><div style="width:${pct}%"></div></div><div class="env-actions"><button class="tiny-btn" data-edit-env="${e.id}">Modifier</button></div></article>`}).join(""):`<div class="empty">👜 Crée ta première enveloppe pour répartir doucement ton argent.</div>`;
+  $$("[data-edit-env]").forEach(b=>b.onclick=()=>openEnvelope(b.dataset.editEnv))
 }
 function renderGoal(){
-  const saved=Number(state.goal.saved)+extraSavings(),target=Number(state.goal.target),pct=target?Math.min(100,saved/target*100):0;
-  $("#goalName").textContent=state.goal.name;$("#goalProgressText").textContent=`${euro.format(saved)} / ${euro.format(target)}`;$("#goalPercent").textContent=Math.round(pct)+" %";$("#goalProgress").style.width=pct+"%";
-  $("#goalMotivation").textContent=target<=0?"Choisis un rêve qui te donne envie d'avancer.":pct>=100?"Ton rêve a fleuri. Tu peux être fière de toi.":`Encore ${euro.format(Math.max(0,target-saved))} pour faire fleurir ce rêve.`
+  const saved=Number(state.goal.saved)+extraSaving(),target=Number(state.goal.target),pct=target?Math.min(100,saved/target*100):0;
+  $("#goalName").textContent=state.goal.name;$("#goalAmount").textContent=`${euro.format(saved)} / ${euro.format(target)}`;$("#goalPct").textContent=Math.round(pct)+" %";$("#goalBar").style.width=pct+"%";
+  $("#goalMessage").textContent=target<=0?"Choisis un projet qui donne du sens à ton épargne.":pct>=100?"Ce rêve a fleuri. Bravo.":`Encore ${euro.format(Math.max(0,target-saved))} pour le faire éclore.`
+}
+function renderStore(){
+  const owned=new Set(state.owned);$("#storeGrid").innerHTML=rewardDefs().map(r=>{const own=owned.has(r.id),can=state.seeds>=r.cost;let label=state.equipped===r.id?"Équipé":own?"Équiper":can?`Débloquer · ${r.cost} graines`:`Encore ${r.cost-state.seeds} graines`;return`<article class="card store-item"><div class="store-emoji">${r.e}</div><b>${r.n}</b><small>${r.desc}</small><button data-reward="${r.id}" ${!own&&!can?"disabled":""} class="${state.equipped===r.id?"active":""}">${label}</button></article>`}).join("");
+  $$("[data-reward]").forEach(b=>b.onclick=()=>{const id=b.dataset.reward,r=rewardDefs().find(x=>x.id===id);if(!state.owned.includes(id)){state.seeds-=r.cost;state.owned.push(id);toast(`${r.n} a rejoint ton jardin ✨`);petals()}state.equipped=id;animate();render()})
+}
+function renderAchievements(){
+  $("#achievementList").innerHTML=achievementDefs().map(a=>`<article class="card achievement ${a.ok?"":"locked"}"><div class="ach-icon">${a.e}</div><div class="ach-main"><b>${a.n}</b><span>${a.d}</span></div><div class="ach-status">${a.ok?"RENCONTRÉ":"À DÉCOUVRIR"}</div></article>`).join("")
 }
 function renderTransactions(){
-  const latest=[...activeCycleTx()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,7);
-  $("#transactions").innerHTML=latest.length?latest.map(x=>{
-    const sav=x.type==="extraSaving",env=state.envelopes.find(e=>e.id===x.envelope);
-    return`<article class="transaction"><div class="tx-icon ${sav?"saving":""}">${sav?"🌱":env?.icon||"🎀"}</div><div class="tx-main"><div class="tx-title">${escapeHtml(x.label)}</div><div class="tx-sub">${sav?"Épargne en plus":escapeHtml(env?.name||"Général")} · ${dateShort.format(new Date(x.date+"T12:00:00"))}</div></div><div class="tx-actions"><div class="tx-amount ${sav?"inc":"exp"}">${sav?"+":"−"}${euro.format(x.amount)}</div><button class="delete-tx" data-delete-tx="${x.id}" aria-label="Annuler ce mouvement">↶</button></div></article>`
-  }).join(""):`<div class="empty">🌷 C'est tout calme ici.<br>Ta première dépense apparaîtra comme une petite trace.</div>`;
-  bindTransactionDeletes()
+  const list=[...cycleTx()].sort((a,b)=>b.date.localeCompare(a.date));
+  $("#transactionList").innerHTML=list.length?list.map(x=>{const plus=x.type==="saving",env=state.envelopes.find(e=>e.id===x.envelope);return`<article class="card tx"><div class="tx-icon">${plus?"🌱":env?.icon||"💳"}</div><div class="tx-main"><b>${esc(x.label)}</b><span>${plus?"Épargne en plus":esc(env?.name||"Général")} · ${dateShort.format(new Date(x.date+"T12:00:00"))}</span></div><div class="tx-side"><div class="tx-amount ${plus?"plus":""}">${plus?"+":"−"}${euro.format(x.amount)}</div><button class="undo-btn" data-undo="${x.id}">↶ Annuler</button></div></article>`}).join(""):`<div class="empty">📖 Aucun mouvement cette saison.</div>`;
+  $$("[data-undo]").forEach(b=>b.onclick=()=>{const x=state.transactions.find(t=>t.id===b.dataset.undo);if(x&&confirm(`Annuler « ${x.label} » et recréditer ${euro.format(x.amount)} ?`)){state.transactions=state.transactions.filter(t=>t.id!==x.id);render();toast("Mouvement annulé et montant recrédité ↶")}})
 }
-function bindTransactionDeletes(){
-  $$("[data-delete-tx]").forEach(button=>button.onclick=()=>{
-    const id=button.dataset.deleteTx;
-    const tx=state.transactions.find(x=>x.id===id);
-    if(!tx)return;
-    if(confirm(`Annuler « ${tx.label} » et recréditer ${euro.format(tx.amount)} ?`)){
-      state.transactions=state.transactions.filter(x=>x.id!==id);
-      render();
-      toast("Mouvement annulé et budget recrédité ↶");
-    }
-  })
+function renderJournal(){
+  $("#journalList").innerHTML=state.journal.length?state.journal.slice().reverse().map(j=>`<article class="card journal-card"><div class="journal-head"><b>${esc(j.title)}</b><span>${j.flower}</span></div><p>${esc(j.text)}</p></article>`).join(""):`<div class="empty">🌱 Ta première page apparaîtra à la fin de cette saison. Le jardin commence déjà à bouger pour te donner envie d'avancer.</div>`
 }
-function populateEnvelope(){$("#txEnvelope").innerHTML=state.envelopes.map(e=>`<option value="${e.id}">${escapeHtml(e.icon)} ${escapeHtml(e.name)}</option>`).join("")}
-function bindEnvelopeEditButtons(){
-  $$('[data-edit-envelope]').forEach(button=>button.onclick=()=>{
-    const env=state.envelopes.find(e=>e.id===button.dataset.editEnvelope);
-    if(!env)return;
-    $("#editEnvId").value=env.id;$("#editEnvName").value=env.name;$("#editEnvBudget").value=env.budget;$("#editEnvIcon").value=env.icon;
-    openModal("editEnvelopeModal")
-  })
-}
+function populateEnvelope(){$("#txEnvelope").innerHTML=state.envelopes.map(e=>`<option value="${e.id}">${esc(e.icon)} ${esc(e.name)}</option>`).join("")}
 function openModal(id){$("#"+id).classList.add("open")}function closeModals(){$$(".modal").forEach(m=>m.classList.remove("open"))}
 $$(".close,.closeModal").forEach(b=>b.onclick=closeModals);$$(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)closeModals()});
- 
-$("#addTxBtn").onclick=()=>{$("#txDate").value=iso(localToday());openModal("txModal")};
-$$(".segmented button").forEach(b=>b.onclick=()=>{$$(".segmented button").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("#txType").value=b.dataset.type;$("#txEnvelopeField").style.display=b.dataset.type==="extraSaving"?"none":"block"});
-$("#saveTx").onclick=()=>{
-  const amount=Number($("#txAmount").value),label=$("#txLabel").value.trim(),type=$("#txType").value;
-  if(!amount||amount<=0||!label)return toast("Ajoute un nom et un montant 🌸");
-  state.transactions.push({id:crypto.randomUUID(),type,amount,label,envelope:type==="expense"?$("#txEnvelope").value:"",date:$("#txDate").value||iso(localToday())});
-  updateStreak();addSeeds(type==="extraSaving"?3:1);$("#txAmount").value="";$("#txLabel").value="";closeModals();render();toast(type==="extraSaving"?"Épargne célébrée : +3 graines 🌱":"Mouvement ajouté : +1 graine 🌿");if(type==="extraSaving")showerPetals()
-};
-function fillSettings(){
-  applyTheme(state.settings.theme||"jardin");
-  $("#setCompanionName").value=state.settings.companionName||"Mochi";
-  $("#setPayday").value=state.settings.payday;$("#setIncome").value=state.settings.income;$("#setFixed").value=state.settings.fixed;$("#setSaving").value=state.settings.savingGoal;$("#setBridgeAvailable").value=state.settings.bridgeAvailable;$("#useBridge").checked=Boolean(state.settings.useBridge);previewSettings()
-}
-function previewSettings(){
-  const payday=Number($("#setPayday").value||1),income=Number($("#setIncome").value||0),fixed=Number($("#setFixed").value||0),saving=Number($("#setSaving").value||0),bridge=Number($("#setBridgeAvailable").value||0),use=$("#useBridge").checked;
-  const old=state.settings.payday;state.settings.payday=payday;const c=cycleFor();state.settings.payday=old;
-  const standard=Math.max(0,income-fixed-saving),days=Math.max(1,Math.ceil((c.next-localToday())/86400000)),amount=use?bridge:standard;
-  $("#settingsPreview").innerHTML=`🌸 Prochaine paie : <b>${dateLong.format(c.next)}</b><br>Budget libre d'une saison complète : <b>${euro.format(standard)}</b><br>${use?"Jusqu'à la prochaine paie, Bloom utilisera seulement":"Bloom utilisera dès maintenant"} : <b>${euro.format(amount)}</b>, soit environ <b>${euro.format(amount/days)}/jour</b>.`
-}
-["setPayday","setIncome","setFixed","setSaving","setBridgeAvailable","useBridge"].forEach(id=>$("#"+id).addEventListener("input",previewSettings));
-$("#settingsBtn").onclick=$("#monthEditBtn").onclick=()=>{fillSettings();openModal("settingsModal")};
-$("#saveSettings").onclick=()=>{
-  state.settings={payday:Math.max(1,Math.min(31,Number($("#setPayday").value||1))),income:Number($("#setIncome").value||0),fixed:Number($("#setFixed").value||0),savingGoal:Number($("#setSaving").value||0),bridgeAvailable:Number($("#setBridgeAvailable").value||0),useBridge:$("#useBridge").checked,theme:state.settings.theme||"jardin",companionName:$("#setCompanionName").value.trim()||"Mochi"};
-  closeModals();render();toast("Ta saison est bien réglée 🌷")
-};
-$("#resetApp").onclick=()=>{if(confirm("Tout recommencer et effacer les données de Bloom ?")){state=structuredClone(DEFAULT_STATE);closeModals();render();toast("Un nouveau jardin commence 🌱")}};
-$("#addEnvelopeBtn").onclick=()=>openModal("envelopeModal");
-$("#saveEnvelope").onclick=()=>{const name=$("#envName").value.trim(),budget=Number($("#envBudget").value||0);if(!name||budget<=0)return toast("Ajoute un nom et un budget 🎀");state.envelopes.push({id:crypto.randomUUID(),name,budget,icon:$("#envIcon").value});$("#envName").value="";$("#envBudget").value="";closeModals();render();toast("Nouveau petit pot ajouté 👜")};
-$("#updateEnvelope").onclick=()=>{
-  const id=$("#editEnvId").value,name=$("#editEnvName").value.trim(),budget=Number($("#editEnvBudget").value||0),icon=$("#editEnvIcon").value;
-  if(!name||budget<=0)return toast("Ajoute un nom et un budget 🎀");
-  const env=state.envelopes.find(e=>e.id===id);if(!env)return;
-  env.name=name;env.budget=budget;env.icon=icon;closeModals();render();toast("Petit pot personnalisé 🌸")
-};
-$("#deleteEnvelope").onclick=()=>{
-  const id=$("#editEnvId").value,env=state.envelopes.find(e=>e.id===id);if(!env)return;
-  if(!confirm(`Supprimer l'enveloppe « ${env.name} » ? Les anciennes dépenses resteront dans l'historique.`))return;
-  state.envelopes=state.envelopes.filter(e=>e.id!==id);closeModals();render();toast("Enveloppe supprimée")
-};
-function fillGoal(){$("#goalNameInput").value=state.goal.name;$("#goalTargetInput").value=state.goal.target;$("#goalSavedInput").value=state.goal.saved}
-$("#goalBtn").onclick=()=>{fillGoal();openModal("goalModal")};$("#saveGoal").onclick=()=>{state.goal={name:$("#goalNameInput").value.trim()||"Mon joli projet",target:Number($("#goalTargetInput").value||0),saved:Number($("#goalSavedInput").value||0)};closeModals();render();toast("Ton rêve est bien gardé 🌸")};
- 
- 
-$("#dailyVisitBtn").onclick=()=>{
-  const today=iso(localToday());
-  if(state.lastVisitDay===today){animateCompanion("happy");return toast(`${companionName()} est déjà heureux de t'avoir vu aujourd'hui 💚`)}
-  state.lastVisitDay=today;addSeeds(2);render();animateCompanion("happy");toast(`Bonjour ${companionName()} : +2 graines ☀️`);showerPetals()
-};
-$("#encourageBtn").onclick=()=>{
-  animateCompanion("happy");
-  const messages=[
-    `${companionName()} te rappelle qu'un jour imparfait reste un jour vécu.`,
-    `${companionName()} est fier de chaque petite décision consciente.`,
-    `Votre jardin grandit lentement, et c'est très bien ainsi.`,
-    `Prendre soin de son budget, c'est aussi prendre soin de soi.`
-  ];
-  toast(messages[Math.floor(Math.random()*messages.length)])
-};
-$$(".theme-pick").forEach(button=>button.onclick=()=>{
-  applyTheme(button.dataset.themeChoice);
-  persist();
-});
-$$(".nav button").forEach(b=>b.onclick=()=>{
- 
-$("#dailyVisitBtn").onclick=()=>{
-  const today=iso(localToday());
-  if(state.lastVisitDay===today){animateCompanion("happy");return toast(`${companionName()} est déjà heureux de t'avoir vu aujourd'hui 💚`)}
-  state.lastVisitDay=today;addSeeds(2);render();animateCompanion("happy");toast(`Bonjour ${companionName()} : +2 graines ☀️`);showerPetals()
-};
-$("#encourageBtn").onclick=()=>{
-  animateCompanion("happy");
-  const messages=[
-    `${companionName()} te rappelle qu'un jour imparfait reste un jour vécu.`,
-    `${companionName()} est fier de chaque petite décision consciente.`,
-    `Votre jardin grandit lentement, et c'est très bien ainsi.`,
-    `Prendre soin de son budget, c'est aussi prendre soin de soi.`
-  ];
-  toast(messages[Math.floor(Math.random()*messages.length)])
-};
-$$(".theme-pick").forEach(button=>button.onclick=()=>{
-  applyTheme(button.dataset.themeChoice);
-  persist();
-});
-$$(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");const id=b.dataset.scroll;if(id==="top")window.scrollTo({top:0,behavior:"smooth"});else document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"})});
-render();
-setTimeout(initOnboarding,180);
+$$(".nav button").forEach(b=>b.onclick=()=>{$$(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");$$(".view").forEach(v=>v.classList.toggle("active",v.id===b.dataset.view));window.scrollTo({top:0,behavior:"smooth"})});
+$("#fab").onclick=()=>{$("#txDate").value=iso(today());openModal("transactionModal")};
+$$(".segmented button").forEach(b=>b.onclick=()=>{$$(".segmented button").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("#txType").value=b.dataset.type;$("#txEnvelopeField").style.display=b.dataset.type==="saving"?"none":"block"});
+$("#saveTransaction").onclick=()=>{const amount=Number($("#txAmount").value),label=$("#txLabel").value.trim(),type=$("#txType").value;if(!amount||amount<=0||!label)return toast("Ajoute un libellé et un montant.");state.transactions.push({id:crypto.randomUUID(),type,amount,label,envelope:type==="expense"?$("#txEnvelope").value:"",date:$("#txDate").value||iso(today())});state.seeds+=type==="saving"?3:1;updateStreak();$("#txAmount").value="";$("#txLabel").value="";closeModals();animate();if(type==="saving")petals();render();toast(type==="saving"?"Épargne célébrée · +3 graines 🌱":"Mouvement ajouté · +1 graine 🍃")};
+$("#helloBtn").onclick=()=>{const t=iso(today());if(state.lastVisit===t){animate();return toast(`${state.settings.name} est déjà heureux de t'avoir vu aujourd'hui.`)}state.lastVisit=t;state.seeds+=2;animate();petals();render();toast(`Bonjour ${state.settings.name} · +2 graines ☀️`)};
+$("#encourageBtn").onclick=()=>{animate();const m=[`${state.settings.name} te rappelle que la régularité vaut plus que la perfection.`,`Un jour difficile ne détruit jamais le jardin déjà construit.`,`Chaque petite décision consciente devient une nouvelle pousse.`];toast(m[Math.floor(Math.random()*m.length)])};
+$("#settingsBtn").onclick=()=>{$("#setName").value=state.settings.name;$("#setPayday").value=state.settings.payday;$("#setIncome").value=state.settings.income;$("#setFixed").value=state.settings.fixed;$("#setSaving").value=state.settings.saving;$("#setBridge").value=state.settings.bridge;$("#setBridgeActive").checked=state.settings.bridgeActive;theme(state.settings.theme);openModal("settingsModal")};
+$$(".theme-btn").forEach(b=>b.onclick=()=>{theme(b.dataset.theme);persist()});
+$("#saveSettings").onclick=()=>{state.settings={...state.settings,name:$("#setName").value.trim()||"Mochi",payday:Math.max(1,Math.min(31,Number($("#setPayday").value||1))),income:Number($("#setIncome").value||0),fixed:Number($("#setFixed").value||0),saving:Number($("#setSaving").value||0),bridge:Number($("#setBridge").value||0),bridgeActive:$("#setBridgeActive").checked};closeModals();render();toast("Réglages enregistrés 🌿")};
+$("#resetApp").onclick=()=>{if(confirm("Effacer toutes les données de Bloom ?")){state=clone(DEFAULT);closeModals();render();initOnboarding();toast("Un nouveau jardin commence.")}};
+$("#addEnvelopeBtn").onclick=()=>openEnvelope("");
+function openEnvelope(id){const e=state.envelopes.find(x=>x.id===id);$("#editEnvelopeId").value=id||"";$("#envName").value=e?.name||"";$("#envBudget").value=e?.budget||"";$("#envIcon").value=e?.icon||"🛒";$("#envelopeModalTitle").textContent=e?"Modifier l'enveloppe":"Nouvelle enveloppe";$("#deleteEnvelope").style.display=e?"block":"none";openModal("envelopeModal")}
+$("#saveEnvelope").onclick=()=>{const id=$("#editEnvelopeId").value,name=$("#envName").value.trim(),budget=Number($("#envBudget").value),icon=$("#envIcon").value;if(!name||budget<=0)return toast("Ajoute un nom et un montant.");if(id){const e=state.envelopes.find(x=>x.id===id);Object.assign(e,{name,budget,icon})}else state.envelopes.push({id:crypto.randomUUID(),name,budget,icon});closeModals();render();toast("Enveloppe enregistrée.")};
+$("#deleteEnvelope").onclick=()=>{const id=$("#editEnvelopeId").value,e=state.envelopes.find(x=>x.id===id);if(e&&confirm(`Supprimer l'enveloppe « ${e.name} » ? Les anciens mouvements resteront dans le journal.`)){state.envelopes=state.envelopes.filter(x=>x.id!==id);closeModals();render();toast("Enveloppe supprimée.")}};
+$("#goalEditBtn").onclick=()=>{$("#goalNameInput").value=state.goal.name;$("#goalTargetInput").value=state.goal.target;$("#goalSavedInput").value=state.goal.saved;openModal("goalModal")};
+$("#saveGoal").onclick=()=>{state.goal={name:$("#goalNameInput").value.trim()||"Mon projet",target:Number($("#goalTargetInput").value||0),saved:Number($("#goalSavedInput").value||0)};closeModals();render();toast("Projet enregistré 🌸")};
+function initOnboarding(){if(state.onboardingDone)return;let step=0;const o=$("#onboarding");o.classList.add("open");const up=()=>{$$(".on-step").forEach((e,i)=>e.classList.toggle("active",i===step));$$(".dot").forEach((e,i)=>e.classList.toggle("active",i===step));$("#onBack").style.display=step?"block":"none";$("#onNext").textContent=step===3?"Entrer dans Bloom":"Continuer"};$("#onBack").onclick=()=>{step=Math.max(0,step-1);up()};$("#onNext").onclick=()=>{if(step<3){step++;up();return}state.settings.name=$("#welcomeName").value.trim()||"Mochi";state.settings.payday=Math.max(1,Math.min(31,Number($("#welcomePayday").value||28)));state.settings.income=Number($("#welcomeIncome").value||0);state.settings.fixed=Number($("#welcomeFixed").value||0);state.settings.saving=Number($("#welcomeSaving").value||0);state.onboardingDone=true;o.classList.remove("open");render();petals();toast("Bienvenue dans ton jardin 🌱")};up()}
+render();setTimeout(initOnboarding,180);
 </script>
 </body>
 </html>
