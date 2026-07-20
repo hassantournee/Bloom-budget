@@ -10,482 +10,381 @@
 <title>Bloom — Mon petit jardin budget</title>
 <style>
 :root{
-  --cream:#fffaf7;
-  --pink-0:#fff3f8;
-  --pink-1:#ffdceb;
-  --pink-2:#ffb9d3;
-  --pink-3:#f58ab4;
-  --pink-4:#d95e92;
-  --lav-1:#eee7ff;
-  --lav-2:#cdbdf9;
-  --mint-1:#e8f8ef;
-  --mint-2:#9bd7ae;
-  --peach:#ffe5d4;
-  --yellow:#fff3c9;
-  --ink:#5d4352;
-  --muted:#987f8e;
-  --white:#fff;
-  --danger:#e76f8b;
-  --ok:#63b680;
-  --warning:#d9a248;
-  --shadow:0 18px 40px rgba(165,95,130,.14);
-  --shadow-soft:0 10px 24px rgba(165,95,130,.10);
-  --radius-xl:32px;
-  --radius-lg:24px;
-  --radius-md:18px;
+  --cream:#fffaf7;--pink0:#fff3f8;--pink1:#ffdceb;--pink2:#ffb9d3;--pink3:#f58ab4;--pink4:#d95e92;
+  --lav1:#eee7ff;--lav2:#cdbdf9;--mint1:#e8f8ef;--mint2:#9bd7ae;--yellow:#fff3c9;
+  --ink:#5d4352;--muted:#987f8e;--white:#fff;--danger:#e76f8b;--ok:#63b680;--warning:#d9a248;
+  --shadow:0 18px 40px rgba(165,95,130,.14);--shadow2:0 10px 24px rgba(165,95,130,.10)
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{background:var(--cream)}
 body{
-  margin:0;
-  min-height:100vh;
-  color:var(--ink);
+  margin:0;min-height:100vh;color:var(--ink);
   font-family:ui-rounded,"SF Pro Rounded","Nunito","Segoe UI",system-ui,-apple-system,sans-serif;
   background:
     radial-gradient(circle at 10% -5%,rgba(255,185,211,.45),transparent 30%),
     radial-gradient(circle at 95% 10%,rgba(205,189,249,.35),transparent 28%),
-    linear-gradient(180deg,var(--cream),var(--pink-0));
-  padding-bottom:102px;
+    linear-gradient(180deg,var(--cream),var(--pink0));
+  padding-bottom:102px
 }
-button,input,select{font:inherit}
-button{cursor:pointer}
+button,input,select{font:inherit}button{cursor:pointer}
 .app{width:min(100%,760px);margin:auto;padding:18px 14px 36px}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px}
 .brand{display:flex;align-items:center;gap:12px}
-.logo{
-  width:54px;height:54px;border-radius:19px;display:grid;place-items:center;
-  background:linear-gradient(145deg,#ffd7e7,#e4dcff);box-shadow:var(--shadow)
-}
-.logo span{font-size:28px}
-.brand h1{margin:0;font-size:34px;line-height:1;letter-spacing:-.04em}
-.brand p{margin:5px 0 0;color:var(--muted);font-size:13px;font-weight:700}
-.icon-btn{
-  width:48px;height:48px;border:0;border-radius:17px;background:rgba(255,255,255,.9);
-  color:var(--ink);box-shadow:var(--shadow-soft);font-size:21px
-}
-.hero{
-  margin-top:18px;padding:22px;border-radius:34px;overflow:hidden;
-  background:
-    radial-gradient(circle at 15% 0%,rgba(255,255,255,.85),transparent 35%),
-    linear-gradient(145deg,#ffdce9,#efe8ff 65%,#e9f7ef);
-  box-shadow:var(--shadow);position:relative
-}
-.sparkle{position:absolute;font-size:20px;opacity:.65;animation:float 3.2s ease-in-out infinite}
-.sparkle.s1{right:18px;top:16px}.sparkle.s2{left:18px;bottom:20px;animation-delay:1s}.sparkle.s3{right:38%;top:86px;animation-delay:1.7s}
+.logo{width:54px;height:54px;border-radius:19px;display:grid;place-items:center;background:linear-gradient(145deg,#ffd7e7,#e4dcff);box-shadow:var(--shadow)}
+.logo span{font-size:28px}.brand h1{margin:0;font-size:34px;line-height:1;letter-spacing:-.04em}.brand p{margin:5px 0 0;color:var(--muted);font-size:13px;font-weight:700}
+.icon-btn{width:48px;height:48px;border:0;border-radius:17px;background:rgba(255,255,255,.9);color:var(--ink);box-shadow:var(--shadow2);font-size:21px}
+.hero{margin-top:18px;padding:22px;border-radius:34px;overflow:hidden;background:radial-gradient(circle at 15% 0%,rgba(255,255,255,.85),transparent 35%),linear-gradient(145deg,#ffdce9,#efe8ff 65%,#e9f7ef);box-shadow:var(--shadow);position:relative}
+.sparkle{position:absolute;font-size:20px;opacity:.65;animation:float 3.2s ease-in-out infinite}.sparkle.s1{right:18px;top:16px}.sparkle.s2{left:18px;bottom:20px;animation-delay:1s}.sparkle.s3{right:38%;top:86px;animation-delay:1.7s}
 @keyframes float{50%{transform:translateY(-6px) rotate(5deg)}}
 .kicker{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:900}
-.daily{font-size:clamp(54px,15vw,82px);line-height:.95;color:var(--pink-4);font-weight:1000;letter-spacing:-.065em;margin:10px 0}
+.daily{font-size:clamp(54px,15vw,82px);line-height:.95;color:var(--pink4);font-weight:1000;letter-spacing:-.065em;margin:10px 0}
 .daily-label{font-size:18px;font-weight:900;line-height:1.35}
-.pill{
-  display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:9px 12px;border-radius:999px;
-  background:rgba(255,255,255,.72);font-size:13px;font-weight:800
-}
-.cycle-label{margin-top:9px;color:var(--muted);font-size:12px;font-weight:850}
+.pill{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.72);font-size:13px;font-weight:800}
+.cycle-label{margin-top:12px;color:var(--muted);font-size:13px;font-weight:850}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;align-items:center}
 .hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
 .stat{padding:13px;border-radius:18px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px)}
 .stat b,.stat span{display:block}.stat b{font-size:20px;letter-spacing:-.03em}.stat span{margin-top:3px;color:var(--muted);font-size:12px;font-weight:750}
+.coach{margin-top:14px;padding:14px;border-radius:19px;background:var(--yellow);display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;font-weight:750}
 .plant-wrap{text-align:center}
 .mascot{width:180px;height:205px;margin:auto;position:relative;filter:drop-shadow(0 14px 16px rgba(94,67,82,.12))}
 .pot{position:absolute;left:49px;bottom:7px;width:82px;height:66px;border-radius:16px 16px 34px 34px;background:linear-gradient(145deg,#e2aac2,#c985a7)}
 .pot:before{content:"";position:absolute;left:-5px;right:-5px;top:-7px;height:18px;border-radius:12px;background:#e7b5ca}
-.eye{position:absolute;top:27px;width:7px;height:10px;background:#624b5a;border-radius:50%}
-.eye.e1{left:24px}.eye.e2{right:24px}
-.cheek{position:absolute;top:39px;width:14px;height:7px;background:#f47fa8;border-radius:50%;opacity:.65}
-.cheek.c1{left:9px}.cheek.c2{right:9px}
+.eye{position:absolute;top:27px;width:7px;height:10px;background:#624b5a;border-radius:50%}.eye.e1{left:24px}.eye.e2{right:24px}
+.cheek{position:absolute;top:39px;width:14px;height:7px;background:#f47fa8;border-radius:50%;opacity:.65}.cheek.c1{left:9px}.cheek.c2{right:9px}
 .smile{position:absolute;left:34px;top:37px;width:16px;height:8px;border-bottom:3px solid #624b5a;border-radius:50%}
-.stem{position:absolute;left:86px;bottom:72px;width:9px;height:82px;border-radius:10px;background:#66b77d;transform-origin:bottom}
+.stem{position:absolute;left:86px;bottom:72px;width:9px;height:82px;border-radius:10px;background:#66b77d}
 .leaf{position:absolute;width:55px;height:29px;background:#82cb94;opacity:0;transition:.35s ease}
 .leaf.l1{left:39px;bottom:108px;border-radius:100% 0 100% 0;transform:rotate(18deg) scale(.4)}
 .leaf.l2{right:35px;bottom:137px;border-radius:0 100% 0 100%;transform:rotate(-18deg) scale(.4)}
 .bud{position:absolute;left:68px;top:28px;width:44px;height:52px;border-radius:50% 50% 45% 45%;background:#f49abc;opacity:0;transform:scale(.4);transition:.35s ease}
 .flower{position:absolute;left:58px;top:5px;width:64px;height:64px;opacity:0;transform:scale(.3) rotate(-10deg);transition:.4s ease}
-.flower i{position:absolute;width:36px;height:36px;border-radius:50%;background:#f49abc}
-.flower .p1{left:14px;top:0}.flower .p2{left:0;top:14px}.flower .p3{right:0;top:14px}.flower .p4{left:14px;bottom:0}.flower .center{left:18px;top:18px;width:28px;height:28px;background:#ffd66b}
+.flower i{position:absolute;width:36px;height:36px;border-radius:50%;background:#f49abc}.flower .p1{left:14px;top:0}.flower .p2{left:0;top:14px}.flower .p3{right:0;top:14px}.flower .p4{left:14px;bottom:0}.flower .center{left:18px;top:18px;width:28px;height:28px;background:#ffd66b}
 .stage-0 .stem{height:14px}.stage-1 .stem{height:36px}.stage-2 .stem{height:56px}
 .stage-2 .leaf.l1,.stage-3 .leaf.l1,.stage-4 .leaf.l1,.stage-5 .leaf.l1{opacity:1;transform:rotate(18deg) scale(1)}
 .stage-3 .leaf.l2,.stage-4 .leaf.l2,.stage-5 .leaf.l2{opacity:1;transform:rotate(-18deg) scale(1)}
-.stage-4 .bud{opacity:1;transform:scale(1)}
-.stage-5 .flower{opacity:1;transform:scale(1) rotate(0)}.stage-5 .bud{opacity:0}
-.plant-title{font-weight:1000;font-size:19px;margin-top:-2px}
-.plant-sub{color:var(--muted);font-size:12px;margin-top:4px;font-weight:750}
-.growth{height:10px;background:rgba(100,71,88,.12);border-radius:999px;overflow:hidden;margin-top:12px}
-.growth>div{height:100%;width:0;background:linear-gradient(90deg,var(--pink-3),var(--lav-2),var(--mint-2));border-radius:999px;transition:.35s ease}
-.coach{
-  margin-top:14px;padding:14px;border-radius:19px;background:var(--yellow);
-  display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;font-weight:750
-}
-.section{margin-top:28px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:13px}
-.section-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:900}
-.section-title{font-size:27px;font-weight:1000;letter-spacing:-.04em}
-.link-btn{border:0;background:transparent;color:var(--pink-4);font-weight:950;padding:7px}
-.soft-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.soft-card{padding:18px;border-radius:24px;background:rgba(255,255,255,.92);box-shadow:var(--shadow-soft);border:1px solid rgba(255,255,255,.9)}
+.stage-4 .bud{opacity:1;transform:scale(1)}.stage-5 .flower{opacity:1;transform:scale(1) rotate(0)}.stage-5 .bud{opacity:0}
+.plant-title{font-weight:1000;font-size:19px;margin-top:-2px}.plant-sub{color:var(--muted);font-size:12px;margin-top:4px;font-weight:750}
+.growth{height:10px;background:rgba(100,71,88,.12);border-radius:999px;overflow:hidden;margin-top:12px}.growth>div{height:100%;width:0;background:linear-gradient(90deg,var(--pink3),var(--lav2),var(--mint2));border-radius:999px;transition:.35s ease}
+.section{margin-top:28px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:13px}.section-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:900}.section-title{font-size:27px;font-weight:1000;letter-spacing:-.04em}
+.link-btn{border:0;background:transparent;color:var(--pink4);font-weight:950;padding:7px}
+.soft-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.soft-card{padding:18px;border-radius:24px;background:rgba(255,255,255,.92);box-shadow:var(--shadow2);border:1px solid rgba(255,255,255,.9)}
 .soft-card .emoji{font-size:24px}.soft-card span{display:block;color:var(--muted);font-size:12px;font-weight:800;margin-top:10px}.soft-card b{display:block;font-size:29px;margin-top:3px;letter-spacing:-.045em}
-.envelopes,.transactions,.dreams{display:grid;gap:12px}
-.envelope,.transaction,.dream-card{
-  background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.95);box-shadow:var(--shadow-soft)
-}
-.envelope{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:15px;border-radius:22px}
-.env-icon{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:24px}
+.envelopes,.transactions{display:grid;gap:12px}.envelope,.transaction,.dream-card{background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.95);box-shadow:var(--shadow2)}
+.envelope{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:15px;border-radius:22px}.env-icon{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:24px}
 .env-name{font-weight:1000}.env-sub{color:var(--muted);font-size:12px;margin-top:3px}.env-remain{font-size:18px;font-weight:1000;white-space:nowrap}
-.mini-progress{height:8px;background:#f0e5ea;border-radius:999px;overflow:hidden;margin-top:9px}.mini-progress>div{height:100%;background:linear-gradient(90deg,var(--mint-2),var(--pink-2));border-radius:999px}
-.dream-card{padding:20px;border-radius:26px;background:linear-gradient(145deg,#fff,#fff6fa)}
-.dream-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.dream-name{font-weight:1000;font-size:18px}.dream-amount{font-size:30px;font-weight:1000;letter-spacing:-.04em;margin-top:6px}.dream-badge{padding:8px 10px;border-radius:13px;background:var(--pink-1);color:var(--pink-4);font-size:13px;font-weight:1000}
-.dream-message{color:var(--muted);font-size:13px;line-height:1.5;margin-top:12px}
-.transaction{display:flex;align-items:center;gap:12px;padding:14px;border-radius:20px}.tx-icon{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:var(--pink-1);font-size:20px}.tx-icon.saving{background:var(--mint-1)}
+.mini-progress{height:8px;background:#f0e5ea;border-radius:999px;overflow:hidden;margin-top:9px}.mini-progress>div{height:100%;background:linear-gradient(90deg,var(--mint2),var(--pink2));border-radius:999px}
+.dream-card{padding:20px;border-radius:26px;background:linear-gradient(145deg,#fff,#fff6fa)}.dream-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.dream-name{font-weight:1000;font-size:18px}.dream-amount{font-size:30px;font-weight:1000;letter-spacing:-.04em;margin-top:6px}.dream-badge{padding:8px 10px;border-radius:13px;background:var(--pink1);color:var(--pink4);font-size:13px;font-weight:1000}.dream-message{color:var(--muted);font-size:13px;line-height:1.5;margin-top:12px}
+.transaction{display:flex;align-items:center;gap:12px;padding:14px;border-radius:20px}.tx-icon{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:var(--pink1);font-size:20px}.tx-icon.saving{background:var(--mint1)}
 .tx-main{flex:1;min-width:0}.tx-title{font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tx-sub{color:var(--muted);font-size:12px;margin-top:3px}.tx-amount{font-weight:1000;white-space:nowrap}.tx-amount.exp{color:var(--danger)}.tx-amount.inc{color:var(--ok)}
 .empty{padding:26px;text-align:center;color:var(--muted);border:1px dashed rgba(100,70,88,.22);border-radius:24px;line-height:1.55;background:rgba(255,255,255,.5)}
-.fab{
-  position:fixed;right:max(18px,calc((100vw - 730px)/2 + 18px));bottom:91px;z-index:20;
-  width:66px;height:66px;border:0;border-radius:23px;color:#fff;font-size:38px;line-height:1;
-  background:linear-gradient(145deg,var(--pink-3),var(--lav-2));box-shadow:0 18px 34px rgba(190,105,147,.35)
-}
-.bottom{
-  position:fixed;left:0;right:0;bottom:0;z-index:15;background:rgba(255,249,252,.91);
-  backdrop-filter:blur(16px);border-top:1px solid rgba(161,99,130,.1);padding:8px 8px calc(8px + env(safe-area-inset-bottom))
-}
-.nav{width:min(100%,760px);margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.nav button{border:0;background:transparent;color:var(--muted);padding:6px 2px;font-size:10px;font-weight:900}.nav button.active{color:var(--pink-4)}
-.nav span{display:block;font-size:22px;margin-bottom:2px}
-.modal{position:fixed;inset:0;z-index:50;background:rgba(72,47,62,.34);display:none;align-items:flex-end}
-.modal.open{display:flex}.sheet{width:min(100%,760px);margin:auto;background:#fffafc;border-radius:30px 30px 0 0;padding:20px 16px calc(24px + env(safe-area-inset-bottom));max-height:90vh;overflow:auto}
-.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.sheet h2{margin:0;font-size:28px}.close{width:40px;height:40px;border:0;border-radius:14px;background:var(--pink-1);color:var(--ink);font-size:24px}
-.field{margin-top:14px}.field label{display:block;font-size:13px;font-weight:900;margin-bottom:7px}.field input,.field select{width:100%;padding:14px;border:1px solid #ead9e2;border-radius:15px;background:#fff;color:var(--ink);outline:none}
-.field input:focus,.field select:focus{border-color:var(--pink-3);box-shadow:0 0 0 4px rgba(245,138,180,.13)}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.primary,.secondary{width:100%;border:0;border-radius:17px;padding:15px;font-weight:1000;margin-top:12px}
-.primary{background:linear-gradient(145deg,var(--pink-3),var(--lav-2));color:#fff}.secondary{background:var(--pink-1);color:var(--ink)}
-.segmented{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:16px;background:var(--pink-1);margin-top:14px}.segmented button{border:0;background:transparent;padding:10px;border-radius:12px;color:var(--muted);font-weight:950}.segmented button.active{background:#fff;color:var(--ink);box-shadow:var(--shadow-soft)}
+.fab{position:fixed;right:max(18px,calc((100vw - 730px)/2 + 18px));bottom:91px;z-index:20;width:66px;height:66px;border:0;border-radius:23px;color:#fff;font-size:38px;line-height:1;background:linear-gradient(145deg,var(--pink3),var(--lav2));box-shadow:0 18px 34px rgba(190,105,147,.35)}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:15;background:rgba(255,249,252,.91);backdrop-filter:blur(16px);border-top:1px solid rgba(161,99,130,.1);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+.nav{width:min(100%,760px);margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}.nav button{border:0;background:transparent;color:var(--muted);padding:6px 2px;font-size:10px;font-weight:900}.nav button.active{color:var(--pink4)}.nav span{display:block;font-size:22px;margin-bottom:2px}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(72,47,62,.34);display:none;align-items:flex-end}.modal.open{display:flex}.sheet{width:min(100%,760px);margin:auto;background:#fffafc;border-radius:30px 30px 0 0;padding:20px 16px calc(24px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto}
+.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.sheet h2{margin:0;font-size:28px}.close{width:40px;height:40px;border:0;border-radius:14px;background:var(--pink1);color:var(--ink);font-size:24px}
+.field{margin-top:14px}.field label{display:block;font-size:13px;font-weight:900;margin-bottom:7px}.field small{display:block;color:var(--muted);font-size:12px;line-height:1.45;margin-top:6px}.field input,.field select{width:100%;padding:14px;border:1px solid #ead9e2;border-radius:15px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field select:focus{border-color:var(--pink3);box-shadow:0 0 0 4px rgba(245,138,180,.13)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.primary,.secondary{width:100%;border:0;border-radius:17px;padding:15px;font-weight:1000;margin-top:12px}.primary{background:linear-gradient(145deg,var(--pink3),var(--lav2));color:#fff}.secondary{background:var(--pink1);color:var(--ink)}
+.segmented{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:16px;background:var(--pink1);margin-top:14px}.segmented button{border:0;background:transparent;padding:10px;border-radius:12px;color:var(--muted);font-weight:950}.segmented button.active{background:#fff;color:var(--ink);box-shadow:var(--shadow2)}
+.info-box{margin-top:14px;padding:14px;border-radius:18px;background:var(--mint1);font-size:13px;line-height:1.5;font-weight:750}.warning-box{margin-top:14px;padding:14px;border-radius:18px;background:var(--yellow);font-size:13px;line-height:1.5;font-weight:750}
 .toast{position:fixed;left:50%;bottom:170px;z-index:80;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:#5d4352;color:#fff;padding:12px 16px;border-radius:999px;font-size:13px;font-weight:900;transition:.25s ease;max-width:calc(100% - 32px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:560px){.hero-grid{grid-template-columns:1fr}.plant-wrap{margin-top:6px}.soft-grid{grid-template-columns:1fr 1fr}.daily{font-size:56px}}
+@media(max-width:560px){.hero-grid{grid-template-columns:1fr}.plant-wrap{margin-top:6px}.daily{font-size:56px}}
 @media(max-width:390px){.app{padding-inline:10px}.hero{padding:18px}.soft-grid{grid-template-columns:1fr}.envelope{grid-template-columns:auto 1fr}.env-remain{grid-column:2}.fab{right:14px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo"><span>🌷</span></div>
-      <div><h1>Bloom</h1><p>Mon petit jardin budget</p></div>
+<header class="topbar">
+  <div class="brand"><div class="logo"><span>🌷</span></div><div><h1>Bloom</h1><p>Mon petit jardin budget</p></div></div>
+  <button id="settingsBtn" class="icon-btn" aria-label="Paramètres">⚙︎</button>
+</header>
+ 
+<main>
+<section class="hero">
+  <span class="sparkle s1">✦</span><span class="sparkle s2">♡</span><span class="sparkle s3">✧</span>
+  <div class="hero-grid">
+    <div>
+      <div class="kicker">Aujourd'hui, tu peux dépenser</div>
+      <div id="dailyBudget" class="daily">0,00 €</div>
+      <div id="dailyMessage" class="daily-label">Configure Bloom pour commencer.</div>
+      <div id="budgetMood" class="pill">🌸 Bloom est prête à t'encourager</div>
+      <div id="cycleLabel" class="cycle-label"></div>
+ 
+      <div class="hero-stats">
+        <div class="stat"><b id="remainingBudget">0 €</b><span>Reste pour la saison</span></div>
+        <div class="stat"><b id="daysLeft">0</b><span>Jours à chouchouter</span></div>
+        <div class="stat"><b id="reservedSaving">0 €</b><span>Épargne réservée</span></div>
+        <div class="stat"><b id="streak">0 jour</b><span>Petite série</span></div>
+      </div>
+      <div class="coach"><span>💌</span><div id="coachText">Chaque petit effort compte.</div></div>
     </div>
-    <button id="settingsBtn" class="icon-btn" aria-label="Paramètres">⚙︎</button>
-  </header>
  
-  <main>
-    <section class="hero">
-      <span class="sparkle s1">✦</span><span class="sparkle s2">♡</span><span class="sparkle s3">✧</span>
-      <div class="hero-grid">
-        <div>
-          <div class="kicker">Aujourd'hui, tu peux dépenser</div>
-          <div id="dailyBudget" class="daily">0,00 €</div>
-          <div id="dailyMessage" class="daily-label">Configure ton mois pour commencer.</div>
-          <div id="budgetMood" class="pill">🌸 Bloom est prête à t'encourager</div>
-          <div id="cycleLabel" class="cycle-label">🌷 Saison en cours</div>
- 
-          <div class="hero-stats">
-            <div class="stat"><b id="remainingBudget">0 €</b><span>Reste pour la saison</span></div>
-            <div class="stat"><b id="daysLeft">0</b><span>Jours à chouchouter</span></div>
-            <div class="stat"><b id="savedMonth">0 €</b><span>Épargnés cette saison</span></div>
-            <div class="stat"><b id="streak">0 jour</b><span>Petite série</span></div>
-          </div>
- 
-          <div class="coach"><span>💌</span><div id="coachText">Chaque petit effort compte, même les jours imparfaits.</div></div>
-        </div>
- 
-        <div class="plant-wrap">
-          <div id="mascot" class="mascot stage-0">
-            <div class="flower"><i class="p1"></i><i class="p2"></i><i class="p3"></i><i class="p4"></i><i class="center"></i></div>
-            <div class="bud"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div>
-            <div class="pot"><span class="eye e1"></span><span class="eye e2"></span><span class="cheek c1"></span><span class="cheek c2"></span><span class="smile"></span></div>
-          </div>
-          <div id="plantTitle" class="plant-title">Une graine pleine de promesses</div>
-          <div id="plantSub" class="plant-sub">Tes habitudes la feront pousser.</div>
-          <div class="growth"><div id="growthBar"></div></div>
-        </div>
+    <div class="plant-wrap">
+      <div id="mascot" class="mascot stage-0">
+        <div class="flower"><i class="p1"></i><i class="p2"></i><i class="p3"></i><i class="p4"></i><i class="center"></i></div>
+        <div class="bud"></div><div class="stem"></div><div class="leaf l1"></div><div class="leaf l2"></div>
+        <div class="pot"><span class="eye e1"></span><span class="eye e2"></span><span class="cheek c1"></span><span class="cheek c2"></span><span class="smile"></span></div>
       </div>
-    </section>
+      <div id="plantTitle" class="plant-title">Une graine pleine de promesses</div>
+      <div id="plantSub" class="plant-sub">Tes habitudes la feront pousser.</div>
+      <div class="growth"><div id="growthBar"></div></div>
+    </div>
+  </div>
+</section>
  
-    <section class="section">
-      <div class="section-head">
-        <div><div class="section-kicker">Tout doux</div><div class="section-title">Ma saison</div></div>
-        <button id="monthEditBtn" class="link-btn">Modifier</button>
-      </div>
-      <div class="soft-grid">
-        <article class="soft-card"><div class="emoji">🎀</div><span>Revenus prévus</span><b id="incomeTotal">0 €</b></article>
-        <article class="soft-card"><div class="emoji">🏡</div><span>Charges fixes</span><b id="fixedTotal">0 €</b></article>
-      </div>
-    </section>
+<section class="section">
+  <div class="section-head"><div><div class="section-kicker">Tout doux</div><div class="section-title">Ma saison</div></div><button id="monthEditBtn" class="link-btn">Modifier</button></div>
+  <div class="soft-grid">
+    <article class="soft-card"><div class="emoji">🎀</div><span>Salaire récurrent</span><b id="incomeTotal">0 €</b></article>
+    <article class="soft-card"><div class="emoji">🏡</div><span>Charges réservées</span><b id="fixedTotal">0 €</b></article>
+  </div>
+</section>
  
-    <section class="section">
-      <div class="section-head">
-        <div><div class="section-kicker">Mes petits pots</div><div class="section-title">Enveloppes</div></div>
-        <button id="addEnvelopeBtn" class="link-btn">+ Ajouter</button>
-      </div>
-      <div id="envelopes" class="envelopes"></div>
-    </section>
+<section class="section">
+  <div class="section-head"><div><div class="section-kicker">Mes petits pots</div><div class="section-title">Enveloppes</div></div><button id="addEnvelopeBtn" class="link-btn">+ Ajouter</button></div>
+  <div id="envelopes" class="envelopes"></div>
+</section>
  
-    <section class="section">
-      <div class="section-head">
-        <div><div class="section-kicker">Ce qui me fait rêver</div><div class="section-title">Mon projet</div></div>
-        <button id="goalBtn" class="link-btn">Modifier</button>
-      </div>
-      <article class="dream-card">
-        <div class="dream-top">
-          <div><div id="goalName" class="dream-name">Mon joli projet</div><div id="goalProgressText" class="dream-amount">0 € / 0 €</div></div>
-          <div id="goalPercent" class="dream-badge">0 %</div>
-        </div>
-        <div class="growth"><div id="goalProgress"></div></div>
-        <div id="goalMotivation" class="dream-message">Choisis un rêve qui te donne envie d'avancer.</div>
-      </article>
-    </section>
+<section class="section">
+  <div class="section-head"><div><div class="section-kicker">Ce qui me fait rêver</div><div class="section-title">Mon projet</div></div><button id="goalBtn" class="link-btn">Modifier</button></div>
+  <article class="dream-card">
+    <div class="dream-top">
+      <div><div id="goalName" class="dream-name">Mon joli projet</div><div id="goalProgressText" class="dream-amount">0 € / 0 €</div></div>
+      <div id="goalPercent" class="dream-badge">0 %</div>
+    </div>
+    <div class="growth"><div id="goalProgress"></div></div>
+    <div id="goalMotivation" class="dream-message"></div>
+  </article>
+</section>
  
-    <section class="section">
-      <div class="section-head"><div><div class="section-kicker">Les petites traces</div><div class="section-title">Derniers mouvements</div></div></div>
-      <div id="transactions" class="transactions"></div>
-    </section>
-  </main>
+<section class="section">
+  <div class="section-head"><div><div class="section-kicker">Les petites traces</div><div class="section-title">Derniers mouvements</div></div></div>
+  <div id="transactions" class="transactions"></div>
+</section>
+</main>
 </div>
  
 <button id="addTxBtn" class="fab" aria-label="Ajouter un mouvement">+</button>
+<nav class="bottom"><div class="nav">
+  <button class="active" data-scroll="top"><span>⌂</span>ACCUEIL</button>
+  <button data-scroll="envelopes"><span>👜</span>ENVELOPPES</button>
+  <button data-scroll="goalName"><span>🌸</span>RÊVE</button>
+  <button data-scroll="transactions"><span>♡</span>HISTORIQUE</button>
+</div></nav>
  
-<nav class="bottom">
-  <div class="nav">
-    <button class="active" data-scroll="top"><span>⌂</span>ACCUEIL</button>
-    <button data-scroll="envelopes"><span>👜</span>ENVELOPPES</button>
-    <button data-scroll="goalName"><span>🌸</span>RÊVE</button>
-    <button data-scroll="transactions"><span>♡</span>HISTORIQUE</button>
-  </div>
-</nav>
+<div id="txModal" class="modal"><div class="sheet">
+  <div class="sheet-head"><div><div class="section-kicker">Une petite trace</div><h2>Ajouter un mouvement</h2></div><button class="close">×</button></div>
+  <div class="segmented"><button class="active" data-type="expense">Dépense</button><button data-type="extraSaving">Épargne en plus</button></div>
+  <input id="txType" type="hidden" value="expense">
+  <div class="row"><div class="field"><label>Montant</label><input id="txAmount" type="number" min="0.01" step="0.01"></div><div class="field"><label>Date</label><input id="txDate" type="date"></div></div>
+  <div class="field"><label>Petit nom</label><input id="txLabel" placeholder="Ex. Courses du samedi"></div>
+  <div id="txEnvelopeField" class="field"><label>Enveloppe</label><select id="txEnvelope"></select></div>
+  <button id="saveTx" class="primary">Ajouter à mon jardin</button><button class="secondary closeModal">Annuler</button>
+</div></div>
  
-<div id="txModal" class="modal">
-  <div class="sheet">
-    <div class="sheet-head"><div><div class="section-kicker">Une petite trace</div><h2>Ajouter un mouvement</h2></div><button class="close">×</button></div>
-    <div class="segmented"><button class="active" data-type="expense">Dépense</button><button data-type="saving">Épargne</button></div>
-    <input id="txType" type="hidden" value="expense">
-    <div class="row"><div class="field"><label>Montant</label><input id="txAmount" type="number" min="0.01" step="0.01"></div><div class="field"><label>Date</label><input id="txDate" type="date"></div></div>
-    <div class="field"><label>Petit nom</label><input id="txLabel" placeholder="Ex. Courses du samedi"></div>
-    <div id="txEnvelopeField" class="field"><label>Enveloppe</label><select id="txEnvelope"></select></div>
-    <button id="saveTx" class="primary">Ajouter à mon jardin</button>
-    <button class="secondary closeModal">Annuler</button>
-  </div>
-</div>
+<div id="settingsModal" class="modal"><div class="sheet">
+  <div class="sheet-head"><div><div class="section-kicker">Ma saison</div><h2>Configurer Bloom</h2></div><button class="close">×</button></div>
+  <div class="field"><label>Jour habituel du salaire</label><input id="setPayday" type="number" min="1" max="31"><small>Exemple : 28 si ton salaire arrive habituellement le 28.</small></div>
+  <div class="field"><label>Salaire reçu à chaque saison</label><input id="setIncome" type="number" min="0" step="0.01"></div>
+  <div class="field"><label>Charges à réserver dès le salaire</label><input id="setFixed" type="number" min="0" step="0.01"><small>Même si elles sont prélevées entre le 5 et le 15, Bloom les met de côté dès le jour du salaire.</small></div>
+  <div class="field"><label>Épargne à réserver dès le salaire</label><input id="setSaving" type="number" min="0" step="0.01"></div>
  
-<div id="settingsModal" class="modal">
-  <div class="sheet">
-    <div class="sheet-head"><div><div class="section-kicker">Ma saison de salaire</div><h2>Configurer Bloom</h2></div><button class="close">×</button></div>
-    <div class="field"><label>Revenus mensuels prévus</label><input id="setIncome" type="number" min="0" step="0.01"></div>
-    <div class="field"><label>Charges fixes prévues</label><input id="setFixed" type="number" min="0" step="0.01"></div>
-    <div class="field"><label>Objectif d'épargne par saison</label><input id="setSaving" type="number" min="0" step="0.01"></div>
-    <div class="field"><label>Jour habituel de réception du salaire</label><input id="setPayDay" type="number" min="1" max="31" step="1" placeholder="Ex. 20"></div>
-    <div class="coach"><span>🌷</span><div>Bloom renouvellera automatiquement ta saison à chaque date de salaire. Ton salaire, tes charges et tes enveloppes resteront enregistrés.</div></div>
-    <button id="saveSettings" class="primary">Enregistrer doucement</button>
-    <button id="resetApp" class="secondary">Tout recommencer</button>
-  </div>
-</div>
+  <div class="warning-box">🌷 Pour ta toute première saison, Bloom ne doit pas utiliser un salaire futur. Indique simplement ce qu'il te reste réellement à dépenser jusqu'au prochain salaire.</div>
+  <div class="field"><label>Reste réellement disponible aujourd'hui</label><input id="setBridgeAvailable" type="number" min="0" step="0.01"><small>Après avoir mis de côté toutes les charges et l'épargne encore nécessaires avant ton prochain salaire.</small></div>
+  <div class="field"><label><input id="useBridge" type="checkbox" style="width:auto;margin-right:8px"> Utiliser ce montant jusqu'au prochain salaire</label></div>
  
-<div id="envelopeModal" class="modal">
-  <div class="sheet">
-    <div class="sheet-head"><div><div class="section-kicker">Un nouveau petit pot</div><h2>Ajouter une enveloppe</h2></div><button class="close">×</button></div>
-    <div class="field"><label>Nom</label><input id="envName" placeholder="Ex. Sorties entre copines"></div>
-    <div class="field"><label>Budget mensuel</label><input id="envBudget" type="number" min="0" step="0.01"></div>
-    <div class="field"><label>Icône</label><select id="envIcon"><option>🛒</option><option>⛽</option><option>🎀</option><option>🍓</option><option>🧁</option><option>🏡</option><option>💄</option><option>👗</option><option>🐰</option><option>🌸</option></select></div>
-    <button id="saveEnvelope" class="primary">Créer l'enveloppe</button>
-    <button class="secondary closeModal">Annuler</button>
-  </div>
-</div>
+  <div id="settingsPreview" class="info-box"></div>
+  <button id="saveSettings" class="primary">Enregistrer doucement</button>
+  <button id="resetApp" class="secondary">Tout recommencer</button>
+</div></div>
  
-<div id="goalModal" class="modal">
-  <div class="sheet">
-    <div class="sheet-head"><div><div class="section-kicker">Mon joli rêve</div><h2>Modifier mon projet</h2></div><button class="close">×</button></div>
-    <div class="field"><label>Nom du projet</label><input id="goalNameInput" placeholder="Ex. Voyage au Japon"></div>
-    <div class="field"><label>Montant cible</label><input id="goalTargetInput" type="number" min="0" step="0.01"></div>
-    <div class="field"><label>Déjà épargné avant ce mois</label><input id="goalSavedInput" type="number" min="0" step="0.01"></div>
-    <button id="saveGoal" class="primary">Faire grandir ce rêve</button>
-    <button class="secondary closeModal">Annuler</button>
-  </div>
-</div>
+<div id="envelopeModal" class="modal"><div class="sheet">
+  <div class="sheet-head"><div><div class="section-kicker">Un nouveau petit pot</div><h2>Ajouter une enveloppe</h2></div><button class="close">×</button></div>
+  <div class="field"><label>Nom</label><input id="envName" placeholder="Ex. Sorties entre copines"></div>
+  <div class="field"><label>Budget par saison</label><input id="envBudget" type="number" min="0" step="0.01"></div>
+  <div class="field"><label>Icône</label><select id="envIcon"><option>🛒</option><option>⛽</option><option>🎀</option><option>🍓</option><option>🧁</option><option>🏡</option><option>💄</option><option>👗</option><option>🐰</option><option>🌸</option></select></div>
+  <button id="saveEnvelope" class="primary">Créer l'enveloppe</button><button class="secondary closeModal">Annuler</button>
+</div></div>
+ 
+<div id="goalModal" class="modal"><div class="sheet">
+  <div class="sheet-head"><div><div class="section-kicker">Mon joli rêve</div><h2>Modifier mon projet</h2></div><button class="close">×</button></div>
+  <div class="field"><label>Nom du projet</label><input id="goalNameInput"></div>
+  <div class="field"><label>Montant cible</label><input id="goalTargetInput" type="number" min="0" step="0.01"></div>
+  <div class="field"><label>Déjà épargné</label><input id="goalSavedInput" type="number" min="0" step="0.01"></div>
+  <button id="saveGoal" class="primary">Faire grandir ce rêve</button><button class="secondary closeModal">Annuler</button>
+</div></div>
  
 <div id="toast" class="toast"></div>
  
 <script>
-const STORAGE_KEY="bloomKawaiiV1";
+const STORAGE_KEY="bloomPayCycleV3";
 const DEFAULT_STATE={
-  settings:{income:1600,fixed:600,savingGoal:300,payDay:new Date().getDate()},
+  settings:{payday:28,income:6440,fixed:4567,savingGoal:800,bridgeAvailable:0,useBridge:true},
   envelopes:[
-    {id:"courses",name:"Courses",icon:"🛒",budget:250},
-    {id:"essence",name:"Essence",icon:"⛽",budget:150},
-    {id:"plaisirs",name:"Petits plaisirs",icon:"🎀",budget:100}
+    {id:"courses",name:"Courses",icon:"🛒",budget:500},
+    {id:"essence",name:"Essence",icon:"⛽",budget:250},
+    {id:"plaisirs",name:"Petits plaisirs",icon:"🎀",budget:150}
   ],
   transactions:[],
-  goal:{name:"Mon joli projet",target:3000,savedBefore:0},
-  streak:0,
-  lastGoodDay:""
+  goal:{name:"Mon joli projet",target:3000,saved:0},
+  streak:0,lastGoodDay:""
 };
- 
 let state=loadState();
-if(!state.settings.payDay){state.settings.payDay=new Date().getDate();delete state.settings.endDate;}
-const $=s=>document.querySelector(s);
-const $$=s=>[...document.querySelectorAll(s)];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const euro=new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",minimumFractionDigits:2});
-const dateFmt=new Intl.DateTimeFormat("fr-FR",{day:"2-digit",month:"short"});
+const dateLong=new Intl.DateTimeFormat("fr-FR",{day:"numeric",month:"long"});
+const dateShort=new Intl.DateTimeFormat("fr-FR",{day:"2-digit",month:"short"});
  
 function loadState(){
   try{
-    const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");
-    return saved?{...structuredClone(DEFAULT_STATE),...saved,settings:{...DEFAULT_STATE.settings,...saved.settings},goal:{...DEFAULT_STATE.goal,...saved.goal}}:structuredClone(DEFAULT_STATE);
+    const s=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");
+    return s?{...structuredClone(DEFAULT_STATE),...s,settings:{...DEFAULT_STATE.settings,...s.settings},goal:{...DEFAULT_STATE.goal,...s.goal}}:structuredClone(DEFAULT_STATE)
   }catch{return structuredClone(DEFAULT_STATE)}
 }
 function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
-function todayISO(){return new Date().toISOString().slice(0,10)}
-function daysInMonth(year,month){return new Date(year,month+1,0).getDate()}
-function salaryDate(year,month){
-  const requested=Math.max(1,Math.min(31,Number(state.settings.payDay)||new Date().getDate()));
-  return new Date(year,month,Math.min(requested,daysInMonth(year,month)),0,0,0,0)
+function localToday(){const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function iso(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function daysInMonth(y,m){return new Date(y,m+1,0).getDate()}
+function payDate(y,m,day){return new Date(y,m,Math.min(Number(day)||1,daysInMonth(y,m)))}
+function cycleFor(date=localToday()){
+  const day=Number(state.settings.payday)||1;
+  const thisMonthPay=payDate(date.getFullYear(),date.getMonth(),day);
+  let start,next;
+  if(date>=thisMonthPay){
+    start=thisMonthPay;
+    next=payDate(date.getFullYear(),date.getMonth()+1,day);
+  }else{
+    start=payDate(date.getFullYear(),date.getMonth()-1,day);
+    next=thisMonthPay;
+  }
+  const end=new Date(next);end.setDate(end.getDate()-1);
+  return{start,end,next}
 }
-function cycleBounds(reference=new Date()){
-  const now=new Date(reference);now.setHours(0,0,0,0);
-  let start=salaryDate(now.getFullYear(),now.getMonth());
-  if(now<start)start=salaryDate(now.getFullYear(),now.getMonth()-1);
-  let next=salaryDate(start.getFullYear(),start.getMonth()+1);
-  if(next<=start)next=new Date(start.getFullYear(),start.getMonth()+1,start.getDate());
-  const end=new Date(next);end.setDate(end.getDate()-1);end.setHours(23,59,59,999);
-  return{start,next,end}
+function isBridgeActive(){
+  const c=cycleFor();
+  return Boolean(state.settings.useBridge)&&localToday()<c.next;
 }
-function cycleTx(){
-  const {start,next}=cycleBounds();
-  return state.transactions.filter(x=>{const d=new Date(x.date+"T12:00:00");return d>=start&&d<next})
+function activeCycleTx(){
+  const c=cycleFor();
+  return state.transactions.filter(x=>{
+    const d=new Date(x.date+"T12:00:00");
+    return d>=c.start&&d<c.next
+  })
 }
-function totalExpense(){return cycleTx().filter(x=>x.type==="expense").reduce((s,x)=>s+Number(x.amount),0)}
-function totalSaving(){return cycleTx().filter(x=>x.type==="saving").reduce((s,x)=>s+Number(x.amount),0)}
-function daysRemaining(){const n=new Date();n.setHours(0,0,0,0);const {next}=cycleBounds(n);return Math.max(1,Math.ceil((next-n)/86400000))}
-function remaining(){return Number(state.settings.income)-Number(state.settings.fixed)-totalExpense()-totalSaving()}
+function expenses(){return activeCycleTx().filter(x=>x.type==="expense").reduce((s,x)=>s+Number(x.amount),0)}
+function extraSavings(){return activeCycleTx().filter(x=>x.type==="extraSaving").reduce((s,x)=>s+Number(x.amount),0)}
+function standardBase(){return Math.max(0,Number(state.settings.income)-Number(state.settings.fixed)-Number(state.settings.savingGoal))}
+function seasonBase(){return isBridgeActive()?Number(state.settings.bridgeAvailable||0):standardBase()}
+function remaining(){return seasonBase()-expenses()-extraSavings()}
+function daysRemaining(){const c=cycleFor();return Math.max(1,Math.ceil((c.next-localToday())/86400000))}
 function daily(){return Math.max(0,remaining()/daysRemaining())}
-function envelopeSpent(id){return cycleTx().filter(x=>x.type==="expense"&&x.envelope===id).reduce((s,x)=>s+Number(x.amount),0)}
-function todaySpent(){const t=todayISO();return state.transactions.filter(x=>x.type==="expense"&&x.date===t).reduce((s,x)=>s+Number(x.amount),0)}
- 
+function envelopeSpent(id){return activeCycleTx().filter(x=>x.type==="expense"&&x.envelope===id).reduce((s,x)=>s+Number(x.amount),0)}
+function todaySpent(){const t=iso(localToday());return state.transactions.filter(x=>x.type==="expense"&&x.date===t).reduce((s,x)=>s+Number(x.amount),0)}
+function reservedSaving(){return isBridgeActive()?0:Number(state.settings.savingGoal)}
 function growthScore(){
-  const savingPart=Math.min(30,totalSaving()/Math.max(1,Number(state.settings.savingGoal))*30);
-  const envPart=state.envelopes.length?state.envelopes.reduce((s,e)=>s+(envelopeSpent(e.id)<=Number(e.budget)?1:0),0)/state.envelopes.length*25:0;
-  const budgetPart=remaining()>=0?20:0;
-  const habitPart=Math.min(15,cycleTx().length*2);
-  const streakPart=Math.min(10,Number(state.streak||0)*2);
-  return Math.round(Math.max(0,Math.min(100,savingPart+envPart+budgetPart+habitPart+streakPart)));
+  const env=state.envelopes.length?state.envelopes.reduce((s,e)=>s+(envelopeSpent(e.id)<=Number(e.budget)?1:0),0)/state.envelopes.length*35:0;
+  const balance=remaining()>=0?25:0;
+  const habit=Math.min(20,activeCycleTx().length*2.5);
+  const streak=Math.min(20,Number(state.streak||0)*4);
+  return Math.round(Math.max(0,Math.min(100,env+balance+habit+streak)))
 }
-function plantStage(score){if(score>=90)return 5;if(score>=70)return 4;if(score>=50)return 3;if(score>=30)return 2;if(score>=10)return 1;return 0}
-function plantCopy(stage){
-  return[
-    ["Une graine pleine de promesses","Tes habitudes la feront pousser."],
-    ["La graine se réveille","Ton premier effort compte déjà."],
-    ["Une petite pousse apparaît","Continue tout doucement."],
-    ["Bloom devient bien feuillue","Ta régularité lui fait du bien."],
-    ["Un bouton floral se prépare","Encore un peu et elle fleurira."],
-    ["Bloom est en fleur","Tes efforts ont créé quelque chose de beau."]
-  ][stage]
-}
+function stage(score){if(score>=90)return 5;if(score>=70)return 4;if(score>=50)return 3;if(score>=30)return 2;if(score>=10)return 1;return 0}
+function plantCopy(n){return[
+  ["Une graine pleine de promesses","Tes habitudes la feront pousser."],
+  ["La graine se réveille","Ton premier effort compte déjà."],
+  ["Une petite pousse apparaît","Continue tout doucement."],
+  ["Bloom devient bien feuillue","Ta régularité lui fait du bien."],
+  ["Un bouton floral se prépare","Encore un peu et elle fleurira."],
+  ["Bloom est en fleur","Tes efforts ont créé quelque chose de beau."]
+][n]}
 function updateStreak(){
-  const today=todayISO();
-  const allowanceBefore=daily()+todaySpent()/daysRemaining();
-  if(todaySpent()>allowanceBefore||state.lastGoodDay===today)return;
-  if(!state.lastGoodDay){state.streak=1}
+  const today=iso(localToday());
+  if(state.lastGoodDay===today||todaySpent()>daily()+todaySpent()/daysRemaining())return;
+  if(!state.lastGoodDay)state.streak=1;
   else{
     const diff=Math.round((new Date(today)-new Date(state.lastGoodDay))/86400000);
-    state.streak=diff===1?Number(state.streak||0)+1:1;
+    state.streak=diff===1?Number(state.streak||0)+1:1
   }
-  state.lastGoodDay=today;
+  state.lastGoodDay=today
 }
-function toast(text){const el=$("#toast");el.textContent=text;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2200)}
-function coachText(){
+function coach(){
+  if(isBridgeActive())return`Cette première saison utilise uniquement les ${euro.format(state.settings.bridgeAvailable)} réellement disponibles jusqu'au prochain salaire.`;
+  if(remaining()<0)return"Ton budget est un peu serré. Bloom a déjà mis tes charges et ton épargne à l'abri : ajuste seulement les dépenses libres.";
   const over=state.envelopes.find(e=>envelopeSpent(e.id)>Number(e.budget));
-  if(remaining()<0)return"Ton mois est un peu serré. Aucun jugement : on ajuste une petite chose à la fois.";
-  if(over)return`L'enveloppe « ${over.name} » déborde un peu. Tu peux ralentir doucement, sans culpabiliser.`;
-  if(totalSaving()>=Number(state.settings.savingGoal)&&Number(state.settings.savingGoal)>0)return"Ton objectif d'épargne du mois est atteint. Bloom est très fière de toi.";
-  if(state.streak>=3)return`${state.streak} jours réguliers de suite : ta constance est plus importante que la perfection.`;
-  return`En restant autour de ${euro.format(daily())} aujourd'hui, tu gardes ta saison toute douce.`;
+  if(over)return`Le petit pot « ${over.name} » déborde un peu. Tu peux ralentir doucement, sans culpabiliser.`;
+  return`Tes ${euro.format(state.settings.fixed)} de charges et ${euro.format(state.settings.savingGoal)} d'épargne sont déjà réservés. Le reste peut être réparti sereinement.`
 }
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
+function escapeHtml(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
  
 function render(){
-  const rem=remaining(), d=daily(), saved=totalSaving(), score=growthScore(), stage=plantStage(score), copy=plantCopy(stage);
-  $("#dailyBudget").textContent=euro.format(d);
-  $("#remainingBudget").textContent=euro.format(rem);
+  const c=cycleFor(),score=growthScore(),st=stage(score),copy=plantCopy(st);
+  $("#dailyBudget").textContent=euro.format(daily());
+  $("#remainingBudget").textContent=euro.format(remaining());
   $("#daysLeft").textContent=daysRemaining();
-  $("#savedMonth").textContent=euro.format(saved);
+  $("#reservedSaving").textContent=euro.format(reservedSaving());
   $("#streak").textContent=`${state.streak||0} jour${state.streak===1?"":"s"}`;
   $("#incomeTotal").textContent=euro.format(state.settings.income);
   $("#fixedTotal").textContent=euro.format(state.settings.fixed);
-  $("#dailyMessage").textContent=rem<0?"Ton budget a besoin d'un petit câlin.":d<10?"Une journée légère fera du bien à Bloom.":d>35?"Tu as une jolie marge aujourd'hui.":"Tu avances dans le bon rythme.";
-  $("#budgetMood").textContent=rem<0?"🌧️ On ajuste sans culpabiliser":d<15?"🍃 Une journée toute douce":d>35?"🌞 Belle marge aujourd'hui":"🌸 Ta saison reste en équilibre";
-  const bounds=cycleBounds();
-  const cycleFmt=new Intl.DateTimeFormat("fr-FR",{day:"numeric",month:"long"});
-  $("#cycleLabel").textContent=`🌷 Saison du ${cycleFmt.format(bounds.start)} au ${cycleFmt.format(bounds.end)}`;
-  $("#coachText").textContent=coachText();
-  $("#mascot").className=`mascot stage-${stage}`;
-  $("#plantTitle").textContent=copy[0];$("#plantSub").textContent=copy[1];$("#growthBar").style.width=score+"%";
-  renderEnvelopes();renderGoal();renderTransactions();populateEnvelope();
-  persist();
+  $("#cycleLabel").textContent=`🌷 Saison du ${dateLong.format(c.start)} au ${dateLong.format(c.end)}`;
+  $("#dailyMessage").textContent=remaining()<0?"Ton budget a besoin d'un petit câlin.":daily()<10?"Une journée légère fera du bien à Bloom.":daily()>50?"Tu as une jolie marge aujourd'hui.":"Tu avances dans le bon rythme.";
+  $("#budgetMood").textContent=isBridgeActive()?"🌱 Première saison adaptée à ton solde réel":remaining()<0?"🌧️ On ajuste sans culpabiliser":daily()>50?"🌞 Belle marge aujourd'hui":"🌸 Ta saison reste en équilibre";
+  $("#coachText").textContent=coach();
+  $("#mascot").className=`mascot stage-${st}`;$("#plantTitle").textContent=copy[0];$("#plantSub").textContent=copy[1];$("#growthBar").style.width=score+"%";
+  renderEnvelopes();renderGoal();renderTransactions();populateEnvelope();persist()
 }
 function renderEnvelopes(){
   const colors=["#ffe0eb","#e9e1ff","#e4f5e9","#fff0d7","#ffe4dc"];
   $("#envelopes").innerHTML=state.envelopes.length?state.envelopes.map((e,i)=>{
-    const spent=envelopeSpent(e.id), left=Number(e.budget)-spent, pct=e.budget?Math.min(100,spent/e.budget*100):0;
+    const spent=envelopeSpent(e.id),left=Number(e.budget)-spent,pct=e.budget?Math.min(100,spent/e.budget*100):0;
     return`<article class="envelope"><div class="env-icon" style="background:${colors[i%colors.length]}">${escapeHtml(e.icon)}</div><div><div class="env-name">${escapeHtml(e.name)}</div><div class="env-sub">${euro.format(spent)} utilisés sur ${euro.format(e.budget)}</div><div class="mini-progress"><div style="width:${pct}%"></div></div></div><div class="env-remain" style="color:${left<0?"var(--danger)":left<e.budget*.2?"var(--warning)":"var(--ok)"}">${euro.format(left)}</div></article>`
-  }).join(""):`<div class="empty">👜 Aucun petit pot pour le moment.<br>Ajoute une enveloppe qui te ressemble.</div>`
+  }).join(""):`<div class="empty">👜 Aucun petit pot pour le moment.</div>`
 }
 function renderGoal(){
-  const saved=Number(state.goal.savedBefore)+totalSaving(), target=Number(state.goal.target), pct=target?Math.min(100,saved/target*100):0;
-  $("#goalName").textContent=state.goal.name;$("#goalProgressText").textContent=`${euro.format(saved)} / ${euro.format(target)}`;
-  $("#goalPercent").textContent=Math.round(pct)+" %";$("#goalProgress").style.width=pct+"%";
-  $("#goalMotivation").textContent=target<=0?"Choisis un rêve qui te donne envie d'avancer.":pct>=100?"Ton rêve a fleuri. Tu peux être fière de toi.":`Encore ${euro.format(Math.max(0,target-saved))} et ce rêve se rapprochera un peu plus.`
+  const saved=Number(state.goal.saved)+extraSavings(),target=Number(state.goal.target),pct=target?Math.min(100,saved/target*100):0;
+  $("#goalName").textContent=state.goal.name;$("#goalProgressText").textContent=`${euro.format(saved)} / ${euro.format(target)}`;$("#goalPercent").textContent=Math.round(pct)+" %";$("#goalProgress").style.width=pct+"%";
+  $("#goalMotivation").textContent=target<=0?"Choisis un rêve qui te donne envie d'avancer.":pct>=100?"Ton rêve a fleuri. Tu peux être fière de toi.":`Encore ${euro.format(Math.max(0,target-saved))} pour faire fleurir ce rêve.`
 }
 function renderTransactions(){
-  const latest=[...cycleTx()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,7);
+  const latest=[...activeCycleTx()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,7);
   $("#transactions").innerHTML=latest.length?latest.map(x=>{
-    const saving=x.type==="saving", env=state.envelopes.find(e=>e.id===x.envelope);
-    return`<article class="transaction"><div class="tx-icon ${saving?"saving":""}">${saving?"🌱":env?.icon||"🎀"}</div><div class="tx-main"><div class="tx-title">${escapeHtml(x.label)}</div><div class="tx-sub">${saving?"Épargne":escapeHtml(env?.name||"Général")} · ${dateFmt.format(new Date(x.date+"T12:00:00"))}</div></div><div class="tx-amount ${saving?"inc":"exp"}">${saving?"+":"−"}${euro.format(x.amount)}</div></article>`
-  }).join(""):`<div class="empty">🌷 C'est tout calme ici.<br>Ta première dépense ou épargne apparaîtra comme une petite trace.</div>`
+    const sav=x.type==="extraSaving",env=state.envelopes.find(e=>e.id===x.envelope);
+    return`<article class="transaction"><div class="tx-icon ${sav?"saving":""}">${sav?"🌱":env?.icon||"🎀"}</div><div class="tx-main"><div class="tx-title">${escapeHtml(x.label)}</div><div class="tx-sub">${sav?"Épargne en plus":escapeHtml(env?.name||"Général")} · ${dateShort.format(new Date(x.date+"T12:00:00"))}</div></div><div class="tx-amount ${sav?"inc":"exp"}">${sav?"+":"−"}${euro.format(x.amount)}</div></article>`
+  }).join(""):`<div class="empty">🌷 C'est tout calme ici.<br>Ta première dépense apparaîtra comme une petite trace.</div>`
 }
-function populateEnvelope(){
-  $("#txEnvelope").innerHTML=state.envelopes.map(e=>`<option value="${e.id}">${escapeHtml(e.icon)} ${escapeHtml(e.name)}</option>`).join("")
-}
-function escapeHtml(v){return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
-function openModal(id){$("#"+id).classList.add("open")}
-function closeModals(){$$(".modal").forEach(m=>m.classList.remove("open"))}
-$$(".close,.closeModal").forEach(b=>b.onclick=closeModals);
-$$(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)closeModals()});
+function populateEnvelope(){$("#txEnvelope").innerHTML=state.envelopes.map(e=>`<option value="${e.id}">${escapeHtml(e.icon)} ${escapeHtml(e.name)}</option>`).join("")}
+function openModal(id){$("#"+id).classList.add("open")}function closeModals(){$$(".modal").forEach(m=>m.classList.remove("open"))}
+$$(".close,.closeModal").forEach(b=>b.onclick=closeModals);$$(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)closeModals()});
  
-$("#addTxBtn").onclick=()=>{$("#txDate").value=todayISO();openModal("txModal")};
-$$(".segmented button").forEach(b=>b.onclick=()=>{
-  $$(".segmented button").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("#txType").value=b.dataset.type;$("#txEnvelopeField").style.display=b.dataset.type==="saving"?"none":"block";
-});
+$("#addTxBtn").onclick=()=>{$("#txDate").value=iso(localToday());openModal("txModal")};
+$$(".segmented button").forEach(b=>b.onclick=()=>{$$(".segmented button").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("#txType").value=b.dataset.type;$("#txEnvelopeField").style.display=b.dataset.type==="extraSaving"?"none":"block"});
 $("#saveTx").onclick=()=>{
   const amount=Number($("#txAmount").value),label=$("#txLabel").value.trim(),type=$("#txType").value;
   if(!amount||amount<=0||!label)return toast("Ajoute un nom et un montant 🌸");
-  state.transactions.push({id:crypto.randomUUID(),type,amount,label,envelope:type==="expense"?$("#txEnvelope").value:"",date:$("#txDate").value||todayISO()});
-  updateStreak();$("#txAmount").value="";$("#txLabel").value="";closeModals();render();toast(type==="saving"?"Une petite graine d'épargne a été plantée 🌱":"Mouvement ajouté tout doucement 🎀");
+  state.transactions.push({id:crypto.randomUUID(),type,amount,label,envelope:type==="expense"?$("#txEnvelope").value:"",date:$("#txDate").value||iso(localToday())});
+  updateStreak();$("#txAmount").value="";$("#txLabel").value="";closeModals();render();toast(type==="extraSaving"?"Une graine d'épargne en plus 🌱":"Mouvement ajouté 🎀")
 };
-function fillSettings(){$("#setIncome").value=state.settings.income;$("#setFixed").value=state.settings.fixed;$("#setSaving").value=state.settings.savingGoal;$("#setPayDay").value=state.settings.payDay||new Date().getDate()}
+function fillSettings(){
+  $("#setPayday").value=state.settings.payday;$("#setIncome").value=state.settings.income;$("#setFixed").value=state.settings.fixed;$("#setSaving").value=state.settings.savingGoal;$("#setBridgeAvailable").value=state.settings.bridgeAvailable;$("#useBridge").checked=Boolean(state.settings.useBridge);previewSettings()
+}
+function previewSettings(){
+  const payday=Number($("#setPayday").value||1),income=Number($("#setIncome").value||0),fixed=Number($("#setFixed").value||0),saving=Number($("#setSaving").value||0),bridge=Number($("#setBridgeAvailable").value||0),use=$("#useBridge").checked;
+  const old=state.settings.payday;state.settings.payday=payday;const c=cycleFor();state.settings.payday=old;
+  const standard=Math.max(0,income-fixed-saving),days=Math.max(1,Math.ceil((c.next-localToday())/86400000)),amount=use?bridge:standard;
+  $("#settingsPreview").innerHTML=`🌸 Prochaine paie : <b>${dateLong.format(c.next)}</b><br>Budget libre d'une saison complète : <b>${euro.format(standard)}</b><br>${use?"Jusqu'à la prochaine paie, Bloom utilisera seulement":"Bloom utilisera dès maintenant"} : <b>${euro.format(amount)}</b>, soit environ <b>${euro.format(amount/days)}/jour</b>.`
+}
+["setPayday","setIncome","setFixed","setSaving","setBridgeAvailable","useBridge"].forEach(id=>$("#"+id).addEventListener("input",previewSettings));
 $("#settingsBtn").onclick=$("#monthEditBtn").onclick=()=>{fillSettings();openModal("settingsModal")};
 $("#saveSettings").onclick=()=>{
-  state.settings={income:Number($("#setIncome").value||0),fixed:Number($("#setFixed").value||0),savingGoal:Number($("#setSaving").value||0),payDay:Math.max(1,Math.min(31,Number($("#setPayDay").value)||new Date().getDate()))};
-  closeModals();render();toast("Ta saison est à jour 🌷");
+  state.settings={payday:Math.max(1,Math.min(31,Number($("#setPayday").value||1))),income:Number($("#setIncome").value||0),fixed:Number($("#setFixed").value||0),savingGoal:Number($("#setSaving").value||0),bridgeAvailable:Number($("#setBridgeAvailable").value||0),useBridge:$("#useBridge").checked};
+  closeModals();render();toast("Ta saison est bien réglée 🌷")
 };
-$("#resetApp").onclick=()=>{if(confirm("Tout recommencer et effacer les données de Bloom ?")){state=structuredClone(DEFAULT_STATE);state.settings.payDay=new Date().getDate();closeModals();render();toast("Un nouveau jardin commence 🌱")}};
+$("#resetApp").onclick=()=>{if(confirm("Tout recommencer et effacer les données de Bloom ?")){state=structuredClone(DEFAULT_STATE);closeModals();render();toast("Un nouveau jardin commence 🌱")}};
 $("#addEnvelopeBtn").onclick=()=>openModal("envelopeModal");
-$("#saveEnvelope").onclick=()=>{
-  const name=$("#envName").value.trim(),budget=Number($("#envBudget").value||0);
-  if(!name||budget<=0)return toast("Ajoute un nom et un budget 🎀");
-  state.envelopes.push({id:crypto.randomUUID(),name,budget,icon:$("#envIcon").value});$("#envName").value="";$("#envBudget").value="";closeModals();render();toast("Nouveau petit pot ajouté 👜");
-};
-function fillGoal(){$("#goalNameInput").value=state.goal.name;$("#goalTargetInput").value=state.goal.target;$("#goalSavedInput").value=state.goal.savedBefore}
-$("#goalBtn").onclick=()=>{fillGoal();openModal("goalModal")};
-$("#saveGoal").onclick=()=>{
-  state.goal={name:$("#goalNameInput").value.trim()||"Mon joli projet",target:Number($("#goalTargetInput").value||0),savedBefore:Number($("#goalSavedInput").value||0)};
-  closeModals();render();toast("Ton rêve est bien gardé 🌸");
-};
-$$(".nav button").forEach(b=>b.onclick=()=>{
-  $$(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");
-  const id=b.dataset.scroll;if(id==="top")window.scrollTo({top:0,behavior:"smooth"});else document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
-});
+$("#saveEnvelope").onclick=()=>{const name=$("#envName").value.trim(),budget=Number($("#envBudget").value||0);if(!name||budget<=0)return toast("Ajoute un nom et un budget 🎀");state.envelopes.push({id:crypto.randomUUID(),name,budget,icon:$("#envIcon").value});$("#envName").value="";$("#envBudget").value="";closeModals();render();toast("Nouveau petit pot ajouté 👜")};
+function fillGoal(){$("#goalNameInput").value=state.goal.name;$("#goalTargetInput").value=state.goal.target;$("#goalSavedInput").value=state.goal.saved}
+$("#goalBtn").onclick=()=>{fillGoal();openModal("goalModal")};$("#saveGoal").onclick=()=>{state.goal={name:$("#goalNameInput").value.trim()||"Mon joli projet",target:Number($("#goalTargetInput").value||0),saved:Number($("#goalSavedInput").value||0)};closeModals();render();toast("Ton rêve est bien gardé 🌸")};
+$$(".nav button").forEach(b=>b.onclick=()=>{$$(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");const id=b.dataset.scroll;if(id==="top")window.scrollTo({top:0,behavior:"smooth"});else document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"})});
 render();
 </script>
 </body>
