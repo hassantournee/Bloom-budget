@@ -80,6 +80,7 @@ button{cursor:pointer}
   display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:9px 12px;border-radius:999px;
   background:rgba(255,255,255,.72);font-size:13px;font-weight:800
 }
+.cycle-label{margin-top:9px;color:var(--muted);font-size:12px;font-weight:850}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;align-items:center}
 .hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
 .stat{padding:13px;border-radius:18px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px)}
@@ -180,11 +181,12 @@ button{cursor:pointer}
           <div id="dailyBudget" class="daily">0,00 €</div>
           <div id="dailyMessage" class="daily-label">Configure ton mois pour commencer.</div>
           <div id="budgetMood" class="pill">🌸 Bloom est prête à t'encourager</div>
+          <div id="cycleLabel" class="cycle-label">🌷 Saison en cours</div>
  
           <div class="hero-stats">
-            <div class="stat"><b id="remainingBudget">0 €</b><span>Reste pour le mois</span></div>
+            <div class="stat"><b id="remainingBudget">0 €</b><span>Reste pour la saison</span></div>
             <div class="stat"><b id="daysLeft">0</b><span>Jours à chouchouter</span></div>
-            <div class="stat"><b id="savedMonth">0 €</b><span>Épargnés ce mois</span></div>
+            <div class="stat"><b id="savedMonth">0 €</b><span>Épargnés cette saison</span></div>
             <div class="stat"><b id="streak">0 jour</b><span>Petite série</span></div>
           </div>
  
@@ -206,7 +208,7 @@ button{cursor:pointer}
  
     <section class="section">
       <div class="section-head">
-        <div><div class="section-kicker">Tout doux</div><div class="section-title">Mon mois</div></div>
+        <div><div class="section-kicker">Tout doux</div><div class="section-title">Ma saison</div></div>
         <button id="monthEditBtn" class="link-btn">Modifier</button>
       </div>
       <div class="soft-grid">
@@ -271,11 +273,12 @@ button{cursor:pointer}
  
 <div id="settingsModal" class="modal">
   <div class="sheet">
-    <div class="sheet-head"><div><div class="section-kicker">Mon petit mois</div><h2>Configurer Bloom</h2></div><button class="close">×</button></div>
+    <div class="sheet-head"><div><div class="section-kicker">Ma saison de salaire</div><h2>Configurer Bloom</h2></div><button class="close">×</button></div>
     <div class="field"><label>Revenus mensuels prévus</label><input id="setIncome" type="number" min="0" step="0.01"></div>
     <div class="field"><label>Charges fixes prévues</label><input id="setFixed" type="number" min="0" step="0.01"></div>
-    <div class="field"><label>Objectif d'épargne du mois</label><input id="setSaving" type="number" min="0" step="0.01"></div>
-    <div class="field"><label>Dernier jour du budget</label><input id="setEndDate" type="date"></div>
+    <div class="field"><label>Objectif d'épargne par saison</label><input id="setSaving" type="number" min="0" step="0.01"></div>
+    <div class="field"><label>Jour habituel de réception du salaire</label><input id="setPayDay" type="number" min="1" max="31" step="1" placeholder="Ex. 20"></div>
+    <div class="coach"><span>🌷</span><div>Bloom renouvellera automatiquement ta saison à chaque date de salaire. Ton salaire, tes charges et tes enveloppes resteront enregistrés.</div></div>
     <button id="saveSettings" class="primary">Enregistrer doucement</button>
     <button id="resetApp" class="secondary">Tout recommencer</button>
   </div>
@@ -308,7 +311,7 @@ button{cursor:pointer}
 <script>
 const STORAGE_KEY="bloomKawaiiV1";
 const DEFAULT_STATE={
-  settings:{income:1600,fixed:600,savingGoal:300,endDate:""},
+  settings:{income:1600,fixed:600,savingGoal:300,payDay:new Date().getDate()},
   envelopes:[
     {id:"courses",name:"Courses",icon:"🛒",budget:250},
     {id:"essence",name:"Essence",icon:"⛽",budget:150},
@@ -321,6 +324,7 @@ const DEFAULT_STATE={
 };
  
 let state=loadState();
+if(!state.settings.payDay){state.settings.payDay=new Date().getDate();delete state.settings.endDate;}
 const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
 const euro=new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",minimumFractionDigits:2});
@@ -334,23 +338,37 @@ function loadState(){
 }
 function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
 function todayISO(){return new Date().toISOString().slice(0,10)}
-function endOfMonthISO(){const d=new Date();return new Date(d.getFullYear(),d.getMonth()+1,0,12).toISOString().slice(0,10)}
-if(!state.settings.endDate)state.settings.endDate=endOfMonthISO();
- 
-function monthTx(){const n=new Date();return state.transactions.filter(x=>{const d=new Date(x.date+"T12:00:00");return d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear()})}
-function totalExpense(){return monthTx().filter(x=>x.type==="expense").reduce((s,x)=>s+Number(x.amount),0)}
-function totalSaving(){return monthTx().filter(x=>x.type==="saving").reduce((s,x)=>s+Number(x.amount),0)}
-function daysRemaining(){const n=new Date();n.setHours(0,0,0,0);const e=new Date((state.settings.endDate||endOfMonthISO())+"T00:00:00");return Math.max(1,Math.ceil((e-n)/86400000)+1)}
+function daysInMonth(year,month){return new Date(year,month+1,0).getDate()}
+function salaryDate(year,month){
+  const requested=Math.max(1,Math.min(31,Number(state.settings.payDay)||new Date().getDate()));
+  return new Date(year,month,Math.min(requested,daysInMonth(year,month)),0,0,0,0)
+}
+function cycleBounds(reference=new Date()){
+  const now=new Date(reference);now.setHours(0,0,0,0);
+  let start=salaryDate(now.getFullYear(),now.getMonth());
+  if(now<start)start=salaryDate(now.getFullYear(),now.getMonth()-1);
+  let next=salaryDate(start.getFullYear(),start.getMonth()+1);
+  if(next<=start)next=new Date(start.getFullYear(),start.getMonth()+1,start.getDate());
+  const end=new Date(next);end.setDate(end.getDate()-1);end.setHours(23,59,59,999);
+  return{start,next,end}
+}
+function cycleTx(){
+  const {start,next}=cycleBounds();
+  return state.transactions.filter(x=>{const d=new Date(x.date+"T12:00:00");return d>=start&&d<next})
+}
+function totalExpense(){return cycleTx().filter(x=>x.type==="expense").reduce((s,x)=>s+Number(x.amount),0)}
+function totalSaving(){return cycleTx().filter(x=>x.type==="saving").reduce((s,x)=>s+Number(x.amount),0)}
+function daysRemaining(){const n=new Date();n.setHours(0,0,0,0);const {next}=cycleBounds(n);return Math.max(1,Math.ceil((next-n)/86400000))}
 function remaining(){return Number(state.settings.income)-Number(state.settings.fixed)-totalExpense()-totalSaving()}
 function daily(){return Math.max(0,remaining()/daysRemaining())}
-function envelopeSpent(id){return monthTx().filter(x=>x.type==="expense"&&x.envelope===id).reduce((s,x)=>s+Number(x.amount),0)}
+function envelopeSpent(id){return cycleTx().filter(x=>x.type==="expense"&&x.envelope===id).reduce((s,x)=>s+Number(x.amount),0)}
 function todaySpent(){const t=todayISO();return state.transactions.filter(x=>x.type==="expense"&&x.date===t).reduce((s,x)=>s+Number(x.amount),0)}
  
 function growthScore(){
   const savingPart=Math.min(30,totalSaving()/Math.max(1,Number(state.settings.savingGoal))*30);
   const envPart=state.envelopes.length?state.envelopes.reduce((s,e)=>s+(envelopeSpent(e.id)<=Number(e.budget)?1:0),0)/state.envelopes.length*25:0;
   const budgetPart=remaining()>=0?20:0;
-  const habitPart=Math.min(15,monthTx().length*2);
+  const habitPart=Math.min(15,cycleTx().length*2);
   const streakPart=Math.min(10,Number(state.streak||0)*2);
   return Math.round(Math.max(0,Math.min(100,savingPart+envPart+budgetPart+habitPart+streakPart)));
 }
@@ -383,7 +401,7 @@ function coachText(){
   if(over)return`L'enveloppe « ${over.name} » déborde un peu. Tu peux ralentir doucement, sans culpabiliser.`;
   if(totalSaving()>=Number(state.settings.savingGoal)&&Number(state.settings.savingGoal)>0)return"Ton objectif d'épargne du mois est atteint. Bloom est très fière de toi.";
   if(state.streak>=3)return`${state.streak} jours réguliers de suite : ta constance est plus importante que la perfection.`;
-  return`En restant autour de ${euro.format(daily())} aujourd'hui, tu gardes ton mois tout doux.`;
+  return`En restant autour de ${euro.format(daily())} aujourd'hui, tu gardes ta saison toute douce.`;
 }
  
 function render(){
@@ -396,7 +414,10 @@ function render(){
   $("#incomeTotal").textContent=euro.format(state.settings.income);
   $("#fixedTotal").textContent=euro.format(state.settings.fixed);
   $("#dailyMessage").textContent=rem<0?"Ton budget a besoin d'un petit câlin.":d<10?"Une journée légère fera du bien à Bloom.":d>35?"Tu as une jolie marge aujourd'hui.":"Tu avances dans le bon rythme.";
-  $("#budgetMood").textContent=rem<0?"🌧️ On ajuste sans culpabiliser":d<15?"🍃 Une journée toute douce":d>35?"🌞 Belle marge aujourd'hui":"🌸 Ton mois reste en équilibre";
+  $("#budgetMood").textContent=rem<0?"🌧️ On ajuste sans culpabiliser":d<15?"🍃 Une journée toute douce":d>35?"🌞 Belle marge aujourd'hui":"🌸 Ta saison reste en équilibre";
+  const bounds=cycleBounds();
+  const cycleFmt=new Intl.DateTimeFormat("fr-FR",{day:"numeric",month:"long"});
+  $("#cycleLabel").textContent=`🌷 Saison du ${cycleFmt.format(bounds.start)} au ${cycleFmt.format(bounds.end)}`;
   $("#coachText").textContent=coachText();
   $("#mascot").className=`mascot stage-${stage}`;
   $("#plantTitle").textContent=copy[0];$("#plantSub").textContent=copy[1];$("#growthBar").style.width=score+"%";
@@ -417,7 +438,7 @@ function renderGoal(){
   $("#goalMotivation").textContent=target<=0?"Choisis un rêve qui te donne envie d'avancer.":pct>=100?"Ton rêve a fleuri. Tu peux être fière de toi.":`Encore ${euro.format(Math.max(0,target-saved))} et ce rêve se rapprochera un peu plus.`
 }
 function renderTransactions(){
-  const latest=[...monthTx()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,7);
+  const latest=[...cycleTx()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,7);
   $("#transactions").innerHTML=latest.length?latest.map(x=>{
     const saving=x.type==="saving", env=state.envelopes.find(e=>e.id===x.envelope);
     return`<article class="transaction"><div class="tx-icon ${saving?"saving":""}">${saving?"🌱":env?.icon||"🎀"}</div><div class="tx-main"><div class="tx-title">${escapeHtml(x.label)}</div><div class="tx-sub">${saving?"Épargne":escapeHtml(env?.name||"Général")} · ${dateFmt.format(new Date(x.date+"T12:00:00"))}</div></div><div class="tx-amount ${saving?"inc":"exp"}">${saving?"+":"−"}${euro.format(x.amount)}</div></article>`
@@ -442,13 +463,13 @@ $("#saveTx").onclick=()=>{
   state.transactions.push({id:crypto.randomUUID(),type,amount,label,envelope:type==="expense"?$("#txEnvelope").value:"",date:$("#txDate").value||todayISO()});
   updateStreak();$("#txAmount").value="";$("#txLabel").value="";closeModals();render();toast(type==="saving"?"Une petite graine d'épargne a été plantée 🌱":"Mouvement ajouté tout doucement 🎀");
 };
-function fillSettings(){$("#setIncome").value=state.settings.income;$("#setFixed").value=state.settings.fixed;$("#setSaving").value=state.settings.savingGoal;$("#setEndDate").value=state.settings.endDate}
+function fillSettings(){$("#setIncome").value=state.settings.income;$("#setFixed").value=state.settings.fixed;$("#setSaving").value=state.settings.savingGoal;$("#setPayDay").value=state.settings.payDay||new Date().getDate()}
 $("#settingsBtn").onclick=$("#monthEditBtn").onclick=()=>{fillSettings();openModal("settingsModal")};
 $("#saveSettings").onclick=()=>{
-  state.settings={income:Number($("#setIncome").value||0),fixed:Number($("#setFixed").value||0),savingGoal:Number($("#setSaving").value||0),endDate:$("#setEndDate").value||endOfMonthISO()};
-  closeModals();render();toast("Ton mois est à jour 🌷");
+  state.settings={income:Number($("#setIncome").value||0),fixed:Number($("#setFixed").value||0),savingGoal:Number($("#setSaving").value||0),payDay:Math.max(1,Math.min(31,Number($("#setPayDay").value)||new Date().getDate()))};
+  closeModals();render();toast("Ta saison est à jour 🌷");
 };
-$("#resetApp").onclick=()=>{if(confirm("Tout recommencer et effacer les données de Bloom ?")){state=structuredClone(DEFAULT_STATE);state.settings.endDate=endOfMonthISO();closeModals();render();toast("Un nouveau jardin commence 🌱")}};
+$("#resetApp").onclick=()=>{if(confirm("Tout recommencer et effacer les données de Bloom ?")){state=structuredClone(DEFAULT_STATE);state.settings.payDay=new Date().getDate();closeModals();render();toast("Un nouveau jardin commence 🌱")}};
 $("#addEnvelopeBtn").onclick=()=>openModal("envelopeModal");
 $("#saveEnvelope").onclick=()=>{
   const name=$("#envName").value.trim(),budget=Number($("#envBudget").value||0);
